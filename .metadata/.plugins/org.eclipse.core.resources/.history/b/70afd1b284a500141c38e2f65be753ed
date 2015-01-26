@@ -2,7 +2,7 @@
 public class Karte {
 int stufe;
 
-public Karte(){
+public Karte{
 	stufe = 1;
 }
 }
