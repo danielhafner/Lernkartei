@@ -1,3 +1,4 @@
+package ch.zbw.lernkartei.model;
 
 public class Card 
 {

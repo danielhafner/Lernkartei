@@ -1,3 +1,4 @@
+package ch.zbw.lernkartei.model;
 import java.util.ArrayList;
 import java.util.Iterator;
 
