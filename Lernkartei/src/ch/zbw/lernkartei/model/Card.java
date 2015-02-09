@@ -25,7 +25,12 @@ public class Card
 	}
 	public void setCard(String front, String back)
 	{
-	
+		if(front!=null && front!=" " && back!=null && back!=" ")
+		{
+			this.front=front;
+			this.back=back;
+		}
+		else{System.out.println("Felder dürfen nicht leer sein");}
 	}
 
 	public void setBoxAndProbability(int box, int probability)
