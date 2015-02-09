@@ -22,7 +22,7 @@ public class Register
 	
 	public void imports(String sourcePath)
 	{
-		
+		this.cards = getTestDataSet();
 	}
 	
 	public void export(String destinationPath)
