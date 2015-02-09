@@ -10,6 +10,11 @@ public class Card
 
 public Card(String front, String back)
 {
+	this.front = front;
+	this.back = back;
+	this.probability = 2;
+	this.calcProbability = 0;
+	this.box = 1;
 }
 
 public boolean equals(Card card)

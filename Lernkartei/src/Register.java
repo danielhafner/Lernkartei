@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class Register 
@@ -14,7 +15,8 @@ public class Register
 	
 	public Register(ArrayList<Card> cards,String title)
 	{
-		
+		this.cards = cards;
+		this.title = title;
 	}
 	
 	public void imports(String sourcePath)
@@ -42,9 +44,18 @@ public class Register
 		
 	}
 	
-	public void add(Card card)
+	public boolean add(Card card)
 	{
-		
+		Iterator i = this.cards.iterator();
+		while(i.hasNext())
+		{
+			if(card.equals(i.next()))
+			{
+				return false;
+			}
+		}
+		this.cards.add(card);
+		return true;
 	}
 	
 	public Card getCardById(int id_card)
