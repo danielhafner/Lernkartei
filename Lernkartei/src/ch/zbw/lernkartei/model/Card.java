@@ -41,5 +41,6 @@ public class Card
 	public void setCalcProbability(int calcProbability)
 	{
 		this.calcProbability = calcProbability;
+		//test
 	}
 }
