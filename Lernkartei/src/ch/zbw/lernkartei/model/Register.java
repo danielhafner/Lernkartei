@@ -80,5 +80,14 @@ public class Register
 		a = null;
 		return a;		
 	}
-
+	
+	public ArrayList<Card> getTestDataSet()
+	{
+		ArrayList<Card> myTestCards = new ArrayList<Card>();
+		myTestCards = new ArrayList<Card>();
+		myTestCards.add(new Card("Gebäude", "Building"));
+		myTestCards.add(new Card("rot", "red"));
+		myTestCards.add(new Card("Fenster", "Window"));
+		return myTestCards;
+	}
 }
