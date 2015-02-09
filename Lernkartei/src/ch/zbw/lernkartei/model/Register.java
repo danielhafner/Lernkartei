@@ -68,7 +68,7 @@ public class Register
 		return true;
 	}
 	
-	public ArrayList<Card> getCards(int id_card)
+	public ArrayList<Card> getCards()
 	{
 		return this.cards;
 	}
