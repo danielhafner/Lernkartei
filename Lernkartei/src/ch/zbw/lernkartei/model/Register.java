@@ -7,10 +7,11 @@ public class Register
 	private ArrayList<Card> cards;
 	private String title;
 	private boolean reverseMode;
+	private ArrayList<Card> myTestCards;
 	
 	public Register()
 	{
-		
+		myTestCards = new ArrayList<Card>();
 	}
 	
 	public Register(ArrayList<Card> cards,String title)
@@ -83,7 +84,6 @@ public class Register
 	
 	public ArrayList<Card> getTestDataSet()
 	{
-		ArrayList<Card> myTestCards = new ArrayList<Card>();
 		myTestCards = new ArrayList<Card>();
 		myTestCards.add(new Card("Gebäude", "Building"));
 		myTestCards.add(new Card("rot", "red"));
