@@ -68,11 +68,9 @@ public class Register
 		return true;
 	}
 	
-	public Card getCardById(int id_card)
+	public ArrayList<Card> getCards(int id_card)
 	{
-		Card a;
-		a = null;
-		return a;
+		return this.cards;
 	}
 	
 	public Card getNextRandomCard()
