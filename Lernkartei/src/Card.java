@@ -8,31 +8,31 @@ public class Card
 	private int calcProbability;
 	private int box;
 
-public Card(String front, String back)
-{
+	public Card(String front, String back)
+	{
 	this.front = front;
 	this.back = back;
 	this.probability = 2;
 	this.calcProbability = 0;
 	this.box = 1;
-}
+	}
 
-public boolean equals(Card card)
-{
-	return true;
-}
-public void setCard(String front, String back)
-{
+	public boolean equals(Card card)
+	{
+		return true;
+	}
+	public void setCard(String front, String back)
+	{
 	
-}
+	}
 
-public void setBoxAndProbability(int box, int probability)
-{
+	public void setBoxAndProbability(int box, int probability)
+	{
 	
-}
+	}
 
-public void setCalcProbability()
-{
+	public void setCalcProbability()
+	{
 	
-}
+	}
 }
