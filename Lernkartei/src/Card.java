@@ -31,8 +31,8 @@ public class Card
 	
 	}
 
-	public void setCalcProbability()
+	public void setCalcProbability(int calcProbability)
 	{
-	
+		this.calcProbability = calcProbability;
 	}
 }
