@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 
-
 public class Register 
 {
 	private ArrayList<Card> cards;
@@ -39,11 +38,20 @@ public class Register
 		
 	}
 	
-	public void remove(Card card)
+	public boolean remove(Card card)
 	{
-		
+		Iterator i = this.cards.iterator();
+		while(i.hasNext())
+		{
+			if(card.equals(i.next()))
+			{
+				this.cards.remove(card);
+				return true;
+			}
+		}
+		return false;
 	}
-	
+
 	public boolean add(Card card)
 	{
 		Iterator i = this.cards.iterator();
