@@ -31,7 +31,7 @@ public class Register
 	
 	public void saveChanges(Card card)
 	{
-		
+		this.cards.set(card.getIndex(), card);
 	}
 	
 	public void setReverseMode(boolean reverseMode)

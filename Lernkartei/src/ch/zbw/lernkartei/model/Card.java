@@ -1,5 +1,6 @@
 package ch.zbw.lernkartei.model;
 
+
 public class Card 
 {
 	private int id_Card;
@@ -31,10 +32,14 @@ public class Card
 	{
 	
 	}
+	
+	public int getIndex()
+	{
+		return this.id_Card;
+	}
 
 	public void setCalcProbability(int calcProbability)
 	{
 		this.calcProbability = calcProbability;
-		//drecks github
 	}
 }
