@@ -1,4 +1,5 @@
 package ch.zbw.lernkartei.model;
+import java.util.Random;
 
 
 public class Card 
@@ -30,7 +31,7 @@ public class Card
 			this.front=front;
 			this.back=back;
 		}
-		else{System.out.println("Felder dürfen nicht leer sein");}
+		else{System.out.println("Felder duerfen nicht leer sein");}
 	}
 
 	public void setBoxAndProbability(int box, int probability)
@@ -45,7 +46,9 @@ public class Card
 
 	public void setCalcProbability(int calcProbability)
 	{
-		this.calcProbability = calcProbability;
-		//test
+		int rnd;
+		Random random = new Random();
+		rnd = random.nextInt(9)+1;
+		this.calcProbability = calcProbability*rnd;
 	}
 }
