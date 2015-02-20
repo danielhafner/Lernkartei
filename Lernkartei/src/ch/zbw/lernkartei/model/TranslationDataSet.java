@@ -40,6 +40,7 @@ public class TranslationDataSet extends ArrayList<String[]>{
 		this.addNewToTranslation("Lernen starten", "Start learning", "Démarrer apprentissage", "Imparare inizio");
 		this.addNewToTranslation("Export wurde abgebrochen.", "Export was canceled.", "Export a été annulée.", "Export è stato annullato.");
 		this.addNewToTranslation("Import wurde abgebrochen.", "Import was canceled.", "Import a été annulée.", "Import è stato annullato.");
+		this.addNewToTranslation("Karten-Nr.", "Card-No.", "Numéro de Carte", "Numero della Carta");
 	}
 	
 	public String getTranslatedText(String originalText, Language languageOriginalText, Language languageTranslatedText)

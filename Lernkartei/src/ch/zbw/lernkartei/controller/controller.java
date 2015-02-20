@@ -1,28 +1,34 @@
 
 package ch.zbw.lernkartei.controller;
 
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
-import ch.zbw.lernkartei.model.Register;
+import javax.swing.ImageIcon;
+
 import ch.zbw.lernkartei.model.Language;
 import ch.zbw.lernkartei.view.GUI;
 
 public class controller {
 	
 	private  GUI gui;
-	private Register register;
 	
 	public controller()
 	{
 		this.gui = new GUI();
-		this.register = new Register();
 		addListener();
 	}
 	
 	public void startApplication()
 	{
-		this.gui.paint();
+		try {
+			this.gui.paint();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private void addListener()

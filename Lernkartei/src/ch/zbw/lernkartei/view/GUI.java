@@ -1,14 +1,15 @@
 package ch.zbw.lernkartei.view;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.beans.Visibility;
-import java.util.ArrayList;
-import java.util.FormatterClosedException;
-import java.util.Iterator;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -19,21 +20,22 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JWindow;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
-import ch.zbw.lernkartei.controller.controller;
 import ch.zbw.lernkartei.controller.controller.MeinMenuActionListener;
 import ch.zbw.lernkartei.model.Language;
 import ch.zbw.lernkartei.model.TranslationDataSet;
 
 public class GUI extends JFrame{
 	
+	private static final long serialVersionUID = 1L;
 	private TranslationDataSet translationArrayList;
 	private Language language;
 	private Language previousLanguage;
 	
-	//Menü
+	private JLabel labelImageIconBackground;
+	
 	private JMenu menuDatei;
 	private JMenu menuSprache;
 	private JMenuBar menuBar;
@@ -48,7 +50,8 @@ public class GUI extends JFrame{
 	private JMenuItem menuItemItalienisch;
 	private JMenuItem menuItemEnglisch;
 	
-	private JPanel panelMainPanel;
+	private JPanel mainPanel;
+	private JPanel gridBagPanel;
 	private JPanel panelSettings;
 	private JLabel labelSettings;
 	private JPanel panelStartLearning;
@@ -70,13 +73,20 @@ public class GUI extends JFrame{
 	private JButton buttonNavBack;
 	private JButton buttonNavForward;
 	
-	
+	private Toolkit toolKit;	
 	private JFileChooser jfImportFile;
 	
+	private int x = 0, y = 0, width = 800, heigth = 600;
+	
+	private GridBagConstraints gridBagContraints;
+	
 	public GUI()
-	{
-		this.language = Language.Deutsch;
-		this.setName("Karteikarte Version 1.0");
+	{					
+		this.gridBagContraints = new GridBagConstraints();
+		
+		this.mainPanel = new JPanel(new GridLayout(1, 1));
+		this.gridBagPanel = new JPanel (new GridBagLayout());
+		
 		this.menuBar = new JMenuBar();
 		
 		this.menuDatei = new JMenu("Datei");
@@ -93,18 +103,16 @@ public class GUI extends JFrame{
 		this.menuItemEnglisch = new JMenuItem("Englisch");
 		
 		this.translationArrayList = new TranslationDataSet();
-		//this.language = Sprache.Deutsch;
 		
-		this.panelMainPanel = new JPanel();
-		
-		this.panelStartLearning = new JPanel(new BorderLayout());
+		this.panelStartLearning = new JPanel();
 		
 		this.labelSettings = new JLabel("Einstellungen");
 		this.labelCardNumber = new JLabel("Karten-Nr.:");
 		this.panelSettings = new JPanel(new BorderLayout());
 		
-		this.panelFront = new JPanel(new BorderLayout());		
+		this.panelFront = new JPanel(new BorderLayout());
 		this.labelFront = new JLabel("Vorderseite");
+		
 		this.textfieldFront = new JTextArea(4, 4);
 		this.panelBack = new JPanel(new BorderLayout());
 		this.labelBack = new JLabel("Rückseite");
@@ -118,24 +126,46 @@ public class GUI extends JFrame{
 		this.buttonNavBack = new JButton("<<<");
 		this.buttonNavForward = new JButton(">>>");
 		
-		this.jfImportFile = new JFileChooser();
-		
+		this.jfImportFile = new JFileChooser();		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		ImageIcon imageIconBackground = new ImageIcon("src/bg-sea.jpg");
+		imageIconBackground.setDescription("Isch das en Scheiss");
+		labelImageIconBackground = new JLabel(imageIconBackground);
+		
+		JFrame.setDefaultLookAndFeelDecorated(true);	
 	}
 	
 	public void paint()
-	{
-		this.setSize(1024, 768);
+	{		
+		try{
+			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+		}
 		
-		this.setLayout(new BorderLayout());
-		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		catch (UnsupportedLookAndFeelException e) {
+			e.printStackTrace();
+		}
+			
+		catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		this.add(menuBar, BorderLayout.NORTH);
-		this.add(panelMainPanel, BorderLayout.CENTER);		
+		this.language = Language.Deutsch;
+		setTitle("Vokabeltrainer R. Holderegger | E. Schwarz | D. Hafner");
+		setIconImage(new ImageIcon("src/zbw.jpg").getImage());
+		
+		this.setJMenuBar(this.menuBar);	
 		menuBar.add(menuDatei);
 		menuBar.add(menuSprache);
-		menuBar.setSize(60, 20);
 		menuDatei.add(menuItemStartLearning);
 		menuDatei.add(menuItemSettings);
 		menuDatei.add(menuItemImport);
@@ -146,13 +176,8 @@ public class GUI extends JFrame{
 		menuSprache.add(menuItemItalienisch);
 		menuSprache.add(menuItemEnglisch);
 		
-		this.panelSettings.setSize(1024, 768);	
-		
 		this.panelFront.add(this.labelFront, BorderLayout.NORTH);
-		this.panelFront.add(this.textfieldFront, BorderLayout.CENTER);
-		this.panelFront.setSize(1024, 768);
-		
-		this.panelBack.setSize(1024, 768);	
+		this.panelFront.add(this.textfieldFront, BorderLayout.CENTER);	
 		this.panelBack.add(this.labelBack, BorderLayout.NORTH);
 		this.panelBack.add(this.textfieldBack, BorderLayout.CENTER);
 		
@@ -168,10 +193,53 @@ public class GUI extends JFrame{
 		this.panelSettings.add(panelBack, BorderLayout.EAST);
 		this.panelSettings.add(panelNav, BorderLayout.SOUTH);
 		
-		this.panelStartLearning.setSize(1024, 768);
 		this.labelStartLearning = new JLabel("Lernen starten");
 		this.panelStartLearning.add(labelStartLearning);
 		this.panelStartLearning.setVisible(true);
+		
+		this.panelStartLearning.setBackground(Color.MAGENTA);
+		this.panelSettings.setBackground(Color.CYAN);
+		this.panelBack.setBackground(Color.RED);
+		this.panelFront.setBackground(Color.YELLOW);
+		this.panelNav.setBackground(Color.GREEN);
+		
+		this.toolKit = Toolkit.getDefaultToolkit();
+		Dimension d = toolKit.getScreenSize();
+		x = (int) ((d.getWidth() - width) / 2);		// Gesamtbreite des Screens abzüglich Breite der Anwendung durch 2 ergibt die x-Anfangsposition.
+		y = (int) ((d.getHeight() - heigth) / 2);	// Gesamthöhe des Screens abzüglich Höhe der Anwendung durch 2 ergibt y-Anfangsposition.
+		
+		setBounds(x, y, this.width, this.heigth);
+		this.setMinimumSize(new Dimension(width, heigth));
+		
+		gridBagContraints.fill = GridBagConstraints.HORIZONTAL;
+		gridBagContraints.gridx = 8;
+		gridBagContraints.gridy = 4;
+		gridBagContraints.ipadx = 400;
+		gridBagContraints.ipady = 300;
+		
+		//Man kann auf einem Label ein Layout definieren...
+		labelImageIconBackground.setLayout(new GridBagLayout());
+		labelImageIconBackground.add(this.mainPanel);
+		this.add(labelImageIconBackground);
+		this.setVisible(true);
+	}
+
+	public void paintSettingsPanel() 
+	{
+		this.repaintTheFrame(this.panelSettings);
+	}
+
+	public void paintPlayPanel()
+	{
+		repaintTheFrame(this.panelStartLearning);
+	}
+	
+	private void repaintTheFrame(JPanel panelToShow) {				
+		labelImageIconBackground.removeAll();
+		this.mainPanel.removeAll();
+		this.mainPanel.add(panelToShow);
+		labelImageIconBackground.add(this.mainPanel);
+		this.setVisible(true);
 	}
 	
 	public void closeApplication()
@@ -181,6 +249,38 @@ public class GUI extends JFrame{
 		this.setVisible(false);
 	}
 
+	public void openFileDialog() 
+	{
+		switch(this.jfImportFile.showOpenDialog(this))
+		{
+		case JFileChooser.APPROVE_OPTION:
+			JOptionPane.showMessageDialog(this, "todo Ruel: Import starten...");
+			break;
+		case JFileChooser.CANCEL_OPTION:
+			JOptionPane.showMessageDialog(this, translationArrayList.getTranslatedText("Import wurde abgebrochen.", Language.Deutsch, this.language));
+			break;
+		case JFileChooser.ERROR_OPTION:
+			JOptionPane.showMessageDialog(this, translationArrayList.getTranslatedText("Fehler beim importieren der Daten", Language.Deutsch, this.language));
+			break;
+		}
+	}
+	
+	public void saveFileDialog()
+	{
+		switch(this.jfImportFile.showSaveDialog(this))
+		{
+		case JFileChooser.APPROVE_OPTION:
+			JOptionPane.showMessageDialog(this, "todo Ruel: Karten werden in ein File exportiert...");
+			break;
+		case JFileChooser.CANCEL_OPTION:
+			JOptionPane.showMessageDialog(this, translationArrayList.getTranslatedText("Export wurde abgebrochen.", Language.Deutsch, this.language));
+			break;
+		case JFileChooser.ERROR_OPTION:
+			JOptionPane.showMessageDialog(this, translationArrayList.getTranslatedText("Fehler beim exportieren der Karten", Language.Deutsch, this.language));
+			break;
+		}
+	}
+	
 	public void setLanguageMenuActionListener(MeinMenuActionListener listener) {
 		
 		if(listener.command.equals(Language.Deutsch.toString()))
@@ -312,53 +412,5 @@ public class GUI extends JFrame{
 		
 		this.translateTextOfAControl(this.labelStartLearning);
 		this.translateTextOfAControl(this.labelSettings);
-	}
-
-	public void paintSettingsPanel() 
-	{
-		this.panelMainPanel.removeAll();
-		this.panelMainPanel.add(this.panelSettings);
-		this.setVisible(true);
-		this.repaint();
-	}
-	
-	public void paintPlayPanel()
-	{
-		this.panelMainPanel.removeAll();
-		this.panelMainPanel.add(this.panelStartLearning);;
-		this.setVisible(true);
-		this.repaint();
-	}
-
-	public void openFileDialog() 
-	{
-		switch(this.jfImportFile.showOpenDialog(this))
-		{
-		case JFileChooser.APPROVE_OPTION:
-			JOptionPane.showMessageDialog(this, "todo Ruel: Import starten...");
-			break;
-		case JFileChooser.CANCEL_OPTION:
-			JOptionPane.showMessageDialog(this, translationArrayList.getTranslatedText("Import wurde abgebrochen.", Language.Deutsch, this.language));
-			break;
-		case JFileChooser.ERROR_OPTION:
-			JOptionPane.showMessageDialog(this, translationArrayList.getTranslatedText("Fehler beim importieren der Daten", Language.Deutsch, this.language));
-			break;
-		}
-	}
-	
-	public void saveFileDialog()
-	{
-		switch(this.jfImportFile.showSaveDialog(this))
-		{
-		case JFileChooser.APPROVE_OPTION:
-			JOptionPane.showMessageDialog(this, "todo Ruel: Karten werden in ein File exportiert...");
-			break;
-		case JFileChooser.CANCEL_OPTION:
-			JOptionPane.showMessageDialog(this, translationArrayList.getTranslatedText("Export wurde abgebrochen.", Language.Deutsch, this.language));
-			break;
-		case JFileChooser.ERROR_OPTION:
-			JOptionPane.showMessageDialog(this, translationArrayList.getTranslatedText("Fehler beim exportieren der Karten", Language.Deutsch, this.language));
-			break;
-		}
 	}
 }
