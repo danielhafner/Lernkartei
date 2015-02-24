@@ -53,6 +53,11 @@ public class Controller {
 		
 		MeinMenuActionListener mExport = new MeinMenuActionListener("Export");
 		this.gui.setExportMenuActionListener(mExport);
+		
+		MeinButtonActionListener mNavigation = new MeinButtonActionListener();
+		this.gui.setNavigationButtonListener(mNavigation);
+		
+		
 	}
 	
     public class MeinMenuActionListener implements ActionListener{
@@ -111,5 +116,16 @@ public class Controller {
 	            {
 	            }
 	        }
-	    }
+	    }    
+
+
+    public class MeinButtonActionListener implements ActionListener{
+
+		public void actionPerformed(ActionEvent e) {
+			
+			  gui.buttonClicked(e);
+            
+		}
+    	
+    }
 }

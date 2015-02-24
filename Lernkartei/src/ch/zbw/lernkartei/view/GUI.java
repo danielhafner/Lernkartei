@@ -25,6 +25,7 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import ch.zbw.lernkartei.controller.Controller.MeinButtonActionListener;
 import ch.zbw.lernkartei.controller.Controller.MeinMenuActionListener;
 import ch.zbw.lernkartei.model.Language;
 import ch.zbw.lernkartei.model.TranslationDataSet;
@@ -58,16 +59,17 @@ public class GUI extends JFrame{
 	private JPanel panelStartLearning;
 	private JLabel labelStartLearning;
 	
-	private JPanel panelFront;
-	private JPanel panelBack;
 	private JPanel panelNav;
 	
+	private JLabel labelRegisterName;
+	private JTextField textfieldRegisterName;
 	private JLabel labelCardNumber;
 	private JTextField textfieldCardNumber;
+	
 	private JLabel labelFront;
-	private JTextArea textfieldFront;
+	private JTextArea textAreaFront;
 	private JLabel labelBack;
-	private JTextArea textfieldBack;
+	private JTextArea textAreaBack;
 	
 	private JButton buttonNewCard;
 	private JButton buttonDeleteCard;
@@ -120,19 +122,21 @@ public class GUI extends JFrame{
 		
 		this.panelSettings = new JPanel(new GridBagLayout());
 		this.labelSettings = new JLabel("Einstellungen");
+		
+		this.labelRegisterName = new JLabel("Karteiname");
+		this.textfieldRegisterName = new JTextField(1);
 		this.labelCardNumber = new JLabel("Karten-Nr.");
 		this.textfieldCardNumber = new JTextField(1);
 		
-		this.panelFront = new JPanel(new BorderLayout());
+
 		this.labelFront = new JLabel("Vorderseite");
 		this.labelFront.setFont(MyFont.Ueberschrift2.getMyFont());
 		
-		this.textfieldFront = new JTextArea(4, 4);
-		this.panelBack = new JPanel(new BorderLayout());
+		this.textAreaFront = new JTextArea(4, 20);
 		this.labelBack = new JLabel("Rückseite");
 		this.labelBack.setFont(MyFont.Ueberschrift2.getMyFont());
-		this.textfieldBack = new JTextArea(4, 4);
-		this.textfieldBack.setSize(300, 100);
+		this.textAreaBack = new JTextArea(4, 20);
+		this.textAreaBack.setSize(300, 100);
 		
 		// Navigation: Neu, Löschen, Speichern, Zurück, Vorwärts
 		this.panelNav = new JPanel(new FlowLayout());
@@ -168,19 +172,14 @@ public class GUI extends JFrame{
 		menuSprache.add(menuItemFranzoesisch);
 		menuSprache.add(menuItemItalienisch);
 		menuSprache.add(menuItemEnglisch);
-		
-		this.panelFront.add(this.labelFront, BorderLayout.NORTH);
-		this.panelFront.add(this.textfieldFront, BorderLayout.CENTER);	
-		this.panelBack.add(this.labelBack, BorderLayout.NORTH);
-		this.panelBack.add(this.textfieldBack, BorderLayout.CENTER);
-		
+				
 		this.panelNav.add(this.buttonNewCard);
 		this.panelNav.add(this.buttonDeleteCard);
 		this.panelNav.add(this.buttonSaveCard);
 		this.panelNav.add(this.buttonNavBack);
 		this.panelNav.add(this.buttonNavForward);
 		
-		gridBagContraints.insets = new Insets(0,0,30,0);
+		gridBagContraints.insets = new Insets(0,0,20,0);
 		gridBagContraints.fill = GridBagConstraints.HORIZONTAL;		
 		
 		gridBagContraints.gridx = 0;
@@ -188,42 +187,64 @@ public class GUI extends JFrame{
 		this.panelSettings.setBackground(Color.getColor("blue"));
 		this.labelSettings.setFont(MyFont.Ueberschrift1.getMyFont());
 		this.panelSettings.add(labelSettings, gridBagContraints);
-
+		
 		gridBagContraints.gridx = 0;
 		gridBagContraints.gridy = 1;
+		this.panelSettings.add(labelRegisterName, gridBagContraints);
+		
+		gridBagContraints.fill = 0;
+		gridBagContraints.gridx = 1;
+		gridBagContraints.gridy = 1;
+		gridBagContraints.ipadx = 210;
+		gridBagContraints.anchor = GridBagConstraints.WEST;
+		this.textfieldRegisterName.setEnabled(false);
+		this.panelSettings.add(textfieldRegisterName, gridBagContraints);
+		
+		gridBagContraints.gridx = 0;
+		gridBagContraints.gridy = 2;
 		gridBagContraints.ipadx = 50;
 		this.panelSettings.add(labelCardNumber, gridBagContraints);		
 		
 		gridBagContraints.fill = 0;
 		gridBagContraints.gridx = 1;
-		gridBagContraints.gridy = 1;
+		gridBagContraints.gridy = 2;
 		gridBagContraints.ipadx = 100;
 		gridBagContraints.anchor = GridBagConstraints.WEST;
 		this.textfieldCardNumber.setEnabled(false);
 		this.panelSettings.add(textfieldCardNumber, gridBagContraints);
 		
-		
-		gridBagContraints.gridy = 3;
-		gridBagContraints.ipadx = 0;
-		gridBagContraints.fill = GridBagConstraints.HORIZONTAL;	
-
-		this.panelSettings.add(panelFront, gridBagContraints);
-		
-		gridBagContraints.gridy = 4;
-		this.panelSettings.add(panelBack, gridBagContraints);
-		
+		gridBagContraints.insets = new Insets(20,0,10,0);
 		gridBagContraints.gridy = 5;
+		gridBagContraints.ipadx = 1;
+		this.panelSettings.add(this.labelFront, gridBagContraints);
+		
+		gridBagContraints.insets = new Insets(0,0,0,0);
+		gridBagContraints.gridy = 6;
+		gridBagContraints.ipadx = 1;
+
+		this.panelSettings.add(this.textAreaFront, gridBagContraints);
+		
+		gridBagContraints.insets = new Insets(20,0,10,0);
+		gridBagContraints.fill = 0;
+		gridBagContraints.gridy = 7;
+		gridBagContraints.ipadx = 1;
+		this.panelSettings.add(this.labelBack, gridBagContraints);
+		
+		gridBagContraints.insets = new Insets(0,0,0,0);
+		gridBagContraints.gridy = 8;
+		gridBagContraints.ipadx = 1;
+
+		this.panelSettings.add(this.textAreaBack, gridBagContraints);
+		
+		gridBagContraints.insets = new Insets(20,0,0,0);
+		gridBagContraints.gridy = 12;
+		gridBagContraints.ipadx = 1;
 		this.panelSettings.add(panelNav, gridBagContraints);
 		
 		this.labelStartLearning = new JLabel("Lernen starten");
 		this.labelStartLearning.setFont(MyFont.Ueberschrift1.getMyFont());
 		this.panelStartLearning.add(labelStartLearning);
 		this.panelStartLearning.setVisible(true);
-		
-		this.panelStartLearning.setSize(new Dimension(400, 500));
-		
-		this.panelFront.setBackground(Color.CYAN);
-		this.panelBack.setBackground(Color.CYAN);
 		
 		this.toolKit = Toolkit.getDefaultToolkit();
 		Dimension d = toolKit.getScreenSize();
@@ -285,7 +306,8 @@ public class GUI extends JFrame{
 		switch(this.jfImportFile.showSaveDialog(this))
 		{
 		case JFileChooser.APPROVE_OPTION:
-			JOptionPane.showMessageDialog(this, "todo Ruel: Karten werden in ein File exportiert...");
+			
+			//JOptionPane.showMessageDialog(this, "todo Ruel: Karten werden in ein File exportiert...");
 			break;
 		case JFileChooser.CANCEL_OPTION:
 			JOptionPane.showMessageDialog(this, translationArrayList.getTranslatedText("Export wurde abgebrochen.", Language.Deutsch, this.language));
@@ -339,6 +361,15 @@ public class GUI extends JFrame{
 	public void setExportMenuActionListener(MeinMenuActionListener listener)
 	{
 		this.menuItemExport.addActionListener(listener);
+	}
+	
+	public void setNavigationButtonListener(MeinButtonActionListener listener)
+	{
+		this.buttonNewCard.addActionListener(listener);
+		this.buttonDeleteCard.addActionListener(listener);
+		this.buttonSaveCard.addActionListener(listener);
+		this.buttonNavBack.addActionListener(listener);
+		this.buttonNavForward.addActionListener(listener);
 	}
 
 	public void switchLanguage(ActionEvent e) 
@@ -429,15 +460,22 @@ public class GUI extends JFrame{
 	}
 
 	public void initializeControls() {
-		setButtonState(this.buttonNewCard, false);
+		setButtonState(this.buttonNewCard, true);
 		setButtonState(this.buttonDeleteCard, false);
 		setButtonState(this.buttonSaveCard, false);
 		setButtonState(this.buttonNavBack, false);
-		setButtonState(this.buttonNavForward, false);		
+		setButtonState(this.buttonNavForward, false);
 	}
 	
 	public void setButtonState(JButton button, boolean isEnabled)
 	{
 		button.setEnabled(isEnabled);
+	}
+
+	public void buttonClicked(ActionEvent e) {
+		if(e.getActionCommand() != null)
+		{
+			JOptionPane.showMessageDialog(this, e.getActionCommand() + " gedrückt");			
+		}		
 	}
 }
