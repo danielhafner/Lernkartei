@@ -20,10 +20,15 @@ public class Card
 	this.box = 1;
 	}
 
-	public boolean equals(Card card)
+	public boolean equals(int calcProbability)
 	{
-		return true;
+		if(calcProbability == this.calcProbability)
+		{
+			return true;
+		}
+		return false;
 	}
+	
 	public void setCard(String front, String back)
 	{
 		if(front!=null && front!=" " && back!=null && back!=" ")
@@ -38,6 +43,7 @@ public class Card
 	{
 		this.box = box;
 		this.probability = probability;
+		setCalcProbability(this.probability);
 	}
 	
 	public int getBox()
@@ -50,6 +56,12 @@ public class Card
 		return this.id_Card;
 	}
 
+	public int getcalcProbability()
+	{
+		setCalcProbability(this.probability);
+		return this.calcProbability;
+	}
+
 	public void setCalcProbability(int calcProbability)
 	{
 		int rnd;
@@ -57,4 +69,5 @@ public class Card
 		rnd = random.nextInt(9)+1;
 		this.calcProbability = calcProbability*rnd;
 	}
+	
 }
