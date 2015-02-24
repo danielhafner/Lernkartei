@@ -56,7 +56,6 @@ public class Controller {
 
     	public String command;
     	
-    	
     	public MeinMenuActionListener(String command)
     	{
     		setCommand(command);
@@ -66,7 +65,7 @@ public class Controller {
     	{
     		this.command = command;
     	}
-    	
+ 
     	public void actionPerformed(ActionEvent e) {
 	            if(e.getActionCommand().equals("Beenden"))
 	            {
