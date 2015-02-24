@@ -54,7 +54,6 @@ public class GUI extends JFrame{
 	private JMenuItem menuItemEnglisch;
 	
 	private JPanel mainPanel;
-	private JPanel gridBagPanel;
 	private JPanel panelSettings;
 	private JLabel labelSettings;
 	private JPanel panelStartLearning;
@@ -100,7 +99,6 @@ public class GUI extends JFrame{
 		this.gridBagContraints = new GridBagConstraints();
 		
 		this.mainPanel = new JPanel(new GridLayout(1, 1));
-		this.gridBagPanel = new JPanel (new GridBagLayout());
 		
 		this.menuBar = new JMenuBar();
 		
