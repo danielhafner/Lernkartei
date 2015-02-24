@@ -181,20 +181,23 @@ public class GUI extends JFrame{
 		this.panelNav.add(this.buttonNavBack);
 		this.panelNav.add(this.buttonNavForward);
 		
-		gridBagContraints.insets = new Insets(10,10,30,10);
+		gridBagContraints.insets = new Insets(0,0,30,0);
+		gridBagContraints.fill = GridBagConstraints.HORIZONTAL;		
 		
 		gridBagContraints.gridx = 0;
 		gridBagContraints.gridy = 0;
-		gridBagContraints.fill = GridBagConstraints.HORIZONTAL;
+		this.panelSettings.setBackground(Color.getColor("blue"));
 		this.panelSettings.add(labelSettings, gridBagContraints);
 
+		gridBagContraints.gridx = 0;
 		gridBagContraints.gridy = 1;
-		this.panelSettings.add(labelCardNumber, gridBagContraints);
+		this.panelSettings.add(labelCardNumber, gridBagContraints);		
 		
 		gridBagContraints.gridx = 1;
 		gridBagContraints.gridy = 1;
+		gridBagContraints.gridwidth = 2;
+		this.textfieldCardNumber.setEnabled(false);
 		this.panelSettings.add(textfieldCardNumber, gridBagContraints);
-		
 		
 		gridBagContraints.gridy = 3;
 		this.panelSettings.add(panelFront, gridBagContraints);
@@ -209,13 +212,10 @@ public class GUI extends JFrame{
 		this.panelStartLearning.add(labelStartLearning);
 		this.panelStartLearning.setVisible(true);
 		
-		this.panelStartLearning.setBackground(Color.MAGENTA);
 		this.panelStartLearning.setSize(new Dimension(400, 500));
 		
-		this.panelSettings.setBackground(Color.CYAN);
-		this.panelBack.setBackground(Color.RED);
-		this.panelFront.setBackground(Color.YELLOW);
-		this.panelNav.setBackground(Color.GREEN);
+		this.panelFront.setBackground(Color.CYAN);
+		this.panelBack.setBackground(Color.CYAN);
 		
 		this.toolKit = Toolkit.getDefaultToolkit();
 		Dimension d = toolKit.getScreenSize();
