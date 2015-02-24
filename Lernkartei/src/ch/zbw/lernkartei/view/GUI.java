@@ -6,12 +6,14 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -20,10 +22,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import ch.zbw.lernkartei.controller.controller.MeinMenuActionListener;
+import ch.zbw.lernkartei.controller.Controller.MeinMenuActionListener;
 import ch.zbw.lernkartei.model.Language;
 import ch.zbw.lernkartei.model.TranslationDataSet;
 
@@ -62,6 +65,7 @@ public class GUI extends JFrame{
 	private JPanel panelNav;
 	
 	private JLabel labelCardNumber;
+	private JTextField textfieldCardNumber;
 	private JLabel labelFront;
 	private JTextArea textfieldFront;
 	private JLabel labelBack;
@@ -81,7 +85,18 @@ public class GUI extends JFrame{
 	private GridBagConstraints gridBagContraints;
 	
 	public GUI()
-	{					
+	{
+		try {
+			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e) {
+			e.printStackTrace();
+		}
 		this.gridBagContraints = new GridBagConstraints();
 		
 		this.mainPanel = new JPanel(new GridLayout(1, 1));
@@ -89,13 +104,13 @@ public class GUI extends JFrame{
 		
 		this.menuBar = new JMenuBar();
 		
+		//Menu
 		this.menuDatei = new JMenu("Datei");
 		this.menuItemStartLearning = new JMenuItem("Lernen starten");
 		this.menuItemSettings = new JMenuItem("Einstellungen");
 		this.menuItemImport = new JMenuItem("Import");
 		this.menuItemExport = new JMenuItem("Export");
 		this.menuItemClose = new JMenuItem("Beenden");
-		
 		this.menuSprache = new JMenu("Sprache");
 		this.menuItemDeutsch = new JMenuItem("Deutsch");
 		this.menuItemFranzoesisch = new JMenuItem("Französisch");
@@ -106,9 +121,10 @@ public class GUI extends JFrame{
 		
 		this.panelStartLearning = new JPanel();
 		
+		this.panelSettings = new JPanel(new GridBagLayout());
 		this.labelSettings = new JLabel("Einstellungen");
 		this.labelCardNumber = new JLabel("Karten-Nr.:");
-		this.panelSettings = new JPanel(new BorderLayout());
+		this.textfieldCardNumber = new JTextField(1);
 		
 		this.panelFront = new JPanel(new BorderLayout());
 		this.labelFront = new JLabel("Vorderseite");
@@ -119,6 +135,7 @@ public class GUI extends JFrame{
 		this.textfieldBack = new JTextArea(4, 4);
 		this.textfieldBack.setSize(300, 100);
 		
+		// Navigation: Neu, Löschen, Speichern, Zurück, Vorwärts
 		this.panelNav = new JPanel(new FlowLayout());
 		this.buttonNewCard = new JButton("Neu");
 		this.buttonDeleteCard = new JButton("Löschen");
@@ -132,33 +149,10 @@ public class GUI extends JFrame{
 		ImageIcon imageIconBackground = new ImageIcon("src/bg-sea.jpg");
 		imageIconBackground.setDescription("Isch das en Scheiss");
 		labelImageIconBackground = new JLabel(imageIconBackground);
-		
-		JFrame.setDefaultLookAndFeelDecorated(true);	
 	}
 	
 	public void paint()
 	{		
-		try{
-			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-		}
-		
-		catch (UnsupportedLookAndFeelException e) {
-			e.printStackTrace();
-		}
-			
-		catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		this.language = Language.Deutsch;
 		setTitle("Vokabeltrainer R. Holderegger | E. Schwarz | D. Hafner");
 		setIconImage(new ImageIcon("src/zbw.jpg").getImage());
@@ -187,17 +181,37 @@ public class GUI extends JFrame{
 		this.panelNav.add(this.buttonNavBack);
 		this.panelNav.add(this.buttonNavForward);
 		
-		this.panelSettings.add(labelSettings, BorderLayout.NORTH);
-		this.panelSettings.add(labelCardNumber, BorderLayout.NORTH);
-		this.panelSettings.add(panelFront, BorderLayout.WEST);
-		this.panelSettings.add(panelBack, BorderLayout.EAST);
-		this.panelSettings.add(panelNav, BorderLayout.SOUTH);
+		gridBagContraints.insets = new Insets(10,10,30,10);
+		
+		gridBagContraints.gridx = 0;
+		gridBagContraints.gridy = 0;
+		gridBagContraints.fill = GridBagConstraints.HORIZONTAL;
+		this.panelSettings.add(labelSettings, gridBagContraints);
+
+		gridBagContraints.gridy = 1;
+		this.panelSettings.add(labelCardNumber, gridBagContraints);
+		
+		gridBagContraints.gridx = 1;
+		gridBagContraints.gridy = 1;
+		this.panelSettings.add(textfieldCardNumber, gridBagContraints);
+		
+		
+		gridBagContraints.gridy = 3;
+		this.panelSettings.add(panelFront, gridBagContraints);
+		
+		gridBagContraints.gridy = 4;
+		this.panelSettings.add(panelBack, gridBagContraints);
+		
+		gridBagContraints.gridy = 5;
+		this.panelSettings.add(panelNav, gridBagContraints);
 		
 		this.labelStartLearning = new JLabel("Lernen starten");
 		this.panelStartLearning.add(labelStartLearning);
 		this.panelStartLearning.setVisible(true);
 		
 		this.panelStartLearning.setBackground(Color.MAGENTA);
+		this.panelStartLearning.setSize(new Dimension(400, 500));
+		
 		this.panelSettings.setBackground(Color.CYAN);
 		this.panelBack.setBackground(Color.RED);
 		this.panelFront.setBackground(Color.YELLOW);
@@ -207,15 +221,8 @@ public class GUI extends JFrame{
 		Dimension d = toolKit.getScreenSize();
 		x = (int) ((d.getWidth() - width) / 2);		// Gesamtbreite des Screens abzüglich Breite der Anwendung durch 2 ergibt die x-Anfangsposition.
 		y = (int) ((d.getHeight() - heigth) / 2);	// Gesamthöhe des Screens abzüglich Höhe der Anwendung durch 2 ergibt y-Anfangsposition.
-		
 		setBounds(x, y, this.width, this.heigth);
 		this.setMinimumSize(new Dimension(width, heigth));
-		
-		gridBagContraints.fill = GridBagConstraints.HORIZONTAL;
-		gridBagContraints.gridx = 8;
-		gridBagContraints.gridy = 4;
-		gridBagContraints.ipadx = 400;
-		gridBagContraints.ipady = 300;
 		
 		//Man kann auf einem Label ein Layout definieren...
 		labelImageIconBackground.setLayout(new GridBagLayout());
@@ -393,10 +400,10 @@ public class GUI extends JFrame{
 			}
 		}
 	
-	public void setControlsToBeTranslated(Language s)
+	public void setControlsToBeTranslated(Language newLanguage)
 	{
 		this.previousLanguage = this.language;
-		this.language = s;
+		this.language = newLanguage;
 		
 		this.translateTextOfAControl(this.menuDatei);
 		this.translateTextOfAControl(menuItemStartLearning);
@@ -409,8 +416,20 @@ public class GUI extends JFrame{
 		this.translateTextOfAControl(this.menuItemFranzoesisch);
 		this.translateTextOfAControl(this.menuItemItalienisch);
 		this.translateTextOfAControl(this.menuItemEnglisch);
-		
 		this.translateTextOfAControl(this.labelStartLearning);
 		this.translateTextOfAControl(this.labelSettings);
+	}
+
+	public void initializeControls() {
+		setButtonState(this.buttonNewCard, false);
+		setButtonState(this.buttonDeleteCard, false);
+		setButtonState(this.buttonSaveCard, false);
+		setButtonState(this.buttonNavBack, false);
+		setButtonState(this.buttonNavForward, false);		
+	}
+	
+	public void setButtonState(JButton button, boolean isEnabled)
+	{
+		button.setEnabled(isEnabled);
 	}
 }

@@ -1,21 +1,18 @@
 
 package ch.zbw.lernkartei.controller;
 
-import java.awt.Image;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
-
 import javax.swing.ImageIcon;
-
 import ch.zbw.lernkartei.model.Language;
 import ch.zbw.lernkartei.view.GUI;
 
-public class controller {
+public class Controller {
 	
 	private  GUI gui;
 	
-	public controller()
+	public Controller()
 	{
 		this.gui = new GUI();
 		addListener();
@@ -25,6 +22,7 @@ public class controller {
 	{
 		try {
 			this.gui.paint();
+			this.gui.initializeControls();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -105,6 +103,10 @@ public class controller {
 	            else if(e.getActionCommand().equals("Export"))
 	            {
 	            	gui.saveFileDialog();
+	            }
+	            else if (e.getActionCommand().equals("Speichern"))
+	            {
+	            	
 	            }
 	        }
 	    }
