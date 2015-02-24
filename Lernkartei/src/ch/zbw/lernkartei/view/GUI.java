@@ -3,6 +3,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -13,7 +14,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -123,15 +123,17 @@ public class GUI extends JFrame{
 		
 		this.panelSettings = new JPanel(new GridBagLayout());
 		this.labelSettings = new JLabel("Einstellungen");
-		this.labelCardNumber = new JLabel("Karten-Nr.:");
+		this.labelCardNumber = new JLabel("Karten-Nr.");
 		this.textfieldCardNumber = new JTextField(1);
 		
 		this.panelFront = new JPanel(new BorderLayout());
 		this.labelFront = new JLabel("Vorderseite");
+		this.labelFront.setFont(MyFont.Ueberschrift2.getMyFont());
 		
 		this.textfieldFront = new JTextArea(4, 4);
 		this.panelBack = new JPanel(new BorderLayout());
 		this.labelBack = new JLabel("Rückseite");
+		this.labelBack.setFont(MyFont.Ueberschrift2.getMyFont());
 		this.textfieldBack = new JTextArea(4, 4);
 		this.textfieldBack.setSize(300, 100);
 		
@@ -187,19 +189,27 @@ public class GUI extends JFrame{
 		gridBagContraints.gridx = 0;
 		gridBagContraints.gridy = 0;
 		this.panelSettings.setBackground(Color.getColor("blue"));
+		this.labelSettings.setFont(MyFont.Ueberschrift1.getMyFont());
 		this.panelSettings.add(labelSettings, gridBagContraints);
 
 		gridBagContraints.gridx = 0;
 		gridBagContraints.gridy = 1;
+		gridBagContraints.ipadx = 50;
 		this.panelSettings.add(labelCardNumber, gridBagContraints);		
 		
+		gridBagContraints.fill = 0;
 		gridBagContraints.gridx = 1;
 		gridBagContraints.gridy = 1;
-		gridBagContraints.gridwidth = 2;
+		gridBagContraints.ipadx = 100;
+		gridBagContraints.anchor = GridBagConstraints.WEST;
 		this.textfieldCardNumber.setEnabled(false);
 		this.panelSettings.add(textfieldCardNumber, gridBagContraints);
 		
+		
 		gridBagContraints.gridy = 3;
+		gridBagContraints.ipadx = 0;
+		gridBagContraints.fill = GridBagConstraints.HORIZONTAL;	
+
 		this.panelSettings.add(panelFront, gridBagContraints);
 		
 		gridBagContraints.gridy = 4;
@@ -209,6 +219,7 @@ public class GUI extends JFrame{
 		this.panelSettings.add(panelNav, gridBagContraints);
 		
 		this.labelStartLearning = new JLabel("Lernen starten");
+		this.labelStartLearning.setFont(MyFont.Ueberschrift1.getMyFont());
 		this.panelStartLearning.add(labelStartLearning);
 		this.panelStartLearning.setVisible(true);
 		
