@@ -110,7 +110,7 @@ public class GUI extends JFrame{
 		this.menuItemClose = new JMenuItem("Beenden");
 		this.menuSprache = new JMenu("Sprache");
 		this.menuItemDeutsch = new JMenuItem("Deutsch");
-		this.menuItemFranzoesisch = new JMenuItem("Französisch");
+		this.menuItemFranzoesisch = new JMenuItem("Franzoesisch");
 		this.menuItemItalienisch = new JMenuItem("Italienisch");
 		this.menuItemEnglisch = new JMenuItem("Englisch");
 		
@@ -306,7 +306,7 @@ public class GUI extends JFrame{
 		{
 			this.menuItemEnglisch.addActionListener(listener);
 		}
-		else if(listener.command.equals(Language.Französisch.toString()))
+		else if(listener.command.equals(Language.Franzoesisch.toString()))
 		{
 			this.menuItemFranzoesisch.addActionListener(listener);
 		}
@@ -349,7 +349,7 @@ public class GUI extends JFrame{
 			break;
 		case "Italienisch": setControlsToBeTranslated(Language.Italienisch);
 			break;
-		case "Französisch": setControlsToBeTranslated(Language.Französisch);
+		case "Franzoesisch": setControlsToBeTranslated(Language.Franzoesisch);
 			break;
 		case "Englisch": setControlsToBeTranslated(Language.Englisch);
 			break;
