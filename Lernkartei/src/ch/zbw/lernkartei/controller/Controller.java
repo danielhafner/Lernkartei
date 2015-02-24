@@ -28,7 +28,6 @@ public class Controller {
 			this.gui.paint();
 			this.gui.initializeControls();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -110,7 +109,6 @@ public class Controller {
 	            }
 	            else if (e.getActionCommand().equals("Speichern"))
 	            {
-	            	
 	            }
 	        }
 	    }

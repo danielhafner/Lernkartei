@@ -129,7 +129,7 @@ public class GUI extends JFrame{
 		
 		this.textfieldFront = new JTextArea(4, 4);
 		this.panelBack = new JPanel(new BorderLayout());
-		this.labelBack = new JLabel("RÃ¼ckseite");
+		this.labelBack = new JLabel("Rückseite");
 		this.labelBack.setFont(MyFont.Ueberschrift2.getMyFont());
 		this.textfieldBack = new JTextArea(4, 4);
 		this.textfieldBack.setSize(300, 100);
