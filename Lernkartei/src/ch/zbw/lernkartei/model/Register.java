@@ -83,9 +83,13 @@ public class Register
 	public ArrayList<Card> getTestDataSet()
 	{
 		myTestCards = new ArrayList<Card>();
-		myTestCards.add(new Card("Gebäude", "Building"));
+		myTestCards.add(new Card("Gebï¿½ude", "Building"));
 		myTestCards.add(new Card("rot", "red"));
 		myTestCards.add(new Card("Fenster", "Window"));
 		return myTestCards;
 	}
+	public int getNumberOfCards()
+		{
+			return cards.length;
+		}
 }
