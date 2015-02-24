@@ -36,33 +36,13 @@ public class Card
 
 	public void setBoxAndProbability(int box, int probability)
 	{
-		if(ButtonActionListener.correctButtonActionPerformed())
-		{
-			if(box<7)
-			{
-				this.box++;
-			}
-			if(probability>2)
-			{
-				probability--;
-			}
-		}
-		if(ButtonActionListener.wrongButtonActionPerformed())
-		{
-			if(box>1)
-			{
-				this.box=1;
-			}	
-			if(probability<Register.getNumberOfCards())
-			{
-				probability++;
-			}
-		}
+		this.box = box;
+		this.probability = probability;
 	}
 	
 	public int getBox()
 		{
-			return Box;
+			return box;
 		}
 	
 	public int getIndex()

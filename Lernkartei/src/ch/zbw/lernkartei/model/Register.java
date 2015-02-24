@@ -90,6 +90,6 @@ public class Register
 	}
 	public int getNumberOfCards()
 		{
-			return cards.length;
+			return myTestCards.size();
 		}
 }

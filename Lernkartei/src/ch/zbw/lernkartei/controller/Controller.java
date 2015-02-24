@@ -4,13 +4,17 @@ package ch.zbw.lernkartei.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.ImageIcon;
+
+import ch.zbw.lernkartei.model.Card;
 import ch.zbw.lernkartei.model.Language;
+import ch.zbw.lernkartei.model.Register;
 import ch.zbw.lernkartei.view.GUI;
 
 public class Controller {
 	
 	private  GUI gui;
+	private  Register register;
+	private Card card;
 	
 	public Controller()
 	{
@@ -66,7 +70,8 @@ public class Controller {
     		this.command = command;
     	}
  
-    	public void actionPerformed(ActionEvent e) {
+    	@Override
+		public void actionPerformed(ActionEvent e) {
 	            if(e.getActionCommand().equals("Beenden"))
 	            {
 	             gui.closeApplication();
