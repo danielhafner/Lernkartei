@@ -110,7 +110,7 @@ public class GUI extends JFrame{
 		this.menuItemClose = new JMenuItem("Beenden");
 		this.menuSprache = new JMenu("Sprache");
 		this.menuItemDeutsch = new JMenuItem("Deutsch");
-		this.menuItemFranzoesisch = new JMenuItem("Französisch");
+		this.menuItemFranzoesisch = new JMenuItem("FranzÃ¶sisch");
 		this.menuItemItalienisch = new JMenuItem("Italienisch");
 		this.menuItemEnglisch = new JMenuItem("Englisch");
 		
@@ -129,15 +129,15 @@ public class GUI extends JFrame{
 		
 		this.textfieldFront = new JTextArea(4, 4);
 		this.panelBack = new JPanel(new BorderLayout());
-		this.labelBack = new JLabel("Rückseite");
+		this.labelBack = new JLabel("RÃ¼ckseite");
 		this.labelBack.setFont(MyFont.Ueberschrift2.getMyFont());
 		this.textfieldBack = new JTextArea(4, 4);
 		this.textfieldBack.setSize(300, 100);
 		
-		// Navigation: Neu, Löschen, Speichern, Zurück, Vorwärts
+		// Navigation: Neu, LÃ¶schen, Speichern, ZurÃ¼ck, VorwÃ¤rts
 		this.panelNav = new JPanel(new FlowLayout());
 		this.buttonNewCard = new JButton("Neu");
-		this.buttonDeleteCard = new JButton("Löschen");
+		this.buttonDeleteCard = new JButton("LÃ¶schen");
 		this.buttonSaveCard = new JButton("Speichern");
 		this.buttonNavBack = new JButton("<<<");
 		this.buttonNavForward = new JButton(">>>");
@@ -227,8 +227,8 @@ public class GUI extends JFrame{
 		
 		this.toolKit = Toolkit.getDefaultToolkit();
 		Dimension d = toolKit.getScreenSize();
-		x = (int) ((d.getWidth() - width) / 2);		// Gesamtbreite des Screens abzüglich Breite der Anwendung durch 2 ergibt die x-Anfangsposition.
-		y = (int) ((d.getHeight() - heigth) / 2);	// Gesamthöhe des Screens abzüglich Höhe der Anwendung durch 2 ergibt y-Anfangsposition.
+		x = (int) ((d.getWidth() - width) / 2);		// Gesamtbreite des Screens abzï¿½glich Breite der Anwendung durch 2 ergibt die x-Anfangsposition.
+		y = (int) ((d.getHeight() - heigth) / 2);	// Gesamthï¿½he des Screens abzï¿½glich Hï¿½he der Anwendung durch 2 ergibt y-Anfangsposition.
 		setBounds(x, y, this.width, this.heigth);
 		this.setMinimumSize(new Dimension(width, heigth));
 		
@@ -306,7 +306,7 @@ public class GUI extends JFrame{
 		{
 			this.menuItemEnglisch.addActionListener(listener);
 		}
-		else if(listener.command.equals(Language.Französisch.toString()))
+		else if(listener.command.equals(Language.FranzÃ¶sisch.toString()))
 		{
 			this.menuItemFranzoesisch.addActionListener(listener);
 		}
@@ -349,7 +349,7 @@ public class GUI extends JFrame{
 			break;
 		case "Italienisch": setControlsToBeTranslated(Language.Italienisch);
 			break;
-		case "Französisch": setControlsToBeTranslated(Language.Französisch);
+		case "FranzÃ¶sisch": setControlsToBeTranslated(Language.FranzÃ¶sisch);
 			break;
 		case "Englisch": setControlsToBeTranslated(Language.Englisch);
 			break;
@@ -369,7 +369,7 @@ public class GUI extends JFrame{
 						((JMenuItem)o).setText(elem[this.language.value]);
 						
 						// Actioncommand  muss neu gesetzt werden, damit die 
-						// deutschen Befehle NICHT mit der fremdsprachigen überschrieben werden!
+						// deutschen Befehle NICHT mit der fremdsprachigen Ã¼berschrieben werden!
 						((JMenuItem)o).setActionCommand(elem[Language.Deutsch.value]);
 						break;
 					}
@@ -382,7 +382,7 @@ public class GUI extends JFrame{
 						((JMenu)o).setText(elem[this.language.value]);
 						
 						// Actioncommand  muss neu gesetzt werden, damit die 
-						// deutschen Befehle NICHT mit der fremdsprachigen überschrieben werden!
+						// deutschen Befehle NICHT mit der fremdsprachigen Ã¼berschrieben werden!
 						((JMenu)o).setActionCommand(elem[Language.Deutsch.value]);
 						break;
 					}
