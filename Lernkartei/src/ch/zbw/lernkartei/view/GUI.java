@@ -110,7 +110,7 @@ public class GUI extends JFrame{
 		this.menuItemClose = new JMenuItem("Beenden");
 		this.menuSprache = new JMenu("Sprache");
 		this.menuItemDeutsch = new JMenuItem("Deutsch");
-		this.menuItemFranzoesisch = new JMenuItem("Franzoesisch");
+		this.menuItemFranzoesisch = new JMenuItem("Französisch");
 		this.menuItemItalienisch = new JMenuItem("Italienisch");
 		this.menuItemEnglisch = new JMenuItem("Englisch");
 		
