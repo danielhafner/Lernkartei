@@ -129,7 +129,7 @@ public class GUI extends JFrame{
 		
 		this.textfieldFront = new JTextArea(4, 4);
 		this.panelBack = new JPanel(new BorderLayout());
-		this.labelBack = new JLabel("R�ckseite");
+		this.labelBack = new JLabel("Rückseite");
 		this.labelBack.setFont(MyFont.Ueberschrift2.getMyFont());
 		this.textfieldBack = new JTextArea(4, 4);
 		this.textfieldBack.setSize(300, 100);
@@ -306,7 +306,7 @@ public class GUI extends JFrame{
 		{
 			this.menuItemEnglisch.addActionListener(listener);
 		}
-		else if(listener.command.equals(Language.Franzoesisch.toString()))
+		else if(listener.command.equals(Language.Französisch.toString()))
 		{
 			this.menuItemFranzoesisch.addActionListener(listener);
 		}
@@ -349,7 +349,7 @@ public class GUI extends JFrame{
 			break;
 		case "Italienisch": setControlsToBeTranslated(Language.Italienisch);
 			break;
-		case "Franzoesisch": setControlsToBeTranslated(Language.Franzoesisch);
+		case "Französisch": setControlsToBeTranslated(Language.Französisch);
 			break;
 		case "Englisch": setControlsToBeTranslated(Language.Englisch);
 			break;

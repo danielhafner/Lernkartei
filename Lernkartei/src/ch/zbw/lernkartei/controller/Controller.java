@@ -39,7 +39,7 @@ public class Controller {
 		
 		this.gui.setLanguageMenuActionListener(new MeinMenuActionListener(Language.Deutsch.toString()));
 		this.gui.setLanguageMenuActionListener(new MeinMenuActionListener(Language.Englisch.toString()));
-		this.gui.setLanguageMenuActionListener(new MeinMenuActionListener(Language.Franzoesisch.toString()));
+		this.gui.setLanguageMenuActionListener(new MeinMenuActionListener(Language.Französisch.toString()));
 		this.gui.setLanguageMenuActionListener(new MeinMenuActionListener(Language.Italienisch.toString()));
 		
 		MeinMenuActionListener mSettings = new MeinMenuActionListener("Einstellungen");
