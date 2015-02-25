@@ -15,10 +15,14 @@ public class Controller {
 	private  GUI gui;
 	private  Register register;
 	private Card card;
+	private int cardId;
 	
-	public Controller()
+	public Controller(GUI gui, Register register)
 	{
-		this.gui = new GUI();
+		this.gui = gui;
+		this.card = card;
+		this.register = register;
+		
 		addListener();
 	}
 	
@@ -56,8 +60,6 @@ public class Controller {
 		
 		MeinButtonActionListener mNavigation = new MeinButtonActionListener();
 		this.gui.setNavigationButtonListener(mNavigation);
-		
-		
 	}
 	
     public class MeinMenuActionListener implements ActionListener{
@@ -98,6 +100,7 @@ public class Controller {
 	            }
 	            else if(e.getActionCommand().equals("Einstellungen"))
 	            {
+	            	gui.initializeSettingsWithData(register);
 	            	gui.paintSettingsPanel();
 	            }
 	            else if(e.getActionCommand().equals("Lernen starten"))
@@ -112,20 +115,59 @@ public class Controller {
 	            {
 	            	gui.saveFileDialog();
 	            }
-	            else if (e.getActionCommand().equals("Speichern"))
-	            {
-	            }
 	        }
-	    }    
-
+	    }
 
     public class MeinButtonActionListener implements ActionListener{
 
+		@Override
 		public void actionPerformed(ActionEvent e) {
-			
-			  gui.buttonClicked(e);
-            
+			  if(e.getActionCommand().equals("Speichern"))	
+			  {
+				String front, back;
+		
+				try
+				{
+					front = gui.getFrontText();
+					back = gui.getBackText();
+					if(gui.getCardid() != null)
+					{
+						cardId = gui.getCardid();			 
+						Card modifiedCard = register.getCards().get(cardId);
+						modifiedCard.setCard(front, back);
+						gui.displayNewCard(modifiedCard, cardId);
+					}
+					else
+					{
+						cardId = gui.getCardid() + 1;
+						register.add(new Card(front, back));
+						gui.displayNewCard(register.getCards().get(register.getCards().size()- 1), cardId);
+					}
+				}
+				
+				catch(Exception ex)
+				{
+					gui.displayErrorMessage("Error: " + ex.getMessage());
+				}
+			  }
+			  else if(e.getActionCommand().equals(">>>"))
+			  {
+				  try {
+					gui.displayNewCard(register.getCards().get(cardId + 1), cardId + 1);
+				} catch (Exception e1) {
+				
+					e1.printStackTrace();
+				}
+			  }
+			  else if(e.getActionCommand().equals("<<<"))
+			  {
+				  try {
+					gui.displayNewCard(register.getCards().get(cardId - 1), cardId - 1);
+				} catch (Exception e1) {
+				
+					e1.printStackTrace();
+				}
+			  }
 		}
-    	
     }
 }

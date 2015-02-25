@@ -1,5 +1,4 @@
 package ch.zbw.lernkartei.model;
-import java.awt.List;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -13,7 +12,10 @@ public class Register
 	
 	public Register()
 	{
-		myTestCards = new ArrayList<Card>();
+		// Dieser Konstruktor wird nur für Testzwecke aufgerufen - so implementiert lassen
+		setTitle("Aus Methode getTestDataSet()");
+		this.cards = new ArrayList<Card>();
+		this.cards = getTestDataSet();
 	}
 	
 	public Register(ArrayList<Card> cards,String title)
@@ -101,8 +103,11 @@ public class Register
 		return true;
 	}
 	
-	public ArrayList<Card> getCards()
+	public ArrayList<Card> getCards() throws Exception
 	{
+		if(this.cards == null)
+			throw new Exception("Keine Karten vorhanden.");
+		
 		return this.cards;
 	}
 	
@@ -131,15 +136,25 @@ public class Register
 	
 	public ArrayList<Card> getTestDataSet()
 	{
-		myTestCards = new ArrayList<Card>();
-		myTestCards.add(new Card("Gebäude", "Building"));
-		myTestCards.add(new Card("rot", "red"));
-		myTestCards.add(new Card("Fenster", "Window"));
-		return myTestCards;
+		this.cards = new ArrayList<Card>();
+		cards.add(new Card("Gebäude", "Building"));
+		cards.add(new Card("rot", "red"));
+		cards.add(new Card("Fenster", "Window"));
+		return cards;
 	}
 	
 	public int getNumberOfCards()
 	{
 			return myTestCards.size();
+	}
+	
+	public String getTitle()
+	{
+		return this.title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+		
 	}
 }

@@ -1,14 +1,18 @@
 package ch.zbw.lernkartei.view;
-import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.List;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,7 +31,9 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import ch.zbw.lernkartei.controller.Controller.MeinButtonActionListener;
 import ch.zbw.lernkartei.controller.Controller.MeinMenuActionListener;
+import ch.zbw.lernkartei.model.Card;
 import ch.zbw.lernkartei.model.Language;
+import ch.zbw.lernkartei.model.Register;
 import ch.zbw.lernkartei.model.TranslationDataSet;
 
 public class GUI extends JFrame{
@@ -97,10 +103,10 @@ public class GUI extends JFrame{
 		} catch (UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
 		}
+		
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.gridBagContraints = new GridBagConstraints();
-		
 		this.mainPanel = new JPanel(new GridLayout(1, 1));
-		
 		this.menuBar = new JMenuBar();
 		
 		//Menu
@@ -127,7 +133,6 @@ public class GUI extends JFrame{
 		this.textfieldRegisterName = new JTextField(1);
 		this.labelCardNumber = new JLabel("Karten-Nr.");
 		this.textfieldCardNumber = new JTextField(1);
-		
 
 		this.labelFront = new JLabel("Vorderseite");
 		this.labelFront.setFont(MyFont.Ueberschrift2.getMyFont());
@@ -147,7 +152,6 @@ public class GUI extends JFrame{
 		this.buttonNavForward = new JButton(">>>");
 		
 		this.jfImportFile = new JFileChooser();		
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		ImageIcon imageIconBackground = new ImageIcon("src/bg-sea.jpg");
 		imageIconBackground.setDescription("Isch das en Scheiss");
@@ -257,12 +261,31 @@ public class GUI extends JFrame{
 		labelImageIconBackground.setLayout(new GridBagLayout());
 		labelImageIconBackground.add(this.mainPanel);
 		this.add(labelImageIconBackground);
-		this.setVisible(true);
 	}
 
 	public void paintSettingsPanel() 
 	{
+		//initializeSettings(this.register);
 		this.repaintTheFrame(this.panelSettings);
+	}
+	
+	public void initializeSettingsWithData(Register reg)
+	{
+		if(reg != null)
+		{
+			this.textfieldRegisterName.setText(reg.getTitle());
+			try {
+				this.textfieldCardNumber.setText(reg.getCards().get(0).getIdCard() + "");
+				this.textAreaBack.setText(reg.getCards().get(0).getBack());
+				this.textAreaFront.setText(reg.getCards().get(0).getFront());
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(this, e.getMessage());
+			}
+		}
+		else
+		{
+			
+		}
 	}
 
 	public void paintPlayPanel()
@@ -293,7 +316,7 @@ public class GUI extends JFrame{
 			JOptionPane.showMessageDialog(this, "todo Ruel: Import starten...");
 			break;
 		case JFileChooser.CANCEL_OPTION:
-			JOptionPane.showMessageDialog(this, translationArrayList.getTranslatedText("Import wurde abgebrochen.", Language.Deutsch, this.language));
+			//JOptionPane.showMessageDialog(this, translationArrayList.getTranslatedText("Import wurde abgebrochen.", Language.Deutsch, this.language));
 			break;
 		case JFileChooser.ERROR_OPTION:
 			JOptionPane.showMessageDialog(this, translationArrayList.getTranslatedText("Fehler beim importieren der Daten", Language.Deutsch, this.language));
@@ -310,7 +333,7 @@ public class GUI extends JFrame{
 			//JOptionPane.showMessageDialog(this, "todo Ruel: Karten werden in ein File exportiert...");
 			break;
 		case JFileChooser.CANCEL_OPTION:
-			JOptionPane.showMessageDialog(this, translationArrayList.getTranslatedText("Export wurde abgebrochen.", Language.Deutsch, this.language));
+			//JOptionPane.showMessageDialog(this, translationArrayList.getTranslatedText("Export wurde abgebrochen.", Language.Deutsch, this.language));
 			break;
 		case JFileChooser.ERROR_OPTION:
 			JOptionPane.showMessageDialog(this, translationArrayList.getTranslatedText("Fehler beim exportieren der Karten", Language.Deutsch, this.language));
@@ -439,43 +462,77 @@ public class GUI extends JFrame{
 			}
 		}
 	
+	
+	public static ArrayList<Component> getAllComponents(final Container c) {
+	    Component[] comps = c.getComponents();
+	    ArrayList<Component> compList = new ArrayList<Component>();
+	    for (Component comp : comps) {
+	        compList.add(comp);
+	        if (comp instanceof Container)
+	            compList.addAll(getAllComponents((Container) comp));
+	    }
+	    return compList;
+	}
+	
 	public void setControlsToBeTranslated(Language newLanguage)
 	{
 		this.previousLanguage = this.language;
 		this.language = newLanguage;
+
+		ArrayList<Component> a = getAllComponents(this.mainPanel);
 		
-		this.translateTextOfAControl(this.menuDatei);
-		this.translateTextOfAControl(menuItemStartLearning);
-		this.translateTextOfAControl(this.menuItemSettings);
-		this.translateTextOfAControl(this.menuItemImport);
-		this.translateTextOfAControl(this.menuItemExport);
-		this.translateTextOfAControl(this.menuItemClose);
-		this.translateTextOfAControl(this.menuSprache);
-		this.translateTextOfAControl(this.menuItemDeutsch);
-		this.translateTextOfAControl(this.menuItemFranzoesisch);
-		this.translateTextOfAControl(this.menuItemItalienisch);
-		this.translateTextOfAControl(this.menuItemEnglisch);
-		this.translateTextOfAControl(this.labelStartLearning);
-		this.translateTextOfAControl(this.labelSettings);
+		for (Component c : a)
+		{
+			translateTextOfAControl(c);
+		}
 	}
 
 	public void initializeControls() {
 		setButtonState(this.buttonNewCard, true);
 		setButtonState(this.buttonDeleteCard, false);
-		setButtonState(this.buttonSaveCard, false);
-		setButtonState(this.buttonNavBack, false);
-		setButtonState(this.buttonNavForward, false);
+		setButtonState(this.buttonSaveCard, true);
+		setButtonState(this.buttonNavBack, true);
+		setButtonState(this.buttonNavForward, true);
 	}
 	
 	public void setButtonState(JButton button, boolean isEnabled)
 	{
 		button.setEnabled(isEnabled);
 	}
+	
+	public String getFrontText()
+	{
+		return this.textAreaFront.getText();
+	}
+	
+	public String getBackText()
+	{
+		return this.textAreaBack.getText();
+	}
+	
+	public void displayErrorMessage(String error)
+	{
+		JOptionPane.showMessageDialog(this, error);
+	}
 
-	public void buttonClicked(ActionEvent e) {
-		if(e.getActionCommand() != null)
+	public void displayNewCard(Card card, int cardId) {
+		
+		this.textAreaFront.setText(card.getFront());
+		this.textAreaBack.setText(card.getBack());
+		this.textfieldCardNumber.setText(cardId + "");
+		
+		
+		//todo!
+		//this.textfieldRegisterName.setText(register.getRegisterName());
+	}
+
+	public Integer getCardid() {
+		
+		if(this.textfieldCardNumber.getText() != null)
 		{
-			JOptionPane.showMessageDialog(this, e.getActionCommand() + " gedrückt");			
-		}		
+			return  Integer.parseInt(this.textfieldCardNumber.getText());
+		}
+		
+		return 0;
 	}
 }

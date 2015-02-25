@@ -13,11 +13,15 @@ public class Card
 
 	public Card(String front, String back)
 	{
+	this.id_Card = id_Card;
 	this.front = front;
 	this.back = back;
 	this.probability = 2;
 	this.calcProbability = 0;
 	this.box = 1;
+	}
+	
+	public Card(){
 	}
 
 	public boolean equals(int calcProbability)
@@ -55,6 +59,11 @@ public class Card
 	{
 		return this.id_Card;
 	}
+	
+	public int getIdCard()
+	{
+		return this.id_Card;
+	}
 
 	public int getcalcProbability()
 	{
@@ -68,6 +77,16 @@ public class Card
 		Random random = new Random();
 		rnd = random.nextInt(9)+1;
 		this.calcProbability = calcProbability*rnd;
+	}
+	
+	public String getFront()
+	{
+		return this.front;
+	}
+	
+	public String getBack()
+	{
+		return this.back;
 	}
 	
 }
