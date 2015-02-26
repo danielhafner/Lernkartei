@@ -488,11 +488,11 @@ public class GUI extends JFrame{
 	}
 
 	public void initializeControls() {
-		setButtonState(this.buttonNewCard, true);
+		setButtonState(this.buttonNewCard, false);
 		setButtonState(this.buttonDeleteCard, false);
-		setButtonState(this.buttonSaveCard, true);
-		setButtonState(this.buttonNavBack, true);
-		setButtonState(this.buttonNavForward, true);
+		setButtonState(this.buttonSaveCard, false);
+		setButtonState(this.buttonNavBack, false);
+		setButtonState(this.buttonNavForward, false);
 	}
 	
 	public void setButtonState(JButton button, boolean isEnabled)
@@ -534,5 +534,9 @@ public class GUI extends JFrame{
 		}
 		
 		return 0;
+	}
+
+	public void setStateDeleteButton(boolean state) {
+		this.buttonDeleteCard.setEnabled(state);
 	}
 }

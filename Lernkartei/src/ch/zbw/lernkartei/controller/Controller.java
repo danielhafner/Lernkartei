@@ -30,7 +30,7 @@ public class Controller {
 	{
 		try {
 			this.gui.paint();
-			this.gui.initializeControls();
+			//this.gui.initializeControls();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -143,6 +143,7 @@ public class Controller {
 						register.add(new Card(front, back));
 						gui.displayNewCard(register.getCards().get(register.getCards().size()- 1), cardId);
 					}
+					gui.setStateDeleteButton(true);
 				}
 				
 				catch(Exception ex)
@@ -159,6 +160,18 @@ public class Controller {
 					  }
 					  
 					gui.displayNewCard(register.getCards().get(cardId), cardId);
+					
+					// todo rho: in Methode auslagern, wird beim back button auch verwendet
+					  if(register.getCards().get(cardId).getFront().equals("") &&
+					  register.getCards().get(cardId).getBack().equals(""))
+					  {
+						  gui.setStateDeleteButton(false);
+					  }
+					  else
+					  {
+						  gui.setStateDeleteButton(true);
+					  }
+					
 				} catch (Exception e1) {
 				
 					e1.printStackTrace();
@@ -172,12 +185,60 @@ public class Controller {
 						  cardId = gui.getCardid() -1;
 					  }
 					  gui.displayNewCard(register.getCards().get(cardId), cardId);
+					  
+					  if(register.getCards().get(cardId).getFront().equals("") &&
+					  register.getCards().get(cardId).getBack().equals(""))
+					  {
+						  gui.setStateDeleteButton(false);
+					  }
+					  else
+					  {
+						  gui.setStateDeleteButton(true);
+					  }
+					  
 				
 				} catch (Exception e1) {
 				
 					gui.displayErrorMessage(e1.getMessage());
 				}
 			  }
+			  else if(e.getActionCommand().equals("Neu"))
+			  {
+				  try {
+					  cardId = register.getCards().size();
+					  Card newCard = new Card("", "");
+					  register.add(newCard);
+					  gui.displayNewCard(newCard, cardId);
+					  gui.setStateDeleteButton(false);
+				
+				} catch (Exception e1) {
+				
+					gui.displayErrorMessage(e1.getMessage());
+				}
+			  }
+			  else if(e.getActionCommand().equals("Löschen"))
+			  {
+				  try {
+					  register.getCards().remove(cardId);
+					  if(cardId != 0)
+					  {
+					  cardId--;
+					  card = register.getCards().get(cardId);
+					  register.add(card);
+					  gui.displayNewCard(card, cardId);
+					  }
+					  else
+					  {
+						  gui.displayNewCard(new Card("", ""), 0);
+						  gui.setStateDeleteButton(false);
+					  }
+				
+				} catch (Exception e1) {
+				
+					gui.displayErrorMessage(e1.getMessage());
+				}
+			  }
+			  
 		}
     }
 }
