@@ -55,11 +55,6 @@ public class Card
 			return box;
 		}
 	
-	public int getIndex()
-	{
-		return this.id_Card;
-	}
-	
 	public int getIdCard()
 	{
 		return this.id_Card;

@@ -26,9 +26,23 @@ public class Register
 	
 	public void imports(String sourcePath)
 	{
-		this.cards = getTestDataSet();
+		//this.cards = getTestDataSet();
+		this.cards = getDataFromInternalFile(sourcePath);
 	}
 	
+	private ArrayList<Card> getDataFromInternalFile(String string) {
+		// todo Daniel
+		// File auslesen
+		// Pro Zeile eine Card
+		// ganzes ArrayList zurückgeben
+		return null;
+	}
+	
+	private void saveDataIntoInternalFile(String string)
+	{
+		
+	}
+
 	public void sortList()
 	{
 		ArrayList<Integer> sortedNumbers = new ArrayList();
@@ -67,7 +81,7 @@ public class Register
 	
 	public void saveChanges(Card card)
 	{
-		this.cards.set(card.getIndex(), card);
+		this.cards.set(card.getIdCard(), card);
 	}
 	
 	public void setReverseMode(boolean reverseMode)

@@ -12,6 +12,7 @@ import java.awt.List;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -89,6 +90,8 @@ public class GUI extends JFrame{
 	private int x = 0, y = 0, width = 800, heigth = 600;
 	
 	private GridBagConstraints gridBagContraints;
+	
+	private String fileExportPath;
 	
 	public GUI()
 	{
@@ -325,7 +328,7 @@ public class GUI extends JFrame{
 	}
 	
 	public void saveFileDialog()
-	{
+	{		
 		switch(this.jfImportFile.showSaveDialog(this))
 		{
 		case JFileChooser.APPROVE_OPTION:
@@ -538,5 +541,10 @@ public class GUI extends JFrame{
 
 	public void setStateDeleteButton(boolean state) {
 		this.buttonDeleteCard.setEnabled(state);
+	}
+	
+	public String getFileExportfile()
+	{
+		return this.fileExportPath;
 	}
 }
