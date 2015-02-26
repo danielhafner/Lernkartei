@@ -153,7 +153,12 @@ public class Controller {
 			  else if(e.getActionCommand().equals(">>>"))
 			  {
 				  try {
-					gui.displayNewCard(register.getCards().get(cardId + 1), cardId + 1);
+					  if(cardId < register.getCards().size() - 1)
+					  {
+						  cardId++;
+					  }
+					  
+					gui.displayNewCard(register.getCards().get(cardId), cardId);
 				} catch (Exception e1) {
 				
 					e1.printStackTrace();
@@ -162,10 +167,15 @@ public class Controller {
 			  else if(e.getActionCommand().equals("<<<"))
 			  {
 				  try {
-					gui.displayNewCard(register.getCards().get(cardId - 1), cardId - 1);
+					  if(cardId != 0)
+					  {
+						  cardId = gui.getCardid() -1;
+					  }
+					  gui.displayNewCard(register.getCards().get(cardId), cardId);
+				
 				} catch (Exception e1) {
 				
-					e1.printStackTrace();
+					gui.displayErrorMessage(e1.getMessage());
 				}
 			  }
 		}
