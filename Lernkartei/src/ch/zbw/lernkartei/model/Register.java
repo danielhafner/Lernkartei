@@ -8,7 +8,6 @@ public class Register
 	private ArrayList<Card> cards;
 	private String title;
 	private boolean reverseMode;
-	private ArrayList<Card> myTestCards;
 	
 	public Register()
 	{
@@ -26,8 +25,8 @@ public class Register
 	
 	public void imports(String sourcePath)
 	{
-		//this.cards = getTestDataSet();
-		this.cards = getDataFromInternalFile(sourcePath);
+		this.cards = getTestDataSet();
+		//this.cards = getDataFromInternalFile(sourcePath);
 	}
 	
 	private ArrayList<Card> getDataFromInternalFile(String string) {
@@ -150,16 +149,16 @@ public class Register
 	
 	public ArrayList<Card> getTestDataSet()
 	{
-		this.cards = new ArrayList<Card>();
-		cards.add(new Card("Gebäude", "Building"));
-		cards.add(new Card("rot", "red"));
-		cards.add(new Card("Fenster", "Window"));
-		return cards;
+		ArrayList<Card> myTestCards = new ArrayList<Card>();
+		myTestCards.add(new Card("Gebäude", "Building"));
+		myTestCards.add(new Card("rot", "red"));
+		myTestCards.add(new Card("Fenster", "Window"));
+		return myTestCards;
 	}
 	
 	public int getNumberOfCards()
 	{
-			return myTestCards.size();
+			return cards.size();
 	}
 	
 	public String getTitle()
@@ -170,5 +169,15 @@ public class Register
 	public void setTitle(String title) {
 		this.title = title;
 		
+	}
+	
+	public Card getCardByIndex(int index)
+	{
+		if(this.cards != null && this.cards.size() > 0 && 
+				index < this.cards.size() && index >= 0)
+		{
+			return this.cards.get(index);
+		}
+		return null;		
 	}
 }
