@@ -84,12 +84,8 @@ public class Register
 				while(i.hasNext())
 				{
 					Card card = (Card)i.next();		
-					writer.append(card.getIdCard());
-					writer.append(card.getFront());
-					writer.append(card.getBack());
-					writer.append(getProbability());
-					writer.append(card.getcalcProbability());
-					writer.append(card.getBox());
+					writer.append(card.getIdCard() + ";" + card.getFront() + ";" + card.getBack() + 
+							";" + card.getProbability() + ";" + card.getcalcProbability() + ";" + card.getBox() + "\n");
 				}
 				writer.flush();
 				writer.close();
