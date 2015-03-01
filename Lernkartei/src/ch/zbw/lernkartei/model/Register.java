@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 
 public class Register 
@@ -16,7 +18,7 @@ public class Register
 		// Dieser Konstruktor wird nur für Testzwecke aufgerufen - so implementiert lassen
 		setTitle("Aus Methode getTestDataSet()");
 		this.cards = new ArrayList<Card>();
-		this.cards = getTestDataSet();
+		//this.cards = getTestDataSet();
 	}
 	
 	public Register(ArrayList<Card> cards,String title)
@@ -27,8 +29,28 @@ public class Register
 	
 	public void imports(String sourcePath)
 	{
-		this.cards = getTestDataSet();
+		//this.cards = getTestDataSet();
 		//this.cards = getDataFromInternalFile(sourcePath);
+		this.cards = new ArrayList<Card>();
+		String importFile;
+		BufferedReader br;
+		String line;
+		String delim;
+
+		importFile = sourcePath;
+		br = null;
+		line = "";
+		delim = ";";
+
+		try{
+			br = new BufferedReader(new FileReader(importFile));
+			while((line=br.readLine())!=null)
+			{
+				cards.add = line.split(delim);
+				//String[] newcard = line.split(delim);
+				//cards.add(newcard[0], newcard[1], newcard[2], newcard[3], newcard[4], newcard[5]);
+			}
+		}
 	}
 	
 	private ArrayList<Card> getDataFromInternalFile(String string) {

@@ -24,6 +24,16 @@ public class Card
 	public Card(){
 	}
 
+	public Card(int id_Card, String front, String back, int probability, int calcProbability, int box)
+	{
+		this.id_Card = id_Card;
+		this.front = front;
+		this.back = back;
+		this.probability = probability;
+		this.calcProbability = calcProbability;
+		this.box = box;
+	}
+	
 	public boolean equals(int calcProbability)
 	{
 		if(calcProbability == this.calcProbability)
