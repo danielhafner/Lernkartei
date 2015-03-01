@@ -74,6 +74,11 @@ public class Card
 		this.calcProbability = calcProbability*rnd;
 	}
 	
+	public int getProbability()
+	{
+		return probability;
+	}
+	
 	public String getFront()
 	{
 		return this.front;

@@ -2,6 +2,8 @@ package ch.zbw.lernkartei.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Register 
 {
@@ -75,8 +77,29 @@ public class Register
 	
 	public void export(String destinationPath)
 	{
-		
-	}
+		try
+		{
+		FileWriter writer = new FileWriter(destinationPath);
+				Iterator i = this.cards.iterator();
+				while(i.hasNext())
+				{
+					Card card = (Card)i.next();		
+					writer.append(card.getIdCard());
+					writer.append(card.getFront());
+					writer.append(card.getBack());
+					writer.append(getProbability());
+					writer.append(card.getcalcProbability());
+					writer.append(card.getBox());
+				}
+				writer.flush();
+				writer.close();
+			}
+			catch(IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
+
 	
 	public void saveChanges(Card card)
 	{
