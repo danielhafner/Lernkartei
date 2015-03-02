@@ -229,13 +229,11 @@ public class Register {
 	public void isTrue(int id)
 	{
 		Iterator i = this.cards.iterator();
-		Card card = null;
 		while(i.hasNext())
 		{
 			Card cardi = (Card) i.next();
 			if(cardi.getIdCard() == id)
 			{
-				card = cardi;
 				int box = cardi.getBox();
 				int probability = cardi.getProbability();
 				
@@ -247,7 +245,7 @@ public class Register {
 				{
 					probability += 1;			
 				}
-				card.setBoxAndProbability(box, probability);
+				cardi.setBoxAndProbability(box, probability);
 				break;
 			}
 		}
@@ -257,20 +255,18 @@ public class Register {
 	public void isFalse(int id)
 	{
 		Iterator i = this.cards.iterator();
-		Card card = null;
 		while(i.hasNext())
 		{
 			Card cardi = (Card) i.next();
 			if(cardi.getIdCard() == id)
 			{
-				card = cardi;
-				int probability = card.getProbability();
+				int probability = cardi.getProbability();
 				
-				if(probability<2)
+				if(probability>2)
 				{			
 					probability -= 1;
 				}
-				card.setBoxAndProbability(1, probability);
+				cardi.setBoxAndProbability(1, probability);
 				break;
 			}
 		}
