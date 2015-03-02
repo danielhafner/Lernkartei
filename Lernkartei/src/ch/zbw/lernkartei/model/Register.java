@@ -70,7 +70,8 @@ public class Register {
 
 	}
 
-	public void sortList() {
+	public void sortList() 
+	{
 		ArrayList<Integer> sortedNumbers = new ArrayList();
 		ArrayList<Card> sortedCards = new ArrayList<Card>();
 		Iterator i = this.cards.iterator();
@@ -87,6 +88,33 @@ public class Register {
 
 			for (int n = 0; n < this.cards.size(); n++) {
 				if (card.getcalcProbability() == (sortedNumbers.get(n))) {
+					sortedCards.add(card);
+					sortedNumbers.remove(n);
+					break;
+				}
+			}
+		}
+		this.cards = sortedCards;
+	}
+	
+	public void sortedByCardID()
+	{
+		ArrayList<Integer> sortedNumbers = new ArrayList();
+		ArrayList<Card> sortedCards = new ArrayList<Card>();
+		Iterator i = this.cards.iterator();
+		while (i.hasNext()) {
+			Card card = (Card) i.next();
+			int id = card.getIdCard();
+			sortedNumbers.add(id);
+		}
+
+		Collections.sort(sortedNumbers);
+
+		while (i.hasNext()) {
+			Card card = (Card) i.next();
+
+			for (int n = 0; n < this.cards.size(); n++) {
+				if (card.getIdCard() == (sortedNumbers.get(n))) {
 					sortedCards.add(card);
 					sortedNumbers.remove(n);
 					break;
@@ -196,5 +224,34 @@ public class Register {
 			return this.cards.get(index);
 		}
 		return null;
+	}
+	
+	public void isTrue(int index)
+	{
+		Card card = this.cards.get(index);
+		int box = card.getBox();
+		int probability = card.getProbability();
+		
+		if(box < 5)
+		{
+			box += 1;
+		}
+		if(probability > this.cards.size())
+		{
+			probability += 1;			
+		}
+		card.setBoxAndProbability(box, probability);
+	}
+	
+	public void isFalse(int index)
+	{
+		Card card = this.cards.get(index);
+		int probability = card.getProbability();
+		
+		if(probability<2)
+		{			
+			probability -= 1;
+		}
+		card.setBoxAndProbability(1, probability);
 	}
 }

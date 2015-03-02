@@ -97,5 +97,4 @@ public class Card
 	{
 		return this.back;
 	}
-	
 }
