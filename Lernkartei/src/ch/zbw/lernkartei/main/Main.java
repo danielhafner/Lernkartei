@@ -3,7 +3,7 @@ package ch.zbw.lernkartei.main;
 import ch.zbw.lernkartei.controller.Controller;
 import ch.zbw.lernkartei.model.Card;
 import ch.zbw.lernkartei.model.Register;
-import ch.zbw.lernkartei.view.GUI;
+import ch.zbw.lernkartei.view.MainView;
 import ch.zbw.lernkartei.view.SettingsView;
 
 public class Main {
@@ -12,13 +12,13 @@ public class Main {
 
 	public static void main(String[] args) {		
 		
-		GUI gui = new GUI();
+		MainView mainView = new MainView();
 		Card card = new Card();
 		Register register = new Register();
 		SettingsView settingsView = new SettingsView();
 		
-		Controller controller = new Controller(gui, settingsView, register);
+		Controller controller = new Controller(mainView, settingsView, register);
 		controller.startApplication();
-		gui.setVisible(true);
+		mainView.setVisible(true);
 	}
 }

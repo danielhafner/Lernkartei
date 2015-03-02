@@ -7,19 +7,19 @@ import javax.swing.event.DocumentListener;
 import ch.zbw.lernkartei.model.Card;
 import ch.zbw.lernkartei.model.Language;
 import ch.zbw.lernkartei.model.Register;
-import ch.zbw.lernkartei.view.GUI;
+import ch.zbw.lernkartei.view.MainView;
 import ch.zbw.lernkartei.view.SettingsView;
 
 public class Controller {
 
-	private GUI gui;
+	private MainView mainView;
 	private SettingsView settingsView;
 	private Register register;
 	private Card card;
 	private int cardId;
 
-	public Controller(GUI gui, SettingsView settingsView, Register register) {
-		this.gui = gui;
+	public Controller(MainView mainView, SettingsView settingsView, Register register) {
+		this.mainView = mainView;
 		this.settingsView = settingsView;
 		this.card = register.getCardByIndex(0);
 		this.register = register;
@@ -29,8 +29,7 @@ public class Controller {
 
 	public void startApplication() {
 		try {
-			this.gui.paint();
-			// this.gui.initializeControls();
+			this.mainView.paint();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -38,30 +37,30 @@ public class Controller {
 
 	private void addListener() {
 		MeinMenuActionListener mBeenden = new MeinMenuActionListener("Beenden");
-		this.gui.setStartMenuActionListener(mBeenden);
+		this.mainView.setStartMenuActionListener(mBeenden);
 
-		this.gui.setLanguageMenuActionListener(new MeinMenuActionListener(
+		this.mainView.setLanguageMenuActionListener(new MeinMenuActionListener(
 				Language.Deutsch.toString()));
-		this.gui.setLanguageMenuActionListener(new MeinMenuActionListener(
+		this.mainView.setLanguageMenuActionListener(new MeinMenuActionListener(
 				Language.Englisch.toString()));
-		this.gui.setLanguageMenuActionListener(new MeinMenuActionListener(
+		this.mainView.setLanguageMenuActionListener(new MeinMenuActionListener(
 				Language.Französisch.toString()));
-		this.gui.setLanguageMenuActionListener(new MeinMenuActionListener(
+		this.mainView.setLanguageMenuActionListener(new MeinMenuActionListener(
 				Language.Italienisch.toString()));
 
 		MeinMenuActionListener mSettings = new MeinMenuActionListener(
 				"Einstellungen");
-		this.gui.setSettingsMenuActionListener(mSettings);
+		this.mainView.setSettingsMenuActionListener(mSettings);
 
 		MeinMenuActionListener mStartLearning = new MeinMenuActionListener(
 				"Lernen starten");
-		this.gui.setStartLearningsMenuActionListener(mStartLearning);
+		this.mainView.setStartLearningsMenuActionListener(mStartLearning);
 
 		MeinMenuActionListener mImport = new MeinMenuActionListener("Import");
-		this.gui.setImportMenuActionListener(mImport);
+		this.mainView.setImportMenuActionListener(mImport);
 
 		MeinMenuActionListener mExport = new MeinMenuActionListener("Export");
-		this.gui.setExportMenuActionListener(mExport);
+		this.mainView.setExportMenuActionListener(mExport);
 
 		MeinButtonActionListener mNavigation = new MeinButtonActionListener();
 		this.settingsView.setNavigationButtonListener(mNavigation);
@@ -110,26 +109,26 @@ public class Controller {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getActionCommand().equals("Beenden")) {
-				gui.closeApplication();
+				mainView.closeApplication();
 			} else if (e.getActionCommand().equals("Deutsch")) {
-				gui.switchLanguage(e);
+				mainView.switchLanguage(e);
 			} else if (e.getActionCommand().equals("Franzoesisch")) {
-				gui.switchLanguage(e);
+				mainView.switchLanguage(e);
 			} else if (e.getActionCommand().equals("Englisch")) {
-				gui.switchLanguage(e);
+				mainView.switchLanguage(e);
 			} else if (e.getActionCommand().equals("Italienisch")) {
-				gui.switchLanguage(e);
+				mainView.switchLanguage(e);
 			} else if (e.getActionCommand().equals("Einstellungen")) {
 				settingsView.initializeSettingsWithData(register);
 				settingsView.setStateNavBackForwardButtons(register, 0);
 				settingsView.setStateSaveButton(false);
-				gui.repaintTheFrame(settingsView);
+				mainView.repaintTheFrame(settingsView);
 			} else if (e.getActionCommand().equals("Lernen starten")) {
-				gui.paintPlayPanel();
+				mainView.paintPlayPanel();
 			} else if (e.getActionCommand().equals("Import")) {
-				gui.openFileDialog();
+				mainView.openFileDialog();
 			} else if (e.getActionCommand().equals("Export")) {
-				gui.saveFileDialog();
+				mainView.saveFileDialog();
 			}
 		}
 	}
@@ -179,7 +178,7 @@ public class Controller {
 
 				} catch (Exception e1) {
 
-					gui.displayErrorMessage(e1.getMessage());
+					mainView.displayErrorMessage(e1.getMessage());
 				}
 			} else if (e.getActionCommand().equals("Neu")) {
 				try {
@@ -195,7 +194,7 @@ public class Controller {
 
 				} catch (Exception e1) {
 
-					gui.displayErrorMessage(e1.getMessage());
+					mainView.displayErrorMessage(e1.getMessage());
 				}
 			} else if (e.getActionCommand().equals("Löschen")) {
 				try {
@@ -217,13 +216,13 @@ public class Controller {
 					}
 				} catch (Exception e1) {
 
-					gui.displayErrorMessage(e1.getMessage());
+					mainView.displayErrorMessage(e1.getMessage());
 				}
 			}
 		}
 
 		private boolean cardWantsToBeDeleted() {
-			if (JOptionPane.showConfirmDialog(gui,
+			if (JOptionPane.showConfirmDialog(mainView,
 					"Willst du die Karte definitiv löschen?") == JOptionPane.OK_OPTION)
 				return true;
 			return false;
@@ -253,7 +252,7 @@ public class Controller {
 			}
 
 			catch (Exception ex) {
-				gui.displayErrorMessage("Error: " + ex.getMessage());
+				mainView.displayErrorMessage("Error: " + ex.getMessage());
 			}
 		}
 
@@ -269,7 +268,7 @@ public class Controller {
 				}
 			} catch (Exception e) {
 
-				gui.displayErrorMessage(e.getMessage());
+				mainView.displayErrorMessage(e.getMessage());
 			}
 			return true;
 		}

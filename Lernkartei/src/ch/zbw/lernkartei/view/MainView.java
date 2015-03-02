@@ -24,7 +24,7 @@ import ch.zbw.lernkartei.controller.Controller.MeinMenuActionListener;
 import ch.zbw.lernkartei.model.Language;
 import ch.zbw.lernkartei.model.TranslationDataSet;
 
-public class GUI extends JFrame {
+public class MainView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private TranslationDataSet translationArrayList;
@@ -55,7 +55,7 @@ public class GUI extends JFrame {
 	private int x = 0, y = 0, width = 800, heigth = 600;
 	private String fileExportPath;
 
-	public GUI() {
+	public MainView() {
 		try {
 			UIManager.setLookAndFeel(UIManager
 					.getCrossPlatformLookAndFeelClassName());
