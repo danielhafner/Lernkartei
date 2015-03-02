@@ -67,6 +67,7 @@ public class Controller {
 
 		DocumentListener documentListener = new DocumentListener() {
 
+			@Override
 			public void removeUpdate(DocumentEvent e) {
 				if (settingsView.getFrontText().equals("")
 						&& settingsView.getBackText().equals("")) {
@@ -77,6 +78,7 @@ public class Controller {
 					settingsView.setStateSaveButton(true);
 			}
 
+			@Override
 			public void insertUpdate(DocumentEvent e) {
 				if (!settingsView.getFrontText().equals(card.getFront())
 						&& !settingsView.getBackText().equals(card.getBack())) {
@@ -87,6 +89,7 @@ public class Controller {
 					removeUpdate(e);
 			}
 
+			@Override
 			public void changedUpdate(DocumentEvent e) {
 			}
 		};
@@ -135,6 +138,7 @@ public class Controller {
 
 	public class MeinButtonActionListener implements ActionListener {
 
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getActionCommand().equals("Speichern")) {
 				saveCard();
