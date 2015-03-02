@@ -112,7 +112,7 @@ public class Controller {
 				mainView.closeApplication();
 			} else if (e.getActionCommand().equals("Deutsch")) {
 				mainView.switchLanguage(e);
-			} else if (e.getActionCommand().equals("Franzoesisch")) {
+			} else if (e.getActionCommand().equals("Französisch")) {
 				mainView.switchLanguage(e);
 			} else if (e.getActionCommand().equals("Englisch")) {
 				mainView.switchLanguage(e);

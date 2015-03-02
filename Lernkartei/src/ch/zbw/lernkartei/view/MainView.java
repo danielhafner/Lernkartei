@@ -194,7 +194,6 @@ public class MainView extends JFrame {
 	}
 
 	public void setLanguageMenuActionListener(MeinMenuActionListener listener) {
-
 		if (listener.command.equals(Language.Deutsch.toString())) {
 			this.menuItemDeutsch.addActionListener(listener);
 		} else if (listener.command.equals(Language.Englisch.toString())) {

@@ -32,15 +32,18 @@ public class TranslationDataSet extends ArrayList<String[]>{
 		this.addNewToTranslation("Sprache", "Language", "Langue", "Lingua");
 		this.addNewToTranslation("Import", "Import", "Importation", "Importazione");
 		this.addNewToTranslation("Export", "Export", "Exportation", "Exportazione");
-		this.addNewToTranslation("Einstellungen", "Settings", "Param�tres", "Impostazioni");
+		this.addNewToTranslation("Einstellungen", "Settings", "Paramètres", "Impostazioni");
 		this.addNewToTranslation("Deutsch", "German", "Allemand", "Tedesco");
 		this.addNewToTranslation("Franz�sisch", "French", "Francais", "Francese");
 		this.addNewToTranslation("Italienisch", "Italian", "Italien", "Italiano");
 		this.addNewToTranslation("Englisch", "English", "Anglais", "Inglese");
 		this.addNewToTranslation("Lernen starten", "Start learning", "Démarrer apprentissage", "Imparare inizio");
-		this.addNewToTranslation("Export wurde abgebrochen.", "Export was canceled.", "Export a �t� annul�e.", "Export � stato annullato.");
-		this.addNewToTranslation("Import wurde abgebrochen.", "Import was canceled.", "Import a �t� annul�e.", "Import � stato annullato.");
+		this.addNewToTranslation("Export wurde abgebrochen.", "Export was canceled.", "Export a été annulée.", "Export è stato annullato.");
+		this.addNewToTranslation("Import wurde abgebrochen.", "Import was canceled.", "Import a été annul�e.", "Import è stato annullato.");
 		this.addNewToTranslation("Karten-Nr.", "Card-No.", "Numéro de Carte", "Numero della Carta");
+		this.addNewToTranslation("Karteiname", "Name of the Database", "Nom de la base de données", "Nome del database");
+		this.addNewToTranslation("Vorderseite", "Front", "Avant", "Anteriore");
+		this.addNewToTranslation("Rückseite", "Back", "Arrière", "posteriore");
 	}
 	
 	public String getTranslatedText(String originalText, Language languageOriginalText, Language languageTranslatedText)
