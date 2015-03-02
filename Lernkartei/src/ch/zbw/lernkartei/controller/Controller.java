@@ -1,27 +1,26 @@
 package ch.zbw.lernkartei.controller;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.InputMethodListener;
-
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-
 import ch.zbw.lernkartei.model.Card;
 import ch.zbw.lernkartei.model.Language;
 import ch.zbw.lernkartei.model.Register;
 import ch.zbw.lernkartei.view.GUI;
+import ch.zbw.lernkartei.view.SettingsView;
 
 public class Controller {
 
 	private GUI gui;
+	private SettingsView settingsView;
 	private Register register;
 	private Card card;
 	private int cardId;
 
-	public Controller(GUI gui, Register register) {
+	public Controller(GUI gui, SettingsView settingsView, Register register) {
 		this.gui = gui;
+		this.settingsView = settingsView;
 		this.card = register.getCardByIndex(0);
 		this.register = register;
 
@@ -65,26 +64,26 @@ public class Controller {
 		this.gui.setExportMenuActionListener(mExport);
 
 		MeinButtonActionListener mNavigation = new MeinButtonActionListener();
-		this.gui.setNavigationButtonListener(mNavigation);
+		this.settingsView.setNavigationButtonListener(mNavigation);
 
 		DocumentListener documentListener = new DocumentListener() {
 
 			public void removeUpdate(DocumentEvent e) {
-				if (gui.getFrontText().equals("")
-						&& gui.getBackText().equals("")) {
-					gui.setStateSaveButton(false);
-					gui.setStateDeleteButton(true);
-				} else if (!gui.getFrontText().equals("")
-						&& !gui.getBackText().equals(""))
-					gui.setStateSaveButton(true);
+				if (settingsView.getFrontText().equals("")
+						&& settingsView.getBackText().equals("")) {
+					settingsView.setStateSaveButton(false);
+					settingsView.setStateDeleteButton(true);
+				} else if (!settingsView.getFrontText().equals("")
+						&& !settingsView.getBackText().equals(""))
+					settingsView.setStateSaveButton(true);
 			}
 
 			public void insertUpdate(DocumentEvent e) {
-				if (!gui.getFrontText().equals(card.getFront())
-						&& !gui.getBackText().equals(card.getBack())) {
+				if (!settingsView.getFrontText().equals(card.getFront())
+						&& !settingsView.getBackText().equals(card.getBack())) {
 
-					gui.setStateSaveButton(true);
-					gui.setStateDeleteButton(true);
+					settingsView.setStateSaveButton(true);
+					settingsView.setStateDeleteButton(true);
 				} else
 					removeUpdate(e);
 			}
@@ -93,7 +92,7 @@ public class Controller {
 			}
 		};
 
-		this.gui.setDocumentListener(documentListener);
+		this.settingsView.setDocumentListener(documentListener);
 	}
 
 	public class MeinMenuActionListener implements ActionListener {
@@ -121,10 +120,10 @@ public class Controller {
 			} else if (e.getActionCommand().equals("Italienisch")) {
 				gui.switchLanguage(e);
 			} else if (e.getActionCommand().equals("Einstellungen")) {
-				gui.initializeSettingsWithData(register);
-				gui.setStateNavBackForwardButtons(register, 0);
-				gui.setStateSaveButton(false);
-				gui.paintSettingsPanel();
+				settingsView.initializeSettingsWithData(register);
+				settingsView.setStateNavBackForwardButtons(register, 0);
+				settingsView.setStateSaveButton(false);
+				gui.repaintTheFrame(settingsView);
 			} else if (e.getActionCommand().equals("Lernen starten")) {
 				gui.paintPlayPanel();
 			} else if (e.getActionCommand().equals("Import")) {
@@ -143,16 +142,15 @@ public class Controller {
 			} else if (e.getActionCommand().equals(">>>")) {
 				try {
 					cardId++;
-					gui.setStateNavBackForwardButtons(register, cardId);
+					settingsView.setStateNavBackForwardButtons(register, cardId);
 					if (register.getNumberOfCards() == cardId) {
-						gui.setStateNavBackForwardButtons(register, cardId);
+						settingsView.setStateNavBackForwardButtons(register, cardId);
 						cardId--;
 						
 					}
-
 					card = register.getCardByIndex(cardId);
-					gui.displayCard(card, cardId);
-					gui.setStateSaveButton(false);
+					settingsView.displayCard(card, cardId);
+					settingsView.setStateSaveButton(false);
 
 				} catch (Exception e1) {
 
@@ -164,19 +162,19 @@ public class Controller {
 						saveCard();
 
 					if (cardId != 0) {
-						cardId = gui.getCardid() - 1;
+						cardId = settingsView.getCardid() - 1;
 					}
 					card = register.getCardByIndex(cardId);
-					gui.displayCard(card, cardId);
-					gui.setStateNavBackForwardButtons(register, cardId);
-					gui.setStateSaveButton(false);
+					settingsView.displayCard(card, cardId);
+					settingsView.setStateNavBackForwardButtons(register, cardId);
+					settingsView.setStateSaveButton(false);
 
 					if (register.getCardByIndex(cardId).getFront().equals("")
 							&& register.getCardByIndex(cardId).getBack()
 									.equals("")) {
-						gui.setStateDeleteButton(false);
+						settingsView.setStateDeleteButton(false);
 					} else {
-						gui.setStateDeleteButton(true);
+						settingsView.setStateDeleteButton(true);
 					}
 
 				} catch (Exception e1) {
@@ -188,13 +186,12 @@ public class Controller {
 					cardId = register.getNumberOfCards();
 					Card newCard = new Card("", "");
 					register.add(newCard);
-					gui.displayCard(newCard, cardId);
-
-					gui.setStateButtonNew(false);
-					gui.setStateSaveButton(false);
-					gui.setStateDeleteButton(false);
-					gui.setStateButtonBack(false);
-					gui.setStateButtonForward(false);
+					settingsView.displayCard(newCard, cardId);
+					settingsView.setStateButtonNew(false);
+					settingsView.setStateSaveButton(false);
+					settingsView.setStateDeleteButton(false);
+					settingsView.setStateButtonBack(false);
+					settingsView.setStateButtonForward(false);
 
 				} catch (Exception e1) {
 
@@ -208,14 +205,14 @@ public class Controller {
 
 						if (register.getNumberOfCards() > 0) {
 							card = register.getCardByIndex(cardId);
-							gui.displayCard(card, cardId);
-							gui.setStateNavBackForwardButtons(register, cardId);
+							settingsView.displayCard(card, cardId);
+							settingsView.setStateNavBackForwardButtons(register, cardId);
 						} else {
 							cardId = 0;
 							card = new Card("", "");
 							register.add(card);
-							gui.displayCard(card, cardId);
-							gui.setStateNavBackForwardButtons(register, cardId);
+							settingsView.displayCard(card, cardId);
+							settingsView.setStateNavBackForwardButtons(register, cardId);
 						}
 					}
 				} catch (Exception e1) {
@@ -223,7 +220,6 @@ public class Controller {
 					gui.displayErrorMessage(e1.getMessage());
 				}
 			}
-
 		}
 
 		private boolean cardWantsToBeDeleted() {
@@ -236,24 +232,24 @@ public class Controller {
 		private void saveCard() {
 			String front, back;
 			try {
-				front = gui.getFrontText();
-				back = gui.getBackText();
-				if (gui.getCardid() != null) {
-					cardId = gui.getCardid();
+				front = settingsView.getFrontText();
+				back = settingsView.getBackText();
+				if (settingsView.getCardid() != null) {
+					cardId = settingsView.getCardid();
 					card = register.getCardByIndex(cardId);
 					card.setCard(front, back);
-					gui.displayCard(card, cardId);
-					gui.setStateNavBackForwardButtons(register, cardId);
+					settingsView.displayCard(card, cardId);
+					settingsView.setStateNavBackForwardButtons(register, cardId);
 				} else {
-					cardId = gui.getCardid() + 1;
+					cardId = settingsView.getCardid() + 1;
 					register.add(new Card(front, back));
-					gui.displayCard(register.getCardByIndex(register
+					settingsView.displayCard(register.getCardByIndex(register
 							.getNumberOfCards() - 1), cardId);
-					gui.setStateNavBackForwardButtons(register, cardId);
+					settingsView.setStateNavBackForwardButtons(register, cardId);
 				}
-				gui.setStateDeleteButton(true);
-				gui.setStateSaveButton(false);
-				gui.setStateNavBackForwardButtons(register, cardId);
+				settingsView.setStateDeleteButton(true);
+				settingsView.setStateSaveButton(false);
+				settingsView.setStateNavBackForwardButtons(register, cardId);
 			}
 
 			catch (Exception ex) {
@@ -263,14 +259,13 @@ public class Controller {
 
 		private boolean continueWithoutSaving() {
 			try {
-				if (!gui.getFrontText().equals(card.getFront())
-						|| !gui.getBackText().equals(card.getBack())) {
-					if (gui.showMessageBox("Daten wurden verändert. Willst du fortfahren ohne zu speichern?") == JOptionPane.OK_OPTION) {
+				if (!settingsView.getFrontText().equals(card.getFront())
+						|| !settingsView.getBackText().equals(card.getBack())) {
+					if (settingsView.showMessageBox("Daten wurden verändert. Willst du fortfahren ohne zu speichern?") == JOptionPane.OK_OPTION) {
 						return true;
 					} else {
 						return false;
 					}
-
 				}
 			} catch (Exception e) {
 

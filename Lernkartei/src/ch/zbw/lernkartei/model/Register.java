@@ -41,10 +41,10 @@ public class Register {
 		{
 			fl = new FileReader(sourcePath);
 			br = new BufferedReader(fl);
+			this.cards.removeAll(cards);
 			
 			while((line=br.readLine())!=null)
-			{				
-				this.cards.removeAll(cards);
+			{
 				String[] newcard = line.split(delim);
 				this.cards.add(new Card(Integer.parseInt(newcard[0]), newcard[1], newcard[2], Integer.parseInt(newcard[3]), Integer.parseInt(newcard[4]), Integer.parseInt(newcard[5])));
 			}
