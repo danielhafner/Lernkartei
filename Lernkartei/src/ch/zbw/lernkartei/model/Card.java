@@ -57,7 +57,6 @@ public class Card
 	{
 		this.box = box;
 		this.probability = probability;
-		setCalcProbability(this.probability);
 	}
 	
 	public int getBox()
@@ -72,16 +71,16 @@ public class Card
 
 	public int getcalcProbability()
 	{
-		setCalcProbability(this.probability);
+		setCalcProbability();
 		return this.calcProbability;
 	}
 
-	public void setCalcProbability(int calcProbability)
+	public void setCalcProbability()
 	{
 		int rnd;
 		Random random = new Random();
 		rnd = random.nextInt(9)+1;
-		this.calcProbability = calcProbability*rnd;
+		this.calcProbability = this.probability*rnd;
 	}
 	
 	public int getProbability()
