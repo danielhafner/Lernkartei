@@ -97,7 +97,7 @@ public class Register {
 		this.cards = sortedCards;
 	}
 	
-	public ArrayList<Card> sortedByCardID()
+	public ArrayList<Card> getSortedCardsByCardID()
 	{
 		ArrayList<Integer> sortedNumbers = new ArrayList();
 		ArrayList<Card> sortedCards = new ArrayList<Card>();
@@ -236,22 +236,22 @@ public class Register {
 			if(cardi.getIdCard() == id)
 			{
 				card = cardi;
+				int box = cardi.getBox();
+				int probability = cardi.getProbability();
+				
+				if(box < 5)
+				{
+					box += 1;
+				}
+				if(probability > this.cards.size())
+				{
+					probability += 1;			
+				}
+				card.setBoxAndProbability(box, probability);
 				break;
 			}
 		}
 		
-		int box = card.getBox();
-		int probability = card.getProbability();
-		
-		if(box < 5)
-		{
-			box += 1;
-		}
-		if(probability > this.cards.size())
-		{
-			probability += 1;			
-		}
-		card.setBoxAndProbability(box, probability);
 	}
 	
 	public void isFalse(int id)
@@ -264,16 +264,15 @@ public class Register {
 			if(cardi.getIdCard() == id)
 			{
 				card = cardi;
+				int probability = card.getProbability();
+				
+				if(probability<2)
+				{			
+					probability -= 1;
+				}
+				card.setBoxAndProbability(1, probability);
 				break;
 			}
 		}
-		
-		int probability = card.getProbability();
-		
-		if(probability<2)
-		{			
-			probability -= 1;
-		}
-		card.setBoxAndProbability(1, probability);
 	}
 }
