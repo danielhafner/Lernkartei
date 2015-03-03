@@ -92,7 +92,6 @@ public class SettingsView extends JPanel {
 
 		gridBagContraints.gridx = 0;
 		gridBagContraints.gridy = 0;
-		this.setBackground(Color.getColor("blue"));
 		this.labelSettings.setFont(MyFont.Ueberschrift1.getMyFont());
 		this.add(labelSettings, gridBagContraints);
 

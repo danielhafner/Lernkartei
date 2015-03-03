@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
@@ -25,6 +26,7 @@ public class Controller {
 	private Register register;
 	private Card card;
 	private int cardId;
+	private ArrayList testArrayListFaecher;
 
 	public Controller(MainView mainView, SettingsView settingsView, LearningView learningView, Register register) {
 		this.mainView = mainView;
@@ -32,6 +34,8 @@ public class Controller {
 		this.learningView = learningView;
 		this.card = register.getCardByIndex(0);
 		this.register = register;
+		this.testArrayListFaecher = new ArrayList();
+		filltestArrayListFaecher();
 		addListener();
 	}
 
@@ -72,6 +76,9 @@ public class Controller {
 
 		MeinButtonActionListener mNavigation = new MeinButtonActionListener();
 		this.settingsView.setNavigationButtonListener(mNavigation);
+		
+		MeinButtonActionListener mLearning = new MeinButtonActionListener();
+		this.learningView.setButtonFrontBackListener(mLearning);
 
 		DocumentListener documentListener = new DocumentListener() {
 
@@ -136,7 +143,7 @@ public class Controller {
 				mainView.repaintTheFrame(settingsView);
 				settingsView.setInitialFocus();
 			} else if (e.getActionCommand().equals("Lernen starten")) {
-				learningView.initializeSettingsWithData(register);
+				learningView.initializeSettingsWithData(testArrayListFaecher, register);
 				mainView.repaintTheFrame(learningView);
 			} else if (e.getActionCommand().equals("Import")) {
 				mainView.openFileDialog();
@@ -233,6 +240,26 @@ public class Controller {
 					mainView.displayErrorMessage(e1.getMessage());
 				}
 			}
+			else if(e.getActionCommand().equals("VORDERSEITE")){
+				//
+				// Lernen: d.h. eine Vorder- oder Rückseite wurde angeklickt
+				// --> entweder Vorderseite ausblenden und Rückseite einblenden
+				// oder Vorderseite einblenden und Rückseite ausblenden
+				learningView.showAnswer();
+			}
+			else if(e.getActionCommand().equals("RÜCKSEITE"))
+			{
+				card = register.getCardByIndex(cardId + 1);
+				learningView.ShowQuestion(testArrayListFaecher, card.getFront(), card.getBack());
+			}
+			else if(e.getActionCommand().equals("Richtig") || e.getActionCommand().equals("Falsch"))
+			{
+				card = register.getCardByIndex(cardId + 1);
+				if(card != null)
+				{
+					learningView.ShowQuestion(testArrayListFaecher, card.getFront(), card.getBack());
+				}
+			}
 		}
 
 		private boolean cardWantsToBeDeleted() {
@@ -286,5 +313,16 @@ public class Controller {
 			}
 			return true;
 		}
+	}
+	public void filltestArrayListFaecher()
+	{
+		// 7 Testfächer hinzufügen
+		this.testArrayListFaecher.add(1 + "");
+		this.testArrayListFaecher.add(2 + "");
+		this.testArrayListFaecher.add(3 + "");
+		this.testArrayListFaecher.add(4 + "");
+		this.testArrayListFaecher.add(5 + "");
+		this.testArrayListFaecher.add(6 + "");
+		this.testArrayListFaecher.add(7 + "");
 	}
 }
