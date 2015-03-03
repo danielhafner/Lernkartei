@@ -13,6 +13,7 @@ import sun.security.krb5.internal.ktab.KeyTabConstants;
 import ch.zbw.lernkartei.model.Card;
 import ch.zbw.lernkartei.model.Language;
 import ch.zbw.lernkartei.model.Register;
+import ch.zbw.lernkartei.view.LearningView;
 import ch.zbw.lernkartei.view.MainView;
 import ch.zbw.lernkartei.view.SettingsView;
 
@@ -20,16 +21,17 @@ public class Controller {
 
 	private MainView mainView;
 	private SettingsView settingsView;
+	private LearningView learningView;
 	private Register register;
 	private Card card;
 	private int cardId;
 
-	public Controller(MainView mainView, SettingsView settingsView, Register register) {
+	public Controller(MainView mainView, SettingsView settingsView, LearningView learningView, Register register) {
 		this.mainView = mainView;
 		this.settingsView = settingsView;
+		this.learningView = learningView;
 		this.card = register.getCardByIndex(0);
 		this.register = register;
-
 		addListener();
 	}
 
@@ -134,7 +136,8 @@ public class Controller {
 				mainView.repaintTheFrame(settingsView);
 				settingsView.setInitialFocus();
 			} else if (e.getActionCommand().equals("Lernen starten")) {
-				mainView.paintPlayPanel();
+				learningView.initializeSettingsWithData(register);
+				mainView.repaintTheFrame(learningView);
 			} else if (e.getActionCommand().equals("Import")) {
 				mainView.openFileDialog();
 			} else if (e.getActionCommand().equals("Export")) {
