@@ -1,9 +1,15 @@
 package ch.zbw.lernkartei.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+
+import sun.security.krb5.internal.ktab.KeyTabConstants;
 import ch.zbw.lernkartei.model.Card;
 import ch.zbw.lernkartei.model.Language;
 import ch.zbw.lernkartei.model.Register;
@@ -276,13 +282,6 @@ public class Controller {
 				mainView.displayErrorMessage(e.getMessage());
 			}
 			return true;
-		}
-		
-		public class KeyBoardActionListener implements ActionListener {
-			
-			public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			}
 		}
 	}
 }

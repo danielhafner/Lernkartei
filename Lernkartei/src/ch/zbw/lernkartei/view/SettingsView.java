@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -76,7 +77,6 @@ public class SettingsView extends JPanel {
 		
 		this.gridBagContraints = new GridBagConstraints();
 		paint();
-		
 	}
 	
 	public void paint(){
@@ -96,8 +96,8 @@ public class SettingsView extends JPanel {
 		this.labelSettings.setFont(MyFont.Ueberschrift1.getMyFont());
 		this.add(labelSettings, gridBagContraints);
 
-		/*
-		gridBagContraints.gridx = 0;
+		/* Registername vorläufig nicht implementieren */
+		/*gridBagContraints.gridx = 0;
 		gridBagContraints.gridy = 1;
 		this.add(labelRegisterName, gridBagContraints);
 		gridBagContraints.fill = 0;
@@ -112,6 +112,7 @@ public class SettingsView extends JPanel {
 		gridBagContraints.gridx = 0;
 		gridBagContraints.gridy = 2;
 		gridBagContraints.ipadx = 50;
+		gridBagContraints.anchor = GridBagConstraints.WEST; //Damit das Label ganz links steht...
 		this.add(labelCardNumber, gridBagContraints);
 
 		gridBagContraints.fill = 0;
@@ -183,7 +184,6 @@ public class SettingsView extends JPanel {
 				JOptionPane.showMessageDialog(this, e.getMessage());
 			}
 		} else {
-
 		}
 	}
 	
