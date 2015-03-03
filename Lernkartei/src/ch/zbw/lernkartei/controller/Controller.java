@@ -126,6 +126,7 @@ public class Controller {
 				settingsView.setStateNavBackForwardButtons(register, 0);
 				settingsView.setStateSaveButton(false);
 				mainView.repaintTheFrame(settingsView);
+				settingsView.setInitialFocus();
 			} else if (e.getActionCommand().equals("Lernen starten")) {
 				mainView.paintPlayPanel();
 			} else if (e.getActionCommand().equals("Import")) {
@@ -275,6 +276,13 @@ public class Controller {
 				mainView.displayErrorMessage(e.getMessage());
 			}
 			return true;
+		}
+		
+		public class KeyBoardActionListener implements ActionListener {
+			
+			public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			}
 		}
 	}
 }

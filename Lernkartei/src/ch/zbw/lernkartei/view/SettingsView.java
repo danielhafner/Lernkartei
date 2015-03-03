@@ -1,17 +1,24 @@
 package ch.zbw.lernkartei.view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.KeyboardFocusManager;
+import java.awt.event.KeyEvent;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.event.DocumentListener;
 
 import ch.zbw.lernkartei.controller.Controller.MeinButtonActionListener;
@@ -23,8 +30,8 @@ public class SettingsView extends JPanel {
 	private JLabel labelSettings;
 	private JPanel panelNav;
 
-	private JLabel labelRegisterName;
-	private JTextField textfieldRegisterName;
+	//private JLabel labelRegisterName;
+	//private JTextField textfieldRegisterName;
 	private JLabel labelCardNumber;
 	private JTextField textfieldCardNumber;
 
@@ -46,19 +53,18 @@ public class SettingsView extends JPanel {
 		this.setLayout(new GridBagLayout());
 		this.labelSettings = new JLabel("Einstellungen");
 		
-		this.labelRegisterName = new JLabel("Karteiname");
-		this.textfieldRegisterName = new JTextField(1);
+		//this.labelRegisterName = new JLabel("Karteiname");
+		//this.textfieldRegisterName = new JTextField(1);
 		this.labelCardNumber = new JLabel("Karten-Nr.");
 		this.textfieldCardNumber = new JTextField(1);
 
 		this.labelFront = new JLabel("Vorderseite");
 		this.labelFront.setFont(MyFont.Ueberschrift2.getMyFont());
-
-		this.textAreaFront = new JTextArea(4, 20);
+		this.textAreaFront = new JTextArea(4, 1);
+		
 		this.labelBack = new JLabel("Rückseite");
 		this.labelBack.setFont(MyFont.Ueberschrift2.getMyFont());
-		this.textAreaBack = new JTextArea(4, 20);
-		this.textAreaBack.setSize(300, 100);
+		this.textAreaBack = new JTextArea(4, 1);
 
 		// Navigation: Neu, Löschen, Speichern, Zurück, Vorwärts
 		this.panelNav = new JPanel(new FlowLayout());
@@ -70,6 +76,7 @@ public class SettingsView extends JPanel {
 		
 		this.gridBagContraints = new GridBagConstraints();
 		paint();
+		
 	}
 	
 	public void paint(){
@@ -89,18 +96,19 @@ public class SettingsView extends JPanel {
 		this.labelSettings.setFont(MyFont.Ueberschrift1.getMyFont());
 		this.add(labelSettings, gridBagContraints);
 
+		/*
 		gridBagContraints.gridx = 0;
 		gridBagContraints.gridy = 1;
 		this.add(labelRegisterName, gridBagContraints);
-
 		gridBagContraints.fill = 0;
 		gridBagContraints.gridx = 1;
 		gridBagContraints.gridy = 1;
 		gridBagContraints.ipadx = 210;
 		gridBagContraints.anchor = GridBagConstraints.WEST;
 		this.textfieldRegisterName.setEnabled(false);
-		this.add(textfieldRegisterName, gridBagContraints);
+		this.add(textfieldRegisterName, gridBagContraints);*/
 
+		gridBagContraints.fill = 0;
 		gridBagContraints.gridx = 0;
 		gridBagContraints.gridy = 2;
 		gridBagContraints.ipadx = 50;
@@ -114,19 +122,23 @@ public class SettingsView extends JPanel {
 		this.textfieldCardNumber.setEnabled(false);
 		this.add(textfieldCardNumber, gridBagContraints);
 
+		gridBagContraints.fill = 0;
 		gridBagContraints.insets = new Insets(20, 0, 10, 0);
 		gridBagContraints.gridy = 5;
 		gridBagContraints.ipadx = 1;
 		this.add(this.labelFront, gridBagContraints);
 
+		gridBagContraints.fill = 0;
 		gridBagContraints.insets = new Insets(0, 0, 0, 0);
 		gridBagContraints.gridy = 6;
 		gridBagContraints.ipadx = 1;
-
+		this.textAreaFront.setPreferredSize(new Dimension(250, 100));
+		this.textAreaFront.setLineWrap(true);
+		this.textAreaFront.setWrapStyleWord(true);
 		this.add(this.textAreaFront, gridBagContraints);
 
-		gridBagContraints.insets = new Insets(20, 0, 10, 0);
 		gridBagContraints.fill = 0;
+		gridBagContraints.insets = new Insets(20, 0, 10, 0);
 		gridBagContraints.gridy = 7;
 		gridBagContraints.ipadx = 1;
 		this.add(this.labelBack, gridBagContraints);
@@ -134,12 +146,17 @@ public class SettingsView extends JPanel {
 		gridBagContraints.insets = new Insets(0, 0, 0, 0);
 		gridBagContraints.gridy = 8;
 		gridBagContraints.ipadx = 1;
+		this.textAreaBack.setPreferredSize(new Dimension(250, 100));
+		this.textAreaBack.setLineWrap(true);
+		this.textAreaBack.setWrapStyleWord(true);
 		this.add(this.textAreaBack, gridBagContraints);
 
 		gridBagContraints.insets = new Insets(20, 0, 0, 0);
 		gridBagContraints.gridy = 12;
 		gridBagContraints.ipadx = 1;
 		this.add(panelNav, gridBagContraints);
+		
+		setMaximumSize(new Dimension(800, 600));
 		this.setVisible(true);
 	}
 	
@@ -232,5 +249,9 @@ public class SettingsView extends JPanel {
 
 	public String getBackText() {
 		return this.textAreaBack.getText();
+	}
+
+	public void setInitialFocus() {
+		this.textAreaFront.requestFocus();
 	}
 }
