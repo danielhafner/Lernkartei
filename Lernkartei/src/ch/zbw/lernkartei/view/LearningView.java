@@ -1,5 +1,6 @@
 package ch.zbw.lernkartei.view;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -90,8 +91,10 @@ public class LearningView extends JPanel{
 		gridBagContraints.gridy = 3;
 		gridBagContraints.gridwidth = 5;
 		this.buttonCardFront.setPreferredSize(new Dimension(250, 100));
+		this.buttonCardFront.setBackground(Color.ORANGE);
 		this.add(buttonCardFront, gridBagContraints);
 		this.buttonCardBack.setPreferredSize(new Dimension(250, 100));
+		this.buttonCardBack.setBackground(Color.GREEN);
 		this.add(buttonCardBack, gridBagContraints);
 		
 		gridBagContraints.insets = new Insets(20, 0, 0, 0);
@@ -99,12 +102,16 @@ public class LearningView extends JPanel{
 		gridBagContraints.gridy = 4;
 		
 		this.panelAnswer.setPreferredSize(new Dimension(400, 100));
+		this.buttonCorrect.setPreferredSize(new Dimension(100, 50));
 		this.panelAnswer.add(this.buttonCorrect);
+		this.buttonWrong.setPreferredSize(new Dimension(100, 50));
 		this.panelAnswer.add(this.buttonWrong);
 		this.add(panelAnswer, gridBagContraints);
 		
 		this.labelBack.setVisible(false);
 		this.buttonCardBack.setVisible(false);
+		this.buttonCorrect.setVisible(false);
+		this.buttonWrong.setVisible(false);
 		this.setVisible(true);
 	}
 	
