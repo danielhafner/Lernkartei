@@ -48,7 +48,7 @@ public class MainView extends JFrame {
 
 	private JPanel mainPanel;
 	private SettingsView panelSettings;
-	private LearningView panelStartLearning;
+	private LearningView panelLearming;
 	private Toolkit toolKit;
 	private JFileChooser jfImportFile;
 
@@ -87,7 +87,7 @@ public class MainView extends JFrame {
 		this.menuItemEnglisch = new JMenuItem("Englisch");
 
 		this.translationArrayList = new TranslationDataSet();
-		this.panelStartLearning = new LearningView();
+		this.panelLearming = new LearningView();
 		this.panelSettings = new SettingsView();
 		this.jfImportFile = new JFileChooser();
 
@@ -138,7 +138,7 @@ public class MainView extends JFrame {
 	}
 
 	public void paintPlayPanel() {
-		repaintTheFrame(this.panelStartLearning);
+		repaintTheFrame(this.panelLearming);
 	}
 
 	public void repaintTheFrame(JPanel panelToShow) {
@@ -309,7 +309,6 @@ public class MainView extends JFrame {
 		this.language = newLanguage;
 
 		ArrayList<Component> a = getAllComponents(this.mainPanel);
-
 		for (Component c : a) {
 			translateTextOfAControl(c);
 		}

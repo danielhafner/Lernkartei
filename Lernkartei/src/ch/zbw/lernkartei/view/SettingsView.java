@@ -1,25 +1,16 @@
 package ch.zbw.lernkartei.view;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.KeyboardFocusManager;
-import java.awt.event.KeyEvent;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.KeyStroke;
 import javax.swing.event.DocumentListener;
 
 import ch.zbw.lernkartei.controller.Controller.MeinButtonActionListener;
@@ -132,7 +123,7 @@ public class SettingsView extends JPanel {
 		gridBagContraints.insets = new Insets(0, 0, 0, 0);
 		gridBagContraints.gridy = 6;
 		gridBagContraints.ipadx = 1;
-		this.textAreaFront.setPreferredSize(new Dimension(250, 100));
+		this.textAreaFront.setPreferredSize(MyDimension.TextAreaDimension.get());
 		this.textAreaFront.setLineWrap(true);
 		this.textAreaFront.setWrapStyleWord(true);
 		this.add(this.textAreaFront, gridBagContraints);
@@ -146,7 +137,7 @@ public class SettingsView extends JPanel {
 		gridBagContraints.insets = new Insets(0, 0, 0, 0);
 		gridBagContraints.gridy = 8;
 		gridBagContraints.ipadx = 1;
-		this.textAreaBack.setPreferredSize(new Dimension(250, 100));
+		this.textAreaBack.setPreferredSize(MyDimension.TextAreaDimension.get());
 		this.textAreaBack.setLineWrap(true);
 		this.textAreaBack.setWrapStyleWord(true);
 		this.add(this.textAreaBack, gridBagContraints);
@@ -156,7 +147,7 @@ public class SettingsView extends JPanel {
 		gridBagContraints.ipadx = 1;
 		this.add(panelNav, gridBagContraints);
 		
-		setMaximumSize(new Dimension(800, 600));
+		setMaximumSize(MyDimension.MaximumSize.get());
 		this.setVisible(true);
 	}
 	

@@ -26,7 +26,7 @@ public class Controller {
 	private Register register;
 	private Card card;
 	private int cardId;
-	private ArrayList testArrayListFaecher;
+	private ArrayList<Integer> testArrayListFaecher;
 
 	public Controller(MainView mainView, SettingsView settingsView, LearningView learningView, Register register) {
 		this.mainView = mainView;
@@ -247,11 +247,6 @@ public class Controller {
 				// oder Vorderseite einblenden und Rückseite ausblenden
 				learningView.showAnswer();
 			}
-			else if(e.getActionCommand().equals("RÜCKSEITE"))
-			{
-				card = register.getCardByIndex(cardId + 1);
-				learningView.ShowQuestion(testArrayListFaecher, card.getFront(), card.getBack());
-			}
 			else if(e.getActionCommand().equals("Richtig") || e.getActionCommand().equals("Falsch"))
 			{
 				card = register.getCardByIndex(cardId + 1);
@@ -317,12 +312,12 @@ public class Controller {
 	public void filltestArrayListFaecher()
 	{
 		// 7 Testfächer hinzufügen
-		this.testArrayListFaecher.add(1 + "");
-		this.testArrayListFaecher.add(2 + "");
-		this.testArrayListFaecher.add(3 + "");
-		this.testArrayListFaecher.add(4 + "");
-		this.testArrayListFaecher.add(5 + "");
-		this.testArrayListFaecher.add(6 + "");
-		this.testArrayListFaecher.add(7 + "");
+		this.testArrayListFaecher.add(1);
+		this.testArrayListFaecher.add(2);
+		this.testArrayListFaecher.add(3);
+		this.testArrayListFaecher.add(4);
+		this.testArrayListFaecher.add(5);
+		this.testArrayListFaecher.add(6);
+		this.testArrayListFaecher.add(7);
 	}
 }

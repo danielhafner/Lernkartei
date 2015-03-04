@@ -1,17 +1,26 @@
 package ch.zbw.lernkartei.view;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 
+import javax.imageio.ImageIO;
+import javax.swing.AbstractButton;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import ch.zbw.lernkartei.controller.Controller.MeinButtonActionListener;
 import ch.zbw.lernkartei.model.Card;
@@ -22,7 +31,7 @@ public class LearningView extends JPanel{
 	private JLabel labelStartLearning;
 	
 	private JLabel labelFach;
-	private JComboBox<String> comboboxFach;
+	private JComboBox<Integer> comboboxFach;
 	
 	private JLabel labelFront;
 	private JButton buttonCardFront;
@@ -38,11 +47,12 @@ public class LearningView extends JPanel{
 	public LearningView()
 	{
 		this.setLayout(new GridBagLayout());
+		this.setMaximumSize(MyDimension.MaximumSize.get());
 		
 		this.labelStartLearning = new JLabel("Lernen starten");
 		
 		this.labelFach = new JLabel("Fach");
-		this.comboboxFach = new JComboBox<String>();
+		this.comboboxFach = new JComboBox<Integer>();
 		
 		this.labelFront = new JLabel("Vorderseite");
 		this.buttonCardFront = new JButton();
@@ -50,8 +60,10 @@ public class LearningView extends JPanel{
 		this.buttonCardBack = new JButton();
 
 		this.panelAnswer = new JPanel();		
-		this.buttonCorrect = new JButton("Richtig");
-		this.buttonWrong = new JButton("Falsch");
+		ImageIcon imageIconCorrect = new ImageIcon("src/correct.png");
+		this.buttonCorrect = new JButton("Richtig", imageIconCorrect);
+		ImageIcon imageIconWrong = new ImageIcon("src/wrong.png");
+		this.buttonWrong = new JButton("Falsch", imageIconWrong);
 		
 		this.gridBagContraints = new GridBagConstraints();
 		paint();
@@ -78,7 +90,7 @@ public class LearningView extends JPanel{
 		this.comboboxFach.setPreferredSize(new Dimension(100, 20));
 		this.add(this.comboboxFach, gridBagContraints);
 		
-		gridBagContraints.insets = new Insets(0, 0, 0, 0);
+		gridBagContraints.insets = new Insets(0, 0, 20, 0);
 		gridBagContraints.gridx = 0;
 		gridBagContraints.gridy = 2;
 		gridBagContraints.gridwidth = 5;
@@ -90,26 +102,31 @@ public class LearningView extends JPanel{
 		gridBagContraints.gridx = 0;
 		gridBagContraints.gridy = 3;
 		gridBagContraints.gridwidth = 5;
-		this.buttonCardFront.setPreferredSize(new Dimension(250, 100));
+		this.buttonCardFront.setPreferredSize(MyDimension.LearningFrontBackDimension.get());
 		this.buttonCardFront.setBackground(Color.ORANGE);
 		this.add(buttonCardFront, gridBagContraints);
-		this.buttonCardBack.setPreferredSize(new Dimension(250, 100));
-		this.buttonCardBack.setBackground(Color.GREEN);
+		this.buttonCardBack.setPreferredSize(MyDimension.LearningFrontBackDimension.get());
+		this.buttonCardBack.setBackground(new Color(0,100,0));
+		this.buttonCardBack.setForeground(Color.WHITE);
 		this.add(buttonCardBack, gridBagContraints);
 		
-		gridBagContraints.insets = new Insets(20, 0, 0, 0);
+		gridBagContraints.fill = 0;
+		gridBagContraints.insets = new Insets(0, 0, 0, 0);
 		gridBagContraints.gridx = 0;
 		gridBagContraints.gridy = 4;
-		
-		this.panelAnswer.setPreferredSize(new Dimension(400, 100));
-		this.buttonCorrect.setPreferredSize(new Dimension(100, 50));
+		this.panelAnswer.setPreferredSize(new Dimension(527, 100));		
+
+		this.buttonCorrect.setPreferredSize(MyDimension.ButtonCorrectWrongDimension.get());		
+		this.buttonCorrect.setHorizontalAlignment(SwingConstants.CENTER); // Damit Text linksbündig angezeigt wird
 		this.panelAnswer.add(this.buttonCorrect);
-		this.buttonWrong.setPreferredSize(new Dimension(100, 50));
+		this.buttonWrong.setHorizontalAlignment(SwingConstants.CENTER); // Damit Text linksbündig angezeigt wird
+		this.buttonWrong.setPreferredSize(MyDimension.ButtonCorrectWrongDimension.get());	
 		this.panelAnswer.add(this.buttonWrong);
 		this.add(panelAnswer, gridBagContraints);
-		
+
 		this.labelBack.setVisible(false);
 		this.buttonCardBack.setVisible(false);
+		this.buttonCardBack.setForeground(Color.WHITE);
 		this.buttonCorrect.setVisible(false);
 		this.buttonWrong.setVisible(false);
 		this.setVisible(true);
@@ -120,9 +137,16 @@ public class LearningView extends JPanel{
 		return this;
 	}
 
-	public void initializeSettingsWithData(ArrayList boxes, Register register) {			
+	public void initializeSettingsWithData(ArrayList<Integer> boxes, Register register) {			
 		try {
-			this.comboboxFach = new JComboBox(boxes.toArray());
+			this.comboboxFach.removeAll();
+			
+			Iterator it = boxes.iterator();
+			while(it.hasNext())
+			{
+				this.comboboxFach.addItem((Integer) it.next());
+			}
+	
 			this.comboboxFach.setSelectedIndex(0);
 			Card c = register.getCardByIndex(0);
 			
@@ -150,8 +174,14 @@ public class LearningView extends JPanel{
 		this.buttonWrong.setVisible(true);
 	}
 
-	public void ShowQuestion(ArrayList boxes, String front, String back) {
-		this.comboboxFach = new JComboBox(boxes.toArray());
+	public void ShowQuestion(ArrayList<Integer> boxes, String front, String back) {
+		this.comboboxFach.removeAll();
+		
+		Iterator<Integer> it = boxes.iterator();
+		while(it.hasNext())
+		{
+			this.comboboxFach.addItem((Integer) it.next());
+		}
 		this.comboboxFach.setSelectedIndex(0);
 		
 		this.labelFront.setVisible(true);
@@ -160,7 +190,7 @@ public class LearningView extends JPanel{
 		this.buttonCardBack.setText(back);
 		
 		this.buttonCardFront.setVisible(true);
-		this.buttonCardBack.setVisible(false);
+		this.buttonCardBack.setVisible(false);		
 		this.buttonCorrect.setVisible(false);
 		this.buttonWrong.setVisible(false);
 	}
@@ -168,5 +198,12 @@ public class LearningView extends JPanel{
 	public void setButtonFrontBackListener(MeinButtonActionListener l) {
 		this.buttonCardFront.addActionListener(l);
 		this.buttonCardBack.addActionListener(l);
+		this.buttonCorrect.addActionListener(l);
+		this.buttonWrong.addActionListener(l);
+	}
+	
+	public void removeButtonFrontBackListener(MeinButtonActionListener l)
+	{
+		this.buttonCardBack.removeActionListener(l);
 	}
 }
