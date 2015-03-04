@@ -57,6 +57,7 @@ public class Card
 	{
 		this.box = box;
 		this.probability = probability;
+		setCalcProbability();
 	}
 	
 	public int getBox()
@@ -71,7 +72,6 @@ public class Card
 
 	public int getcalcProbability()
 	{
-		setCalcProbability();
 		return this.calcProbability;
 	}
 

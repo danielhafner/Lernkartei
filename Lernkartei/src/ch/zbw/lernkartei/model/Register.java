@@ -83,6 +83,7 @@ public class Register {
 
 		Collections.sort(sortedNumbers);
 
+		i = this.cards.iterator();
 		while (i.hasNext()) {
 			Card card = (Card) i.next();
 
@@ -110,6 +111,7 @@ public class Register {
 
 		Collections.sort(sortedNumbers);
 
+		i = this.cards.iterator();
 		while (i.hasNext()) {
 			Card card = (Card) i.next();
 
@@ -146,10 +148,6 @@ public class Register {
 		this.cards.set(card.getIdCard(), card);
 	}
 
-	public void setReverseMode(boolean reverseMode) {
-
-	}
-
 	public boolean remove(Card card) {
 		Iterator i = this.cards.iterator();
 		while (i.hasNext()) {
@@ -180,21 +178,17 @@ public class Register {
 	}
 
 	public ArrayList<Card> getCardsByBox(int box) {
+		sortList();
 		Iterator i = this.cards.iterator();
 		ArrayList<Card> cards = new ArrayList<Card>();
 		while (i.hasNext()) {
 			Card card = (Card) i.next();
-			if (card.getBox() == box) {
+			if (card.getBox() == box) 
+			{
 				cards.add(card);
 			}
 		}
 		return cards;
-	}
-
-	public Card getNextRandomCard() {
-		Card a;
-		a = null;
-		return a;
 	}
 
 	public ArrayList<Card> getTestDataSet() {
