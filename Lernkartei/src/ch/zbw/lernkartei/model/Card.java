@@ -17,8 +17,8 @@ public class Card
 	this.front = front;
 	this.back = back;
 	this.probability = 2;
-	this.calcProbability = 0;
 	this.box = 1;
+	setCalcProbability();
 	}
 	
 	public Card(){

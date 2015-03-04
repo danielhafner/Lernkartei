@@ -272,7 +272,7 @@ public class Register {
 		
 		if(this.cards != null)
 		{
-		 Iterator it = cards.iterator();
+		 Iterator it = this.cards.iterator();
 		 while(it.hasNext())
 		 {
 			 int box = ((Card)it.next()).getBox();
