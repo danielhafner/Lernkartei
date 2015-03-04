@@ -28,6 +28,7 @@ import ch.zbw.lernkartei.model.Register;
 
 public class LearningView extends JPanel{
 
+	private int cardId;
 	private JLabel labelStartLearning;
 	
 	private JLabel labelFach;
@@ -139,16 +140,16 @@ public class LearningView extends JPanel{
 
 	public void initializeSettingsWithData(ArrayList<Integer> boxes, Register register) {			
 		try {
-			this.comboboxFach.removeAll();
+			this.comboboxFach.removeAllItems();
 			
 			Iterator it = boxes.iterator();
 			while(it.hasNext())
 			{
 				this.comboboxFach.addItem((Integer) it.next());
 			}
-	
 			this.comboboxFach.setSelectedIndex(0);
 			Card c = register.getCardByIndex(0);
+			this.cardId = c.getIdCard();
 			
 			this.buttonCardFront.setText(c.getFront());
 			this.buttonCardFront.setActionCommand("VORDERSEITE");
@@ -161,7 +162,7 @@ public class LearningView extends JPanel{
 		}
 	}
 
-	private void displayErrorMessage(String message) {
+	public void displayErrorMessage(String message) {
 		JOptionPane.showMessageDialog(this, message);
 	}
 
@@ -174,9 +175,10 @@ public class LearningView extends JPanel{
 		this.buttonWrong.setVisible(true);
 	}
 
-	public void ShowQuestion(ArrayList<Integer> boxes, String front, String back) {
-		this.comboboxFach.removeAll();
+	public void ShowQuestion(ArrayList<Integer> boxes, String front, String back, int cardId) {
 		
+		this.cardId = cardId;
+		this.comboboxFach.removeAll();
 		Iterator<Integer> it = boxes.iterator();
 		while(it.hasNext())
 		{
@@ -205,5 +207,27 @@ public class LearningView extends JPanel{
 	public void removeButtonFrontBackListener(MeinButtonActionListener l)
 	{
 		this.buttonCardBack.removeActionListener(l);
+	}
+	
+	public int getCardId()
+	{
+		return this.cardId;
+	}
+	
+	public void setCardId(int id)
+	{
+		this.cardId = id;
+	}
+
+	public void refreshData(ArrayList<Integer> boxes,ArrayList<Card> cardsOfABox) {
+		try {
+			Card c = cardsOfABox.get(0);
+			this.cardId = c.getIdCard();	
+			ShowQuestion(boxes, c.getFront(), c.getBack(), c.getIdCard());
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			this.displayErrorMessage(e.getMessage());
+		}		
 	}
 }

@@ -271,4 +271,23 @@ public class Register {
 			}
 		}
 	}
+	
+	public ArrayList<Integer> getBoxes()
+	{
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		
+		if(this.cards != null)
+		{
+		 Iterator it = cards.iterator();
+		 while(it.hasNext())
+		 {
+			 int box = ((Card)it.next()).getBox();
+			 if(!list.contains(box))
+			 {
+				 list.add(box);
+			 }
+		  }
+		}
+		return list;
+	}
 }

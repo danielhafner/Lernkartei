@@ -26,7 +26,8 @@ public class Controller {
 	private Register register;
 	private Card card;
 	private int cardId;
-	private ArrayList<Integer> testArrayListFaecher;
+	private ArrayList<Card> allCards;
+	private ArrayList<Card> cardsOfABox;
 
 	public Controller(MainView mainView, SettingsView settingsView, LearningView learningView, Register register) {
 		this.mainView = mainView;
@@ -34,8 +35,6 @@ public class Controller {
 		this.learningView = learningView;
 		this.card = register.getCardByIndex(0);
 		this.register = register;
-		this.testArrayListFaecher = new ArrayList();
-		filltestArrayListFaecher();
 		addListener();
 	}
 
@@ -143,7 +142,8 @@ public class Controller {
 				mainView.repaintTheFrame(settingsView);
 				settingsView.setInitialFocus();
 			} else if (e.getActionCommand().equals("Lernen starten")) {
-				learningView.initializeSettingsWithData(testArrayListFaecher, register);
+				cardsOfABox = register.getCardsByBox(register.getBoxes().get(0));				
+				learningView.initializeSettingsWithData(register.getBoxes(), register);
 				mainView.repaintTheFrame(learningView);
 			} else if (e.getActionCommand().equals("Import")) {
 				mainView.openFileDialog();
@@ -249,13 +249,20 @@ public class Controller {
 			}
 			else if(e.getActionCommand().equals("Richtig") || e.getActionCommand().equals("Falsch"))
 			{
-				card = register.getCardByIndex(cardId + 1);
-				if(card != null)
+				cardId = learningView.getCardId();
+				if(e.getActionCommand().equals("Richtig"))
 				{
-					learningView.ShowQuestion(testArrayListFaecher, card.getFront(), card.getBack());
+					register.isTrue(learningView.getCardId());
 				}
+				else if(e.getActionCommand().equals("Falsch"))
+				{
+					register.isFalse(learningView.getCardId());
+				}
+				cardsOfABox.remove(card);
+				learningView.refreshData(register.getBoxes(), cardsOfABox);
 			}
 		}
+		
 
 		private boolean cardWantsToBeDeleted() {
 			if (JOptionPane.showConfirmDialog(mainView,
@@ -308,16 +315,5 @@ public class Controller {
 			}
 			return true;
 		}
-	}
-	public void filltestArrayListFaecher()
-	{
-		// 7 Testfächer hinzufügen
-		this.testArrayListFaecher.add(1);
-		this.testArrayListFaecher.add(2);
-		this.testArrayListFaecher.add(3);
-		this.testArrayListFaecher.add(4);
-		this.testArrayListFaecher.add(5);
-		this.testArrayListFaecher.add(6);
-		this.testArrayListFaecher.add(7);
 	}
 }
