@@ -176,7 +176,7 @@ public class MainView extends JFrame {
 	public void saveFileDialog() {
 		switch (this.jfImportFile.showSaveDialog(this)) {
 		case JFileChooser.APPROVE_OPTION:
-
+			fileExportPath = jfImportFile.getSelectedFile().toString();
 			// JOptionPane.showMessageDialog(this,
 			// "todo Ruel: Karten werden in ein File exportiert...");
 			break;

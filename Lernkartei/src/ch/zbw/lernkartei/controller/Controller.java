@@ -149,6 +149,7 @@ public class Controller {
 				mainView.openFileDialog();
 			} else if (e.getActionCommand().equals("Export")) {
 				mainView.saveFileDialog();
+				register.export(mainView.getFileExportfile());
 			}
 		}
 	}

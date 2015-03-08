@@ -67,7 +67,8 @@ public class Register {
 	}
 
 	private void saveDataIntoInternalFile(String string) {
-
+		//Wenn interner Pfad angegeben wurde muss unterschieden werden
+		//zwischen Windows und Unix-basierten Systemen, da / und \ unterschiedlich? dh
 	}
 
 	public void sortList() 
