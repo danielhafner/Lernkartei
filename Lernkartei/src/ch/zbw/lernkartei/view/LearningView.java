@@ -61,9 +61,9 @@ public class LearningView extends JPanel{
 		this.buttonCardBack = new JButton();
 
 		this.panelAnswer = new JPanel();		
-		ImageIcon imageIconCorrect = new ImageIcon("src/correct.png");
+		ImageIcon imageIconCorrect = new ImageIcon(this.getClass().getResource("/correct.png"));
 		this.buttonCorrect = new JButton("Richtig", imageIconCorrect);
-		ImageIcon imageIconWrong = new ImageIcon("src/wrong.png");
+		ImageIcon imageIconWrong = new ImageIcon(this.getClass().getResource("/wrong.png"));
 		this.buttonWrong = new JButton("Falsch", imageIconWrong);
 		
 		this.gridBagContraints = new GridBagConstraints();

@@ -91,7 +91,7 @@ public class MainView extends JFrame {
 		this.panelSettings = new SettingsView();
 		this.jfImportFile = new JFileChooser();
 
-		ImageIcon imageIconBackground = new ImageIcon("src/bg-sea.jpg");
+		ImageIcon imageIconBackground = new ImageIcon(this.getClass().getResource("/bg-sea.jpg"));
 		imageIconBackground.setDescription("Isch das en Scheiss");
 		labelImageIconBackground = new JLabel(imageIconBackground);
 	}
@@ -99,7 +99,7 @@ public class MainView extends JFrame {
 	public void paint() {
 		this.language = Language.Deutsch;
 		setTitle("Vokabeltrainer R. Holderegger | E. Schwarz | D. Hafner");
-		setIconImage(new ImageIcon("src/zbw.jpg").getImage());
+		setIconImage(new ImageIcon(this.getClass().getResource("/zbw.jpg")).getImage());
 
 		this.setJMenuBar(this.menuBar);
 		menuBar.add(menuDatei);
