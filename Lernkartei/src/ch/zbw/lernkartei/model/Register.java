@@ -11,20 +11,18 @@ import java.io.IOException;
 
 public class Register {
 	private ArrayList<Card> cards;
-	private String title;
 	private boolean reverseMode;
+	private int maxId_Card;
 
 	public Register() {
 		// Dieser Konstruktor wird nur für Testzwecke aufgerufen - so
 		// implementiert lassen
-		setTitle("Aus Methode getTestDataSet()");
 		this.cards = new ArrayList<Card>();
 		this.cards = getDataFromInternalFile("src/data.csv");
 	}
 
 	public Register(ArrayList<Card> cards, String title) {
 		this.cards = cards;
-		this.title = title;
 	}
 
 	public void imports(String sourcePath)
@@ -204,15 +202,6 @@ public class Register {
 		return cards.size();
 	}
 
-	public String getTitle() {
-		return this.title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-
-	}
-
 	public Card getCardByIndex(int index) {
 		if (this.cards != null && this.cards.size() > 0
 				&& index < this.cards.size() && index >= 0) {
@@ -284,5 +273,20 @@ public class Register {
 		  }
 		}
 		return list;
+	}
+	
+	public int getMaxId_Card()
+	{
+		Iterator i = this.cards.iterator();
+		while(i.hasNext())
+		{
+			Card card = (Card)i.next();
+			if( this.maxId_Card < card.getIdCard())
+			{
+				this.maxId_Card = card.getIdCard();
+			}
+		}
+		this.maxId_Card += 1;
+		return this.maxId_Card;
 	}
 }
