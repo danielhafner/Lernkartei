@@ -18,7 +18,6 @@ public class Main {
 		Register register = new Register();
 		SettingsView settingsView = new SettingsView();
 		LearningView learningView = new LearningView();
-		
 		Controller controller = new Controller(mainView, settingsView, learningView, register);
 		controller.startApplication();
 		mainView.setVisible(true);

@@ -178,7 +178,7 @@ public class LearningView extends JPanel{
 	public void ShowQuestion(ArrayList<Integer> boxes, String front, String back, int cardId) {
 		
 		this.cardId = cardId;
-		this.comboboxFach.removeAll();
+		this.comboboxFach.removeAllItems();
 		Iterator<Integer> it = boxes.iterator();
 		while(it.hasNext())
 		{
