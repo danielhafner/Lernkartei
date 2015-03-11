@@ -141,7 +141,6 @@ public class LearningView extends JPanel{
 	public void initializeSettingsWithData(ArrayList<Integer> boxes, Register register) {			
 		try {
 			this.comboboxFach.removeAllItems();
-			
 			Iterator it = boxes.iterator();
 			while(it.hasNext())
 			{

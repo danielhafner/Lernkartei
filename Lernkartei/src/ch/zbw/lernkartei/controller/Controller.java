@@ -191,7 +191,6 @@ public class Controller {
 				try {
 					if (!continueWithoutSaving())
 						saveCard();
-
 					if (index != 0) {
 						index--;
 					}
@@ -247,7 +246,9 @@ public class Controller {
 						
 						if(settingCard == null)
 						{
+							index = 0;
 							settingCard = new Card("", "", register.getMaxId_Card());
+							register.add(settingCard);
 							settingsView.displayCard(settingCard);
 							settingsView.setStateButtonNew(false);
 							settingsView.setStateDeleteButton(false);
@@ -255,9 +256,10 @@ public class Controller {
 						else
 						{
 							settingsView.displayCard(settingCard);
+							index = register.getNumberOfCards() - 1;
 						}
-						index = register.getNumberOfCards();
 						settingsView.setStateSaveButton(false);
+						settingsView.setStateButtonNew(true);
 						settingsView.setStateNavBackForwardButtons(register, index);
 					}
 				} catch (Exception e1) {
