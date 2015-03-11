@@ -136,7 +136,10 @@ public class Controller {
 			} else if (e.getActionCommand().equals("Italienisch")) {
 				mainView.switchLanguage(e);
 			} else if (e.getActionCommand().equals("Einstellungen")) {
-				settingsView.initializeSettingsWithData(register);
+				allCards = register.getSortedCardsByCardID();
+				settingsView.setTextTextFieldCardNumber(allCards.get(0).getIdCard() + "");
+				settingsView.setTextAreaFront(allCards.get(0).getFront());
+				settingsView.setTextAreaBack(allCards.get(0).getBack());
 				settingsView.setStateNavBackForwardButtons(register, 0);
 				settingsView.setStateSaveButton(false);
 				mainView.repaintTheFrame(settingsView);

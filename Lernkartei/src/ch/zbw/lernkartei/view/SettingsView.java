@@ -164,19 +164,6 @@ public class SettingsView extends JPanel {
 		this.buttonNavForward.addActionListener(listener);
 	}
 	
-	public void initializeSettingsWithData(Register reg) {
-		if (reg != null) {
-			try {
-				this.setTextTextFieldCardNumber(reg.getCards().get(0).getIdCard()+ "");
-				this.textAreaBack.setText(reg.getCards().get(0).getBack());
-				this.textAreaFront.setText(reg.getCards().get(0).getFront());
-			} catch (Exception e) {
-				JOptionPane.showMessageDialog(this, e.getMessage());
-			}
-		} else {
-		}
-	}
-	
 	public void displayCard(Card card, int cardId) {
 
 		this.textAreaFront.setText(card.getFront());
@@ -243,5 +230,15 @@ public class SettingsView extends JPanel {
 
 	public void setInitialFocus() {
 		this.textAreaFront.requestFocus();
+	}
+	
+	public void setTextAreaFront(String s)
+	{
+		this.textAreaFront.setText(s);
+	}
+	
+	public void setTextAreaBack(String s)
+	{
+		this.textAreaBack.setText(s);
 	}
 }
