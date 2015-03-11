@@ -202,6 +202,7 @@ public class LearningView extends JPanel{
 		this.buttonCardBack.addActionListener(l);
 		this.buttonCorrect.addActionListener(l);
 		this.buttonWrong.addActionListener(l);
+		this.comboboxFach.addActionListener(l);  // Der Einfachheit halber wird für die Combobox der MeinButtonActionListener angehängt...
 	}
 	
 	public void removeButtonFrontBackListener(MeinButtonActionListener l)

@@ -1,16 +1,10 @@
 package ch.zbw.lernkartei.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
-import javax.swing.KeyStroke;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-
-import sun.security.krb5.internal.ktab.KeyTabConstants;
 import ch.zbw.lernkartei.model.Card;
 import ch.zbw.lernkartei.model.Language;
 import ch.zbw.lernkartei.model.Register;
@@ -24,8 +18,8 @@ public class Controller {
 	private SettingsView settingsView;
 	private LearningView learningView;
 	private Register register;
-	private Card card;
-	private int cardId;
+	private Card settingCard;
+	private int index;
 	private ArrayList<Card> allCards;
 	private ArrayList<Card> cardsOfABox;
 
@@ -33,7 +27,7 @@ public class Controller {
 		this.mainView = mainView;
 		this.settingsView = settingsView;
 		this.learningView = learningView;
-		this.card = register.getCardByIndex(0);
+		this.settingCard = register.getCardByIndex(0);
 		this.register = register;
 		addListener();
 	}
@@ -94,8 +88,8 @@ public class Controller {
 
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				if (!settingsView.getFrontText().equals(card.getFront())
-						&& !settingsView.getBackText().equals(card.getBack())) {
+				if (!settingsView.getFrontText().equals(settingCard.getFront())
+						&& !settingsView.getBackText().equals(settingCard.getBack())) {
 
 					settingsView.setStateSaveButton(true);
 					settingsView.setStateDeleteButton(true);
@@ -173,18 +167,21 @@ public class Controller {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getActionCommand().equals("Speichern")) {
 				saveCard();
+				
 			} else if (e.getActionCommand().equals(">>>")) {
-				try {
-					cardId++;
-					settingsView.setStateNavBackForwardButtons(register, cardId);
-					if (register.getNumberOfCards() == cardId) {
-						settingsView.setStateNavBackForwardButtons(register, cardId);
-						cardId--;
-						
+				try {											
+					settingCard = register.getCardByIndex(index + 1);
+					if(settingCard != null)
+					{
+						index++;
+						settingsView.displayCard(settingCard);
 					}
-					card = register.getCardByIndex(cardId);
-					settingsView.displayCard(card, cardId);
-					settingsView.setStateSaveButton(false);
+					else
+					{
+						index--;
+					}
+					settingsView.setStateSaveButton(false);	
+					settingsView.setStateNavBackForwardButtons(register, index);
 
 				} catch (Exception e1) {
 
@@ -195,16 +192,16 @@ public class Controller {
 					if (!continueWithoutSaving())
 						saveCard();
 
-					if (cardId != 0) {
-						cardId = settingsView.getCardid() - 1;
+					if (index != 0) {
+						index--;
 					}
-					card = register.getCardByIndex(cardId);
-					settingsView.displayCard(card, cardId);
-					settingsView.setStateNavBackForwardButtons(register, cardId);
+					settingCard = register.getCardByIndex(index);
+					settingsView.displayCard(settingCard);
+					settingsView.setStateNavBackForwardButtons(register, index);
 					settingsView.setStateSaveButton(false);
 
-					if (register.getCardByIndex(cardId).getFront().equals("")
-							&& register.getCardByIndex(cardId).getBack()
+					if (register.getCardByIndex(index).getFront().equals("")
+							&& register.getCardByIndex(index).getBack()
 									.equals("")) {
 						settingsView.setStateDeleteButton(false);
 					} else {
@@ -217,16 +214,20 @@ public class Controller {
 				}
 			} else if (e.getActionCommand().equals("Neu")) {
 				try {
-					cardId = register.getNumberOfCards();
-					Card newCard = new Card("", "");
-					register.add(newCard);
-					settingsView.displayCard(newCard, cardId);
+					index = register.getNumberOfCards();
+					settingCard = new Card("", "", register.getMaxId_Card());
+					register.add(settingCard);
+					
+					//Erfasste Karte neu laden (am Ende der Liste)
+					settingsView.displayCard(register.getCardByIndex(index));
+					
+					//Buttons aktualisieren
+					settingsView.setStateNavBackForwardButtons(register, index);
 					settingsView.setStateButtonNew(false);
 					settingsView.setStateSaveButton(false);
 					settingsView.setStateDeleteButton(false);
 					settingsView.setStateButtonBack(false);
 					settingsView.setStateButtonForward(false);
-
 				} catch (Exception e1) {
 
 					mainView.displayErrorMessage(e1.getMessage());
@@ -234,20 +235,30 @@ public class Controller {
 			} else if (e.getActionCommand().equals("Löschen")) {
 				try {
 					if (cardWantsToBeDeleted()) {
-						register.getCards().remove(
-								register.getCardByIndex(cardId));
-
-						if (register.getNumberOfCards() > 0) {
-							card = register.getCardByIndex(cardId);
-							settingsView.displayCard(card, cardId);
-							settingsView.setStateNavBackForwardButtons(register, cardId);
-						} else {
-							cardId = 0;
-							card = new Card("", "");
-							register.add(card);
-							settingsView.displayCard(card, cardId);
-							settingsView.setStateNavBackForwardButtons(register, cardId);
+						register.getCards().remove(settingCard);
+						index = register.getNumberOfCards();
+						// Eine nachfolgende Karte müsste nun am gleichen Index stehen...						
+						settingCard = register.getCardByIndex(register.getNumberOfCards() - 1);
+						while (settingCard == null && index >= 0)
+						{
+							settingCard = register.getCardByIndex(index);
+							index--;
 						}
+						
+						if(settingCard == null)
+						{
+							settingCard = new Card("", "", register.getMaxId_Card());
+							settingsView.displayCard(settingCard);
+							settingsView.setStateButtonNew(false);
+							settingsView.setStateDeleteButton(false);
+						}
+						else
+						{
+							settingsView.displayCard(settingCard);
+						}
+						index = register.getNumberOfCards();
+						settingsView.setStateSaveButton(false);
+						settingsView.setStateNavBackForwardButtons(register, index);
 					}
 				} catch (Exception e1) {
 
@@ -263,7 +274,7 @@ public class Controller {
 			}
 			else if(e.getActionCommand().equals("Richtig") || e.getActionCommand().equals("Falsch"))
 			{
-				cardId = learningView.getCardId();
+				index = learningView.getCardId();
 				if(e.getActionCommand().equals("Richtig"))
 				{
 					register.isTrue(learningView.getCardId());
@@ -272,11 +283,10 @@ public class Controller {
 				{
 					register.isFalse(learningView.getCardId());
 				}
-				cardsOfABox.remove(card);
+				cardsOfABox.remove(settingCard);
 				learningView.refreshData(register.getBoxes(), cardsOfABox);
 			}
 		}
-		
 
 		private boolean cardWantsToBeDeleted() {
 			if (JOptionPane.showConfirmDialog(mainView,
@@ -286,27 +296,12 @@ public class Controller {
 		}
 
 		private void saveCard() {
-			String front, back;
 			try {
-				front = settingsView.getFrontText();
-				back = settingsView.getBackText();
-				if (settingsView.getCardid() != null) {
-					cardId = settingsView.getCardid();
-					card = register.getCardByIndex(cardId);
-					card.setCard(front, back);
-					settingsView.displayCard(card, cardId);
-					settingsView.setStateNavBackForwardButtons(register, cardId);
-				} else {
-					cardId = settingsView.getCardid() + 1;
-					register.add(new Card(front, back));
-					settingsView.displayCard(register.getCardByIndex(register
-							.getNumberOfCards() - 1), cardId);
-					settingsView.setStateNavBackForwardButtons(register, cardId);
-				}
+				settingCard.setCard(settingsView.getFrontText(), settingsView.getBackText());				
 				settingsView.setStateDeleteButton(true);
 				settingsView.setStateButtonNew(true);
 				settingsView.setStateSaveButton(false);
-				settingsView.setStateNavBackForwardButtons(register, cardId);
+				settingsView.setStateNavBackForwardButtons(register, index);
 			}
 
 			catch (Exception ex) {
@@ -316,8 +311,8 @@ public class Controller {
 
 		private boolean continueWithoutSaving() {
 			try {
-				if (!settingsView.getFrontText().equals(card.getFront())
-						|| !settingsView.getBackText().equals(card.getBack())) {
+				if (!settingsView.getFrontText().equals(settingCard.getFront())
+						|| !settingsView.getBackText().equals(settingCard.getBack())) {
 					if (settingsView.showMessageBox("Daten wurden verändert. Willst du fortfahren ohne zu speichern?") == JOptionPane.OK_OPTION) {
 						return true;
 					} else {

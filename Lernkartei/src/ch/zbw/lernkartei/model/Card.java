@@ -11,7 +11,7 @@ public class Card
 	private int calcProbability;
 	private int box;
 
-	public Card(String front, String back)
+	public Card(String front, String back, int id_Card)
 	{
 	this.id_Card = id_Card;
 	this.front = front;

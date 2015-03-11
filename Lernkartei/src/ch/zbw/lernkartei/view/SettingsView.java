@@ -164,11 +164,10 @@ public class SettingsView extends JPanel {
 		this.buttonNavForward.addActionListener(listener);
 	}
 	
-	public void displayCard(Card card, int cardId) {
-
+	public void displayCard(Card card) {
 		this.textAreaFront.setText(card.getFront());
 		this.textAreaBack.setText(card.getBack());
-		this.textfieldCardNumber.setText(cardId + "");
+		this.textfieldCardNumber.setText(card.getIdCard() + "");
 	}
 	
 	public Integer getCardid() {
@@ -176,7 +175,6 @@ public class SettingsView extends JPanel {
 		if (this.textfieldCardNumber.getText() != null) {
 			return Integer.parseInt(this.textfieldCardNumber.getText());
 		}
-
 		return 0;
 	}
 
@@ -214,7 +212,7 @@ public class SettingsView extends JPanel {
 			this.buttonNavBack.setEnabled(false);
 		else
 			this.buttonNavBack.setEnabled(true);
-		if (index < reg.getNumberOfCards())
+		if (index < reg.getNumberOfCards() - 1)
 			setStateButtonForward(true);
 		else
 			setStateButtonForward(false);

@@ -199,14 +199,18 @@ public class Register {
 
 	public ArrayList<Card> getTestDataSet() {
 		ArrayList<Card> myTestCards = new ArrayList<Card>();
-		myTestCards.add(new Card("Gebäude", "Building"));
-		myTestCards.add(new Card("rot", "red"));
-		myTestCards.add(new Card("Fenster", "Window"));
+		myTestCards.add(new Card("Gebäude", "Building", 1));
+		myTestCards.add(new Card("rot", "red", 2));
+		myTestCards.add(new Card("Fenster", "Window", 3));
 		return myTestCards;
 	}
 
 	public int getNumberOfCards() {
-		return cards.size();
+		if(cards != null)
+		{
+			return cards.size();
+		}
+		return 0;	
 	}
 
 	public Card getCardByIndex(int index) {
