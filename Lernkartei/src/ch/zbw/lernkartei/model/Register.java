@@ -228,7 +228,7 @@ public class Register {
 				int box = cardi.getBox();
 				int probability = cardi.getProbability();
 				
-				if(box < 5)
+				if(box < 7)
 				{
 					box += 1;
 				}
