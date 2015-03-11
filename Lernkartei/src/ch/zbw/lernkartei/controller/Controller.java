@@ -291,6 +291,7 @@ public class Controller {
 					settingsView.setStateNavBackForwardButtons(register, cardId);
 				}
 				settingsView.setStateDeleteButton(true);
+				settingsView.setStateButtonNew(true);
 				settingsView.setStateSaveButton(false);
 				settingsView.setStateNavBackForwardButtons(register, cardId);
 			}
