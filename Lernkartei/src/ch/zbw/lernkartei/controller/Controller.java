@@ -257,9 +257,9 @@ public class Controller {
 						{
 							settingsView.displayCard(settingCard);
 							index = register.getNumberOfCards() - 1;
+							settingsView.setStateButtonNew(true);
 						}
 						settingsView.setStateSaveButton(false);
-						settingsView.setStateButtonNew(true);
 						settingsView.setStateNavBackForwardButtons(register, index);
 					}
 				} catch (Exception e1) {
