@@ -97,7 +97,7 @@ public class Register {
 		this.cards = sortedCards;
 	}
 	
-	public ArrayList<Card> getSortedCardsByCardID()
+	public ArrayList<Card> getSortedCardsByCardID() throws Exception
 	{
 		ArrayList<Integer> sortedNumbers = new ArrayList();
 		ArrayList<Card> sortedCards = new ArrayList<Card>();
@@ -122,7 +122,11 @@ public class Register {
 				}
 			}
 		}
+		if (sortedCards == null)
+			throw new Exception("Keine Karten vorhanden.");
+			
 		return sortedCards;
+		
 	}
 
 	public void export(String destinationPath) {
@@ -176,7 +180,7 @@ public class Register {
 		return this.cards;
 	}
 
-	public ArrayList<Card> getCardsByBox(int box) {
+	public ArrayList<Card> getCardsByBox(int box) throws Exception{
 		sortList();
 		Iterator i = this.cards.iterator();
 		ArrayList<Card> cards = new ArrayList<Card>();
@@ -187,6 +191,9 @@ public class Register {
 				cards.add(card);
 			}
 		}
+		if (cards == null)
+			throw new Exception("Keine Karten vorhanden.");
+		
 		return cards;
 	}
 

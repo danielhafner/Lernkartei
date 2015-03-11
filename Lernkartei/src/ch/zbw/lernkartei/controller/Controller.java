@@ -136,7 +136,12 @@ public class Controller {
 			} else if (e.getActionCommand().equals("Italienisch")) {
 				mainView.switchLanguage(e);
 			} else if (e.getActionCommand().equals("Einstellungen")) {
-				allCards = register.getSortedCardsByCardID();
+				
+				try {
+					allCards = register.getSortedCardsByCardID();
+				} catch (Exception e1) {
+					settingsView.showMessageBox(e1.getMessage());
+				}
 				settingsView.setTextTextFieldCardNumber(allCards.get(0).getIdCard() + "");
 				settingsView.setTextAreaFront(allCards.get(0).getFront());
 				settingsView.setTextAreaBack(allCards.get(0).getBack());
@@ -145,7 +150,11 @@ public class Controller {
 				mainView.repaintTheFrame(settingsView);
 				settingsView.setInitialFocus();
 			} else if (e.getActionCommand().equals("Lernen starten")) {
-				cardsOfABox = register.getCardsByBox(register.getBoxes().get(0));				
+				try {
+					cardsOfABox = register.getCardsByBox(register.getBoxes().get(0));
+				} catch (Exception e1) {
+					settingsView.showMessageBox(e1.getMessage());
+				}				
 				learningView.initializeSettingsWithData(register.getBoxes(), register);
 				mainView.repaintTheFrame(learningView);
 			} else if (e.getActionCommand().equals("Import")) {
