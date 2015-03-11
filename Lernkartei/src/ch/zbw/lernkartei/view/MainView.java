@@ -54,6 +54,7 @@ public class MainView extends JFrame {
 
 	private int x = 0, y = 0, width = 800, heigth = 600;
 	private String fileExportPath;
+	private String fileImportPath;
 
 	public MainView() {
 		try {
@@ -158,7 +159,7 @@ public class MainView extends JFrame {
 	public void openFileDialog() {
 		switch (this.jfImportFile.showOpenDialog(this)) {
 		case JFileChooser.APPROVE_OPTION:
-			JOptionPane.showMessageDialog(this, "todo Ruel: Import starten...");
+			fileImportPath = jfImportFile.getSelectedFile().toString();
 			break;
 		case JFileChooser.CANCEL_OPTION:
 			// JOptionPane.showMessageDialog(this,
@@ -324,5 +325,9 @@ public class MainView extends JFrame {
 
 	public String getFileExportfile() {
 		return this.fileExportPath;
+	}
+	
+	public String getFileImportfile() {
+		return this.fileImportPath;
 	}
 }

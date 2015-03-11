@@ -240,7 +240,6 @@ public class Register {
 				break;
 			}
 		}
-		
 	}
 	
 	public void isFalse(int id)

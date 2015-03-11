@@ -159,6 +159,7 @@ public class Controller {
 				mainView.repaintTheFrame(learningView);
 			} else if (e.getActionCommand().equals("Import")) {
 				mainView.openFileDialog();
+				register.imports(mainView.getFileExportfile());
 			} else if (e.getActionCommand().equals("Export")) {
 				mainView.saveFileDialog();
 				register.export(mainView.getFileExportfile());
