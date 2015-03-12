@@ -124,6 +124,7 @@ public class LearningView extends JPanel{
 		this.buttonWrong.setHorizontalAlignment(SwingConstants.CENTER); // Damit Text linksbündig angezeigt wird
 		this.buttonWrong.setPreferredSize(MyDimension.ButtonCorrectWrongDimension.get());	
 		this.panelAnswer.add(this.buttonWrong);
+		this.panelAnswer.setBackground(Color.WHITE);
 		this.add(panelAnswer, gridBagContraints);
 
 		this.labelBack.setVisible(false);
@@ -131,6 +132,7 @@ public class LearningView extends JPanel{
 		this.buttonCardBack.setForeground(Color.WHITE);
 		this.buttonCorrect.setVisible(false);
 		this.buttonWrong.setVisible(false);
+		this.setBackground(Color.WHITE);
 		this.setVisible(true);
 	}
 	

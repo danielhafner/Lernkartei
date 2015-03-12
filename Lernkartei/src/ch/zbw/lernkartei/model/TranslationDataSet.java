@@ -44,6 +44,7 @@ public class TranslationDataSet extends ArrayList<String[]>{
 		this.addNewToTranslation("Karteiname", "Name of the Database", "Nom de la base de données", "Nome del database");
 		this.addNewToTranslation("Vorderseite", "Front", "Avant", "Anteriore");
 		this.addNewToTranslation("Rückseite", "Back", "Arrière", "Posteriore");
+		this.addNewToTranslation("Fach", "Box", "Compartiment", "Scomparto");
 	}
 	
 	public String getTranslatedText(String originalText, Language languageOriginalText, Language languageTranslatedText)
