@@ -16,6 +16,11 @@ import ch.zbw.lernkartei.view.LearningView;
 import ch.zbw.lernkartei.view.MainView;
 import ch.zbw.lernkartei.view.SettingsView;
 
+
+/**
+ * @author Ruel
+ *
+ */
 public class Controller {
 
 	private MainView mainView;
@@ -28,6 +33,12 @@ public class Controller {
 	private ArrayList<Card> allCards;
 	private ArrayList<Card> cardsOfABox;
 
+	/** Konstructor
+	 * @param mainView
+	 * @param settingsView
+	 * @param learningView
+	 * @param register
+	 */
 	public Controller(MainView mainView, SettingsView settingsView, LearningView learningView, Register register) {
 		this.mainView = mainView;
 		this.settingsView = settingsView;
@@ -37,8 +48,9 @@ public class Controller {
 		addListener();
 	}
 
-	/* 
-	 * Startet die Applikation (mainView)
+
+	/**
+	 * Paints the mainView
 	 */
 	public void paintMainView() {
 		try {
@@ -48,8 +60,9 @@ public class Controller {
 		}
 	}
 
-	/*
-	 * Verschiedene Listener werden hier registriert
+
+	/**
+	 * Registrates all needed Listeners
 	 */
 	private void addListener() {
 		MeinMenuActionListener mBeenden = new MeinMenuActionListener("Beenden");
@@ -118,6 +131,10 @@ public class Controller {
 		this.settingsView.setDocumentListener(documentListener);
 	}
 
+	/**
+	 * @author Ruel
+	 * MenuActionListener (Inner Class) for all Menu(Items)
+	 */
 	public class MeinMenuActionListener implements ActionListener {
 
 		public String command;
@@ -164,18 +181,23 @@ public class Controller {
 				} catch (Exception e1) {
 					settingsView.showMessageBox(e1.getMessage());
 				}				
-				learningView.initializeSettingsWithData(register.getBoxes(), register);
+				learningView.initializeWithData(register.getBoxes(), register);
 				mainView.repaintTheFrame(learningView);
 			} else if (e.getActionCommand().equals("Import")) {
 				mainView.openFileDialog();
-				register.imports(mainView.getFileImportfile());
+				register.imports(mainView.getFileImportPath());
 			} else if (e.getActionCommand().equals("Export")) {
 				mainView.saveFileDialog();
-				register.export(mainView.getFileExportfile());
+				register.export(mainView.getFileExportPath());
 			}
 		}
 	}
 
+	
+	/**
+	 * @author Ruel
+	 * ButtonActionListener (Inner Class) for all Buttons
+	 */
 	public class MeinButtonActionListener implements ActionListener {
 
 		@Override
@@ -313,9 +335,9 @@ public class Controller {
 			}
 		}
 
-		/*
-		 *  Zeigt ein Dialogfenster an und fragt den Benutzer
-		 *  ob, die Karte effektiv gelöscht werden möchte.
+
+		/** Shows a Dialog and ask the User, if he really want to delete the card
+		 * @return: yes = true, no = false
 		 */
 		private boolean cardWantsToBeDeleted() {
 			if (JOptionPane.showConfirmDialog(mainView,
@@ -324,8 +346,9 @@ public class Controller {
 			return false;
 		}
 
-		/*
-		 * Speichert eine aktuelle Karte ab
+
+		/**
+		 * Saves a card
 		 */
 		private void saveCard() {
 			try {
@@ -341,8 +364,9 @@ public class Controller {
 			}
 		}
 
-		/*
-		 * Fragt, ob ohne Speichern weiternavigiert werden möchte
+
+		/**Ask if User wants to continue without saving the changes...
+		 * @return
 		 */
 		private boolean continueWithoutSaving() {
 			try {
@@ -362,6 +386,10 @@ public class Controller {
 		}
 	}
 	
+	/**
+	 * @author Ruel
+	 * Inner Class for all ItemListeners
+	 */
 	public class MyComboboxItemListener implements ItemListener {
 		
 		public void itemStateChanged(ItemEvent arg0) {
@@ -379,6 +407,10 @@ public class Controller {
 		}
 	}
 	
+	
+	/** Refreshs the Learning-Data
+	 * @param cardsOfABox
+	 */
 	public void refreshLearningData(ArrayList<Card> cardsOfABox)
 	{
 		this.learningCard = cardsOfABox.get(0);

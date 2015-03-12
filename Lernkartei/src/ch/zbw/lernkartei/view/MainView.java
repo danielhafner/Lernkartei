@@ -24,6 +24,10 @@ import ch.zbw.lernkartei.controller.Controller.MeinMenuActionListener;
 import ch.zbw.lernkartei.model.Language;
 import ch.zbw.lernkartei.model.TranslationDataSet;
 
+/**
+ * @author Ruel
+ *
+ */
 public class MainView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -56,6 +60,9 @@ public class MainView extends JFrame {
 	private String fileExportPath;
 	private String fileImportPath;
 
+	/**
+	 * MainView-Constructor
+	 */
 	public MainView() {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -96,6 +103,9 @@ public class MainView extends JFrame {
 		labelImageIconBackground = new JLabel(imageIconBackground);
 	}
 
+	/**
+	 *  Paints the mainView
+	 */
 	public void paint() {
 		this.language = Language.Deutsch;
 		setTitle("Vokabeltrainer R. Holderegger | E. Schwarz | D. Hafner");
@@ -133,14 +143,23 @@ public class MainView extends JFrame {
 		this.add(labelImageIconBackground);
 	}
 
+	/**
+	 * Paints the Setting-Panel
+	 */
 	public void paintSettingsPanel() {
 		this.repaintTheFrame(this.panelSettings);
 	}
 
-	public void paintPlayPanel() {
+	/**
+	 * Paints the Learning-Panel
+	 */
+	public void paintPanelLearning() {
 		repaintTheFrame(this.panelLearming);
 	}
 
+	/** Repaints a certain Panel
+	 * @param panelToShow
+	 */
 	public void repaintTheFrame(JPanel panelToShow) {
 		labelImageIconBackground.removeAll();
 		this.mainPanel.removeAll();
@@ -149,12 +168,17 @@ public class MainView extends JFrame {
 		this.setVisible(true);
 	}
 
+	/**
+	 *  Closes the application
+	 */
 	public void closeApplication() {
-		// Anwendung beenden
 		this.dispose();
 		this.setVisible(false);
 	}
 
+	/**
+	 * Sets the File Import Path
+	 */
 	public void openFileDialog() {
 		switch (this.jfImportFile.showOpenDialog(this)) {
 		case JFileChooser.APPROVE_OPTION:
@@ -173,6 +197,9 @@ public class MainView extends JFrame {
 		}
 	}
 
+	/**
+	 * Saves as File unter the selected Path
+	 */
 	public void saveFileDialog() {
 		switch (this.jfImportFile.showSaveDialog(this)) {
 		case JFileChooser.APPROVE_OPTION:
@@ -181,9 +208,9 @@ public class MainView extends JFrame {
 			// "todo Ruel: Karten werden in ein File exportiert...");
 			break;
 		case JFileChooser.CANCEL_OPTION:
-			// JOptionPane.showMessageDialog(this,
-			// translationArrayList.getTranslatedText("Export wurde abgebrochen.",
-			// Language.Deutsch, this.language));
+			JOptionPane.showMessageDialog(this,
+			translationArrayList.getTranslatedText("Export wurde abgebrochen.",
+			Language.Deutsch, this.language));
 			break;
 		case JFileChooser.ERROR_OPTION:
 			JOptionPane.showMessageDialog(this, translationArrayList
@@ -193,6 +220,9 @@ public class MainView extends JFrame {
 		}
 	}
 
+	/** Sets MenuActionListener for all different Languages
+	 * @param listener
+	 */
 	public void setLanguageMenuActionListener(MeinMenuActionListener listener) {
 		if (listener.command.equals(Language.Deutsch.toString())) {
 			this.menuItemDeutsch.addActionListener(listener);
@@ -205,27 +235,47 @@ public class MainView extends JFrame {
 		}
 	}
 
+	/** Sets MenuActionListener for 'Close'
+	 * @param listener
+	 */
 	public void setStartMenuActionListener(MeinMenuActionListener listener) {
 		this.menuItemClose.addActionListener(listener);
 	}
 
+	
+	/** Sets MenuActionListener for 'Settings'
+	 * @param listener
+	 */
 	public void setSettingsMenuActionListener(MeinMenuActionListener listener) {
 		this.menuItemSettings.addActionListener(listener);
 	}
 
+	/** Sets MenuActionListener for 'Start Learning'
+	 * @param listener
+	 */
 	public void setStartLearningsMenuActionListener(
 			MeinMenuActionListener listener) {
 		this.menuItemStartLearning.addActionListener(listener);
 	}
 
+	/** Sets the MenuActionListener for 'Import'
+	 * @param listener
+	 */
 	public void setImportMenuActionListener(MeinMenuActionListener listener) {
 		this.menuItemImport.addActionListener(listener);
 	}
 
+	/** Sets the MenuActionListener for 'Export'
+	 * @param listener
+	 */
 	public void setExportMenuActionListener(MeinMenuActionListener listener) {
 		this.menuItemExport.addActionListener(listener);
 	}
 
+	
+	/** Switchs into the selected Language
+	 * @param e
+	 */
 	public void switchLanguage(ActionEvent e) {
 		switch ((e.getActionCommand())) {
 		case "Deutsch":
@@ -246,6 +296,9 @@ public class MainView extends JFrame {
 		}
 	}
 
+	/** Translates a Control into the selectec Language
+	 * @param o
+	 */
 	public void translateTextOfAControl(Object o) {
 		for (String[] elem : this.translationArrayList) {
 			if (o instanceof JMenuItem) {
@@ -293,6 +346,11 @@ public class MainView extends JFrame {
 		}
 	}
 
+	
+	/** 
+	 * @param c: Container
+	 * @return: An ArryList with Components
+	 */
 	public static ArrayList<Component> getAllComponents(final Container c) {
 		Component[] comps = c.getComponents();
 		ArrayList<Component> compList = new ArrayList<Component>();
@@ -304,6 +362,11 @@ public class MainView extends JFrame {
 		return compList;
 	}
 
+	
+	/** Gets all Components of the mainPanel and call the Method
+	 *  translateTExtOfAControl for each Control
+	 * @param newLanguage
+	 */
 	public void setControlsToBeTranslated(Language newLanguage) {
 		this.previousLanguage = this.language;
 		this.language = newLanguage;
@@ -314,19 +377,32 @@ public class MainView extends JFrame {
 		}
 	}
 
+	/** Sets the Button enabled or disabled
+	 * @param button
+	 * @param isEnabled
+	 */
 	public void setButtonState(JButton button, boolean isEnabled) {
 		button.setEnabled(isEnabled);
 	}
 
+	/** Shows an Error into a Message box
+	 * @param error
+	 */
 	public void displayErrorMessage(String error) {
 		JOptionPane.showMessageDialog(this, error);
 	}
 
-	public String getFileExportfile() {
+	/**
+	 * @return: The File Export Path
+	 */
+	public String getFileExportPath() {
 		return this.fileExportPath;
 	}
 	
-	public String getFileImportfile() {
+	/**
+	 * @return: The File Import Path
+	 */
+	public String getFileImportPath() {
 		return this.fileImportPath;
 	}
 }

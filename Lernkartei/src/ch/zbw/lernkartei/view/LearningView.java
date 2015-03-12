@@ -27,6 +27,10 @@ import ch.zbw.lernkartei.controller.Controller.MyComboboxItemListener;
 import ch.zbw.lernkartei.model.Card;
 import ch.zbw.lernkartei.model.Register;
 
+/**
+ * @author Ruel
+ *
+ */
 public class LearningView extends JPanel{
 
 	private int cardId;
@@ -46,6 +50,9 @@ public class LearningView extends JPanel{
 	
 	private GridBagConstraints gridBagContraints;
 	
+	/**
+	 * Konstructor
+	 */
 	public LearningView()
 	{
 		this.setLayout(new GridBagLayout());
@@ -71,6 +78,9 @@ public class LearningView extends JPanel{
 		paint();
 	}
 	
+	/**
+	 *  Paints the LearningView
+	 */
 	public void paint()
 	{		
 		gridBagContraints.insets = new Insets(0, 0, 40, 0);
@@ -136,17 +146,20 @@ public class LearningView extends JPanel{
 		this.setVisible(true);
 	}
 	
+	/**
+	 * @return: LerningView
+	 */
 	public LearningView getLearningView()
 	{
 		return this;
 	}
 
-	/*
-	 * Initialisiert das Fenster mit den Daten
-	 * @param boxes: Zur Verfügung stehende Fächer
-	 * 
+	
+	/**Initialize the LearningView with Data
+	 * @param boxes
+	 * @param register
 	 */
-	public void initializeSettingsWithData(ArrayList<Integer> boxes, Register register) {			
+	public void initializeWithData(ArrayList<Integer> boxes, Register register) {			
 		try {
 			this.comboboxFach.removeAllItems();
 			Iterator<Integer> it = boxes.iterator();
@@ -173,12 +186,16 @@ public class LearningView extends JPanel{
 		}
 	}
 
+	/** Displays an Error-Message as into a Message Dialog
+	 * @param message
+	 */
 	public void displayErrorMessage(String message) {
 		JOptionPane.showMessageDialog(this, message);
 	}
 
-	/* 
-	 * Zeigt die Lösung zur Frage an
+	
+	/**
+	 * Shows the Answer (Back)
 	 */
 	public void showAnswer() {
 		this.labelFront.setVisible(false);
@@ -189,8 +206,11 @@ public class LearningView extends JPanel{
 		this.buttonWrong.setVisible(true);
 	}
 
-	/*
-	 * Zeigt eine Frage (Vorderseite) an
+	
+	/** Shows the Question (Front)
+	 * @param front
+	 * @param back
+	 * @param cardId
 	 */
 	public void ShowQuestion(String front, String back, int cardId) {		
 		this.cardId = cardId;
@@ -198,15 +218,15 @@ public class LearningView extends JPanel{
 		this.labelBack.setVisible(false);
 		this.buttonCardFront.setText(front);
 		this.buttonCardBack.setText(back);
-		
 		this.buttonCardFront.setVisible(true);
 		this.buttonCardBack.setVisible(false);		
 		this.buttonCorrect.setVisible(false);
 		this.buttonWrong.setVisible(false);
 	}
 
-	/*
-	 * Fügt die Controls dem MeinButtonActionListener hinzu
+	
+	/** Sets the Actionlistener to the Buttons
+	 * @param l
 	 */
 	public void setButtonFrontBackListener(MeinButtonActionListener l) {
 		this.buttonCardFront.addActionListener(l);
@@ -215,39 +235,52 @@ public class LearningView extends JPanel{
 		this.buttonWrong.addActionListener(l);
 	}
 	
+	/** Sets the ItemListener to the Combobox
+	 * @param m
+	 */
 	public void setComboboxItemListener(MyComboboxItemListener m)
 	{
 		this.comboboxFach.addItemListener(m);  // Der Einfachheit halber wird für die Combobox der MeinButtonActionListener angehängt...
 	}
 	
-	/*
-	 * Entfernt den Actionlistener auf dem Rückseite-Button der Karte
+
+	/** Removes the ActionListener of the Answer (Back)
+	 * @param l
 	 */
 	public void removeButtonFrontBackListener(MeinButtonActionListener l)
 	{
 		this.buttonCardBack.removeActionListener(l);
 	}
 	
-	/*
-	 * Gibt die Karten-Id zurück
+
+	/**
+	 * @return: Card-Id
 	 */
 	public int getCardId()
 	{
 		return this.cardId;
 	}
-	/*
-	 * Setzt die Karten-Id
+
+
+	/** Sets the Card-Id
+	 * @param id
 	 */
 	public void setCardId(int id)
 	{
 		this.cardId = id;
 	}
 	
+	/** Gets the Selected Combobox-Item
+	 * @return Value (1,2,3...) as a String
+	 */
 	public String getComboBoxSelectedItem()
 	{
 		return this.comboboxFach.getSelectedItem().toString();
 	}
 
+	/** Refreshs the Combobox with the Data
+	 * @param boxes
+	 */
 	public void refreshComboboxFachWithData(ArrayList<Integer> boxes) {
 		if(boxes != null)
 		{

@@ -43,6 +43,9 @@ public class SettingsView extends JPanel {
 	
 	private GridBagConstraints gridBagContraints;
 	
+	/**
+	 * Konstructor
+	 */
 	public SettingsView()
 	{
 		this.setLayout(new GridBagLayout());
@@ -76,6 +79,9 @@ public class SettingsView extends JPanel {
 		paint();
 	}
 	
+	/**
+	 *  Paints the SettingView
+	 */
 	public void paint(){
 		
 		this.panelNav.add(this.buttonNewCard);
@@ -178,11 +184,17 @@ public class SettingsView extends JPanel {
 		this.setVisible(true);
 	}
 	
+	/** Sets the Card-No. Textfield
+	 * @param text
+	 */
 	public void setTextTextFieldCardNumber(String text)
 	{
 		this.textfieldCardNumber.setText(text);
 	}
 	
+	/** Sets the ActionListeners for all Buttons
+	 * @param listener
+	 */
 	public void setNavigationButtonListener(MeinButtonActionListener listener) {
 		this.buttonNewCard.addActionListener(listener);
 		this.buttonDeleteCard.addActionListener(listener);
@@ -191,12 +203,18 @@ public class SettingsView extends JPanel {
 		this.buttonNavForward.addActionListener(listener);
 	}
 	
+	/** Displays a card
+	 * @param card
+	 */
 	public void displayCard(Card card) {
 		this.textAreaFront.setText(card.getFront());
 		this.textAreaBack.setText(card.getBack());
 		this.textfieldCardNumber.setText(card.getIdCard() + "");
 	}
 	
+	/** Return the Id of the Card
+	 * @return
+	 */
 	public Integer getCardid() {
 
 		if (this.textfieldCardNumber.getText() != null) {
@@ -205,35 +223,61 @@ public class SettingsView extends JPanel {
 		return 0;
 	}
 
+	/** Sets the Button-State of the Delete-Button
+	 * @param state
+	 */
 	public void setStateDeleteButton(boolean state) {
 		this.buttonDeleteCard.setEnabled(state);
 	}
 
+	/** Sets the State of the Save-Button
+	 * @param state
+	 */
 	public void setStateSaveButton(boolean state) {
 		this.buttonSaveCard.setEnabled(state);
 	}
 
+	/** Sets the State of the Back-Button
+	 * @param state
+	 */
 	public void setStateButtonBack(boolean state) {
 		this.buttonNavBack.setEnabled(state);
 	}
 
+	/** Sets the State of the Forward-Button
+	 * @param state
+	 */
 	public void setStateButtonForward(boolean state) {
 		this.buttonNavForward.setEnabled(state);
 	}
 	
+	/** Shows a Message-Box
+	 * @param text to be displayd
+	 * @return
+	 */
 	public int showMessageBox(String text) {
 		return JOptionPane.showConfirmDialog(this, text);
 	}
 
+	/** Sets the DocumentListener for the Textfields Front and Back
+	 * @param documentListener
+	 */
 	public void setDocumentListener(DocumentListener documentListener) {
 		this.textAreaFront.getDocument().addDocumentListener(documentListener);
 		this.textAreaBack.getDocument().addDocumentListener(documentListener);
 	}
 
+	/** Sets the State of the New-Button
+	 * @param state
+	 */
 	public void setStateButtonNew(boolean state) {
 		this.buttonNewCard.setEnabled(state);
 	}
 
+	/** Sets state of the Navigation Buttions (Back <<< and Forward >>>)
+	 * @param reg
+	 * @param index
+	 */
 	public void setStateNavBackForwardButtons(Register reg, int index) {
 		if (index == 0)
 			this.buttonNavBack.setEnabled(false);
@@ -245,33 +289,54 @@ public class SettingsView extends JPanel {
 			setStateButtonForward(false);
 	}
 	
+	/** 
+	 * @return Text of the Fontside (Question)
+	 */
 	public String getFrontText() {
 		return this.textAreaFront.getText();
 	}
 
+	/**
+	 * @return Text of the Backside (Answer)
+	 */
 	public String getBackText() {
 		return this.textAreaBack.getText();
 	}
 
+	/**
+	 * Sets the initial Focus to the Textarea Front
+	 */
 	public void setInitialFocus() {
 		this.textAreaFront.requestFocus();
 	}
 	
+	/** Sets the TextArea Front with a certain text
+	 * @param s
+	 */
 	public void setTextAreaFront(String s)
 	{
 		this.textAreaFront.setText(s);
 	}
 	
+	/** Sets the TextArea Back with a certain text
+	 * @param s
+	 */
 	public void setTextAreaBack(String s)
 	{
 		this.textAreaBack.setText(s);
 	}
 	
+	/** Sets the BoxNumber with a certain Text
+	 * @param s
+	 */
 	public void setBoxNumber(String s)
 	{
 		this.textfieldBoxNumber.setText(s);
 	}
 	
+	/**
+	 * @return the Box Number
+	 */
 	public int getBoxNumber()
 	{
 		if(!this.textfieldBoxNumber.getText().equals(""))

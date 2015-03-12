@@ -7,10 +7,11 @@ import ch.zbw.lernkartei.view.LearningView;
 import ch.zbw.lernkartei.view.MainView;
 import ch.zbw.lernkartei.view.SettingsView;
 
+/**
+ * @author Ruel
+ *
+ */
 public class Main {
-	
-	private static Controller c;
-
 	/*
 	 * Einstiegspunkt des Programms
 	 */
