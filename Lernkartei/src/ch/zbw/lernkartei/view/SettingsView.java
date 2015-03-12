@@ -26,6 +26,9 @@ public class SettingsView extends JPanel {
 	//private JTextField textfieldRegisterName;
 	private JLabel labelCardNumber;
 	private JTextField textfieldCardNumber;
+	
+	private JLabel labelBoxNumber;
+	private JTextField textfieldBoxNumber;
 
 	private JLabel labelFront;
 	private JTextArea textAreaFront;
@@ -49,7 +52,10 @@ public class SettingsView extends JPanel {
 		//this.textfieldRegisterName = new JTextField(1);
 		this.labelCardNumber = new JLabel("Karten-Nr.");
 		this.textfieldCardNumber = new JTextField(1);
-
+		
+		this.labelBoxNumber = new JLabel("Fach");
+		this.textfieldBoxNumber = new JTextField(1);
+		
 		this.labelFront = new JLabel("Vorderseite");
 		this.labelFront.setFont(MyFont.Ueberschrift2.getMyFont());
 		this.textAreaFront = new JTextArea(4, 1);
@@ -103,6 +109,7 @@ public class SettingsView extends JPanel {
 		gridBagContraints.gridy = 2;
 		gridBagContraints.ipadx = 50;
 		gridBagContraints.anchor = GridBagConstraints.WEST; //Damit das Label ganz links steht...
+		this.labelCardNumber.setFont(MyFont.Ueberschrift3.getMyFont());
 		this.add(labelCardNumber, gridBagContraints);
 
 		gridBagContraints.fill = 0;
@@ -112,6 +119,26 @@ public class SettingsView extends JPanel {
 		gridBagContraints.anchor = GridBagConstraints.WEST;
 		this.textfieldCardNumber.setEnabled(false);
 		this.add(textfieldCardNumber, gridBagContraints);
+		
+	
+		// Label Box-Number
+		gridBagContraints.fill = 0;
+		gridBagContraints.gridx = 0;
+		gridBagContraints.gridy = 3;
+		gridBagContraints.ipadx = 50;
+		gridBagContraints.anchor = GridBagConstraints.WEST;
+		this.labelBoxNumber.setFont(MyFont.Ueberschrift3.getMyFont());
+		this.add(labelBoxNumber, gridBagContraints);
+	
+		// Textfiel Box-Number
+		gridBagContraints.fill = 0;
+		gridBagContraints.gridx = 1;
+		gridBagContraints.gridy = 3;
+		gridBagContraints.ipadx = 100;
+		gridBagContraints.anchor = GridBagConstraints.WEST;
+		this.textfieldBoxNumber.setEnabled(false);
+		this.add(textfieldBoxNumber, gridBagContraints);
+		
 
 		gridBagContraints.fill = 0;
 		gridBagContraints.insets = new Insets(20, 0, 10, 0);
@@ -238,5 +265,22 @@ public class SettingsView extends JPanel {
 	public void setTextAreaBack(String s)
 	{
 		this.textAreaBack.setText(s);
+	}
+	
+	public void setBoxNumber(String s)
+	{
+		this.textfieldBoxNumber.setText(s);
+	}
+	
+	public int getBoxNumber()
+	{
+		if(!this.textfieldBoxNumber.getText().equals(""))
+		{
+			return Integer.parseInt(this.textfieldBoxNumber.getText() + "");
+		}
+		else
+		{
+			return 1;
+		}
 	}
 }

@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import ch.zbw.lernkartei.controller.Controller.MeinButtonActionListener;
+import ch.zbw.lernkartei.controller.Controller.MyComboboxItemListener;
 import ch.zbw.lernkartei.model.Card;
 import ch.zbw.lernkartei.model.Register;
 
@@ -138,18 +139,27 @@ public class LearningView extends JPanel{
 		return this;
 	}
 
+	/*
+	 * Initialisiert das Fenster mit den Daten
+	 * @param boxes: Zur Verfügung stehende Fächer
+	 * 
+	 */
 	public void initializeSettingsWithData(ArrayList<Integer> boxes, Register register) {			
 		try {
 			this.comboboxFach.removeAllItems();
-			Iterator it = boxes.iterator();
+			Iterator<Integer> it = boxes.iterator();
+			
 			while(it.hasNext())
 			{
-				this.comboboxFach.addItem((Integer) it.next());
+				Integer i = it.next();
+				if(i != null)
+				{
+					this.comboboxFach.addItem(i);
+				}
 			}
-			this.comboboxFach.setSelectedIndex(0);
+			
 			Card c = register.getCardByIndex(0);
 			this.cardId = c.getIdCard();
-			
 			this.buttonCardFront.setText(c.getFront());
 			this.buttonCardFront.setActionCommand("VORDERSEITE");
 			
@@ -165,6 +175,9 @@ public class LearningView extends JPanel{
 		JOptionPane.showMessageDialog(this, message);
 	}
 
+	/* 
+	 * Zeigt die Lösung zur Frage an
+	 */
 	public void showAnswer() {
 		this.labelFront.setVisible(false);
 		this.labelBack.setVisible(true);
@@ -174,17 +187,11 @@ public class LearningView extends JPanel{
 		this.buttonWrong.setVisible(true);
 	}
 
-	public void ShowQuestion(ArrayList<Integer> boxes, String front, String back, int cardId) {
-		
+	/*
+	 * Zeigt eine Frage (Vorderseite) an
+	 */
+	public void ShowQuestion(String front, String back, int cardId) {		
 		this.cardId = cardId;
-		this.comboboxFach.removeAllItems();
-		Iterator<Integer> it = boxes.iterator();
-		while(it.hasNext())
-		{
-			this.comboboxFach.addItem((Integer) it.next());
-		}
-		this.comboboxFach.setSelectedIndex(0);
-		
 		this.labelFront.setVisible(true);
 		this.labelBack.setVisible(false);
 		this.buttonCardFront.setText(front);
@@ -196,38 +203,68 @@ public class LearningView extends JPanel{
 		this.buttonWrong.setVisible(false);
 	}
 
+	/*
+	 * Fügt die Controls dem MeinButtonActionListener hinzu
+	 */
 	public void setButtonFrontBackListener(MeinButtonActionListener l) {
 		this.buttonCardFront.addActionListener(l);
 		this.buttonCardBack.addActionListener(l);
 		this.buttonCorrect.addActionListener(l);
 		this.buttonWrong.addActionListener(l);
-		this.comboboxFach.addActionListener(l);  // Der Einfachheit halber wird für die Combobox der MeinButtonActionListener angehängt...
 	}
 	
+	public void setComboboxItemListener(MyComboboxItemListener m)
+	{
+		this.comboboxFach.addItemListener(m);  // Der Einfachheit halber wird für die Combobox der MeinButtonActionListener angehängt...
+	}
+	
+	/*
+	 * Entfernt den Actionlistener auf dem Rückseite-Button der Karte
+	 */
 	public void removeButtonFrontBackListener(MeinButtonActionListener l)
 	{
 		this.buttonCardBack.removeActionListener(l);
 	}
 	
+	/*
+	 * Gibt die Karten-Id zurück
+	 */
 	public int getCardId()
 	{
 		return this.cardId;
 	}
-	
+	/*
+	 * Setzt die Karten-Id
+	 */
 	public void setCardId(int id)
 	{
 		this.cardId = id;
 	}
+	
+	public String getComboBoxSelectedItem()
+	{
+		return this.comboboxFach.getSelectedItem().toString();
+	}
 
-	public void refreshData(ArrayList<Integer> boxes,ArrayList<Card> cardsOfABox) {
-		try {
-			Card c = cardsOfABox.get(0);
-			this.cardId = c.getIdCard();	
-			ShowQuestion(boxes, c.getFront(), c.getBack(), c.getIdCard());
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			this.displayErrorMessage(e.getMessage());
-		}		
+	public void refreshComboboxFachWithData(ArrayList<Integer> boxes) {
+		if(boxes != null)
+		{
+			// Zuletzt selektiertes Fach zwischenspeichern
+			Object o = this.comboboxFach.getSelectedItem();
+			this.comboboxFach.removeAllItems();
+			Iterator<Integer> it = boxes.iterator();
+			while(it.hasNext())
+			{
+				Integer i = it.next();
+				if(i != null)
+				{
+					this.comboboxFach.addItem(i);
+				}
+			}
+			if (o != null)
+			{
+				comboboxFach.setSelectedItem(o);
+			}
+		}
 	}
 }

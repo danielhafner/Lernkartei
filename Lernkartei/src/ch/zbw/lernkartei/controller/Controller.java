@@ -1,10 +1,14 @@
 package ch.zbw.lernkartei.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+
 import ch.zbw.lernkartei.model.Card;
 import ch.zbw.lernkartei.model.Language;
 import ch.zbw.lernkartei.model.Register;
@@ -19,6 +23,7 @@ public class Controller {
 	private LearningView learningView;
 	private Register register;
 	private Card settingCard;
+	private Card learningCard;
 	private int index;
 	private ArrayList<Card> allCards;
 	private ArrayList<Card> cardsOfABox;
@@ -32,7 +37,10 @@ public class Controller {
 		addListener();
 	}
 
-	public void startApplication() {
+	/* 
+	 * Startet die Applikation (mainView)
+	 */
+	public void paintMainView() {
 		try {
 			this.mainView.paint();
 		} catch (Exception e) {
@@ -40,10 +48,12 @@ public class Controller {
 		}
 	}
 
+	/*
+	 * Verschiedene Listener werden hier registriert
+	 */
 	private void addListener() {
 		MeinMenuActionListener mBeenden = new MeinMenuActionListener("Beenden");
 		this.mainView.setStartMenuActionListener(mBeenden);
-
 		this.mainView.setLanguageMenuActionListener(new MeinMenuActionListener(
 				Language.Deutsch.toString()));
 		this.mainView.setLanguageMenuActionListener(new MeinMenuActionListener(
@@ -72,6 +82,9 @@ public class Controller {
 		
 		MeinButtonActionListener mLearning = new MeinButtonActionListener();
 		this.learningView.setButtonFrontBackListener(mLearning);
+		
+		MyComboboxItemListener itemHandler = new MyComboboxItemListener();
+		this.learningView.setComboboxItemListener(itemHandler);
 
 		DocumentListener documentListener = new DocumentListener() {
 
@@ -137,6 +150,7 @@ public class Controller {
 					settingsView.showMessageBox(e1.getMessage());
 				}
 				settingsView.setTextTextFieldCardNumber(allCards.get(0).getIdCard() + "");
+				settingsView.setBoxNumber(allCards.get(0).getBox() + "");
 				settingsView.setTextAreaFront(allCards.get(0).getFront());
 				settingsView.setTextAreaBack(allCards.get(0).getBack());
 				settingsView.setStateNavBackForwardButtons(register, 0);
@@ -146,6 +160,7 @@ public class Controller {
 			} else if (e.getActionCommand().equals("Lernen starten")) {
 				try {
 					cardsOfABox = register.getCardsByBox(register.getBoxes().get(0));
+					learningCard = cardsOfABox.get(0);
 				} catch (Exception e1) {
 					settingsView.showMessageBox(e1.getMessage());
 				}				
@@ -233,6 +248,7 @@ public class Controller {
 				}
 			} else if (e.getActionCommand().equals("Löschen")) {
 				try {
+					// Benutzer fragen, ob er die Karte auch wirklich löschen will...
 					if (cardWantsToBeDeleted()) {
 						register.getCards().remove(settingCard);
 						index = register.getNumberOfCards();
@@ -240,12 +256,14 @@ public class Controller {
 						settingCard = register.getCardByIndex(register.getNumberOfCards() - 1);
 						while (settingCard == null && index >= 0)
 						{
-							settingCard = register.getCardByIndex(index);
+							//vorgehende Karte ermitteln
 							index--;
+							settingCard = register.getCardByIndex(index);
 						}
 						
 						if(settingCard == null)
 						{
+							//Keine Karten mehr vorhanden
 							index = 0;
 							settingCard = new Card("", "", register.getMaxId_Card());
 							register.add(settingCard);
@@ -255,6 +273,7 @@ public class Controller {
 						}
 						else
 						{
+							// Vor
 							settingsView.displayCard(settingCard);
 							index = register.getNumberOfCards() - 1;
 							settingsView.setStateButtonNew(true);
@@ -276,7 +295,6 @@ public class Controller {
 			}
 			else if(e.getActionCommand().equals("Richtig") || e.getActionCommand().equals("Falsch"))
 			{
-				index = learningView.getCardId();
 				if(e.getActionCommand().equals("Richtig"))
 				{
 					register.isTrue(learningView.getCardId());
@@ -285,11 +303,20 @@ public class Controller {
 				{
 					register.isFalse(learningView.getCardId());
 				}
-				cardsOfABox.remove(settingCard);
-				learningView.refreshData(register.getBoxes(), cardsOfABox);
+				cardsOfABox.remove(learningCard);
+				if(cardsOfABox.size() == 0)
+				{
+					JOptionPane.showMessageDialog(learningView, "Fach leer, bitte ein neues Fach wählen.");
+					learningView.refreshComboboxFachWithData(register.getBoxes());
+				}
+				refreshLearningData(cardsOfABox);
 			}
 		}
 
+		/*
+		 *  Zeigt ein Dialogfenster an und fragt den Benutzer
+		 *  ob, die Karte effektiv gelöscht werden möchte.
+		 */
 		private boolean cardWantsToBeDeleted() {
 			if (JOptionPane.showConfirmDialog(mainView,
 					"Willst du die Karte definitiv löschen?") == JOptionPane.OK_OPTION)
@@ -297,13 +324,16 @@ public class Controller {
 			return false;
 		}
 
+		/*
+		 * Speichert eine aktuelle Karte ab
+		 */
 		private void saveCard() {
 			try {
 				settingCard.setCard(settingsView.getFrontText(), settingsView.getBackText());				
 				settingsView.setStateDeleteButton(true);
 				settingsView.setStateButtonNew(true);
 				settingsView.setStateSaveButton(false);
-				settingsView.setStateNavBackForwardButtons(register, index);
+				settingsView.setStateNavBackForwardButtons(register, index);				
 			}
 
 			catch (Exception ex) {
@@ -311,6 +341,9 @@ public class Controller {
 			}
 		}
 
+		/*
+		 * Fragt, ob ohne Speichern weiternavigiert werden möchte
+		 */
 		private boolean continueWithoutSaving() {
 			try {
 				if (!settingsView.getFrontText().equals(settingCard.getFront())
@@ -328,4 +361,28 @@ public class Controller {
 			return true;
 		}
 	}
+	
+	public class MyComboboxItemListener implements ItemListener {
+		
+		public void itemStateChanged(ItemEvent arg0) {
+			
+			if(arg0.getStateChange() == ItemEvent.SELECTED)
+			{
+				try {
+					cardsOfABox = register.getCardsByBox(Integer.parseInt(arg0.getItem().toString()));
+					refreshLearningData(cardsOfABox);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					learningView.displayErrorMessage(e.getMessage());
+				}
+			}
+		}
+	}
+	
+	public void refreshLearningData(ArrayList<Card> cardsOfABox)
+	{
+		this.learningCard = cardsOfABox.get(0);
+		learningView.ShowQuestion(this.learningCard.getFront(), this.learningCard.getBack(), this.learningCard.getIdCard());
+	}
+	
 }

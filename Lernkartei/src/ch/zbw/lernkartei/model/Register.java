@@ -11,7 +11,6 @@ import java.io.IOException;
 
 public class Register {
 	private ArrayList<Card> cards;
-	private boolean reverseMode;
 	private int maxId_Card;
 
 	public Register() {
@@ -71,9 +70,9 @@ public class Register {
 
 	public void sortList() 
 	{
-		ArrayList<Integer> sortedNumbers = new ArrayList();
+		ArrayList<Integer> sortedNumbers = new ArrayList<Integer>();
 		ArrayList<Card> sortedCards = new ArrayList<Card>();
-		Iterator i = this.cards.iterator();
+		Iterator<Card> i = this.cards.iterator();
 		while (i.hasNext()) {
 			Card card = (Card) i.next();
 			int prob = card.getcalcProbability();
@@ -99,9 +98,9 @@ public class Register {
 	
 	public ArrayList<Card> getSortedCardsByCardID() throws Exception
 	{
-		ArrayList<Integer> sortedNumbers = new ArrayList();
+		ArrayList<Integer> sortedNumbers = new ArrayList<Integer>();
 		ArrayList<Card> sortedCards = new ArrayList<Card>();
-		Iterator i = this.cards.iterator();
+		Iterator<Card> i = this.cards.iterator();
 		while (i.hasNext()) {
 			Card card = (Card) i.next();
 			int id = card.getIdCard();
@@ -132,7 +131,7 @@ public class Register {
 	public void export(String destinationPath) {
 		try {
 			FileWriter writer = new FileWriter(destinationPath);
-			Iterator i = this.cards.iterator();
+			Iterator<Card> i = this.cards.iterator();
 			while (i.hasNext()) {
 				Card card = (Card) i.next();
 				writer.append(card.getIdCard() + ";" + card.getFront() + ";"
@@ -182,7 +181,7 @@ public class Register {
 
 	public ArrayList<Card> getCardsByBox(int box) throws Exception{
 		sortList();
-		Iterator i = this.cards.iterator();
+		Iterator<Card> i = this.cards.iterator();
 		ArrayList<Card> cards = new ArrayList<Card>();
 		while (i.hasNext()) {
 			Card card = (Card) i.next();
@@ -223,7 +222,7 @@ public class Register {
 	
 	public void isTrue(int id)
 	{
-		Iterator i = this.cards.iterator();
+		Iterator<Card> i = this.cards.iterator();
 		while(i.hasNext())
 		{
 			Card cardi = (Card) i.next();
@@ -248,7 +247,7 @@ public class Register {
 	
 	public void isFalse(int id)
 	{
-		Iterator i = this.cards.iterator();
+		Iterator<Card> i = this.cards.iterator();
 		while(i.hasNext())
 		{
 			Card cardi = (Card) i.next();
@@ -272,7 +271,7 @@ public class Register {
 		
 		if(this.cards != null)
 		{
-		 Iterator it = this.cards.iterator();
+		 Iterator<Card> it = this.cards.iterator();
 		 while(it.hasNext())
 		 {
 			 int box = ((Card)it.next()).getBox();
@@ -287,7 +286,7 @@ public class Register {
 	
 	public int getMaxId_Card()
 	{
-		Iterator i = this.cards.iterator();
+		Iterator<Card> i = this.cards.iterator();
 		while(i.hasNext())
 		{
 			Card card = (Card)i.next();

@@ -11,15 +11,21 @@ public class Main {
 	
 	private static Controller c;
 
+	/*
+	 * Einstiegspunkt des Programms
+	 */
 	public static void main(String[] args) {		
-		
+		run();
+	}
+	
+	public static void run()
+	{
 		MainView mainView = new MainView();
-		Card card = new Card();
 		Register register = new Register();
 		SettingsView settingsView = new SettingsView();
 		LearningView learningView = new LearningView();
 		Controller controller = new Controller(mainView, settingsView, learningView, register);
-		controller.startApplication();
-		mainView.setVisible(true);
+		controller.paintMainView();
+		mainView.setVisible(true);		
 	}
 }
