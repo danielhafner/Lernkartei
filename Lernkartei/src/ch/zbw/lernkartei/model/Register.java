@@ -44,19 +44,22 @@ public class Register {
 	private ArrayList<Card> getDataFromInternalFile(Path sourcePath) {
 		BufferedReader br = null;
 		FileReader fl;
-		
 		String line = "";
 		String delim = ";";		
 		try
 		{
-			fl = new FileReader(sourcePath.toString());
-			br = new BufferedReader(fl);
-			this.cards.removeAll(cards);
-			
-			while((line=br.readLine())!=null)
-			{
-				String[] newcard = line.split(delim);
-				this.cards.add(new Card(Integer.parseInt(newcard[0]), newcard[1], newcard[2], Integer.parseInt(newcard[3]), Integer.parseInt(newcard[4]), Integer.parseInt(newcard[5])));
+			if (sourcePath != null) {
+				fl = new FileReader(sourcePath.toString());
+				br = new BufferedReader(fl);
+				this.cards.removeAll(cards);
+				while ((line = br.readLine()) != null) {
+					String[] newcard = line.split(delim);
+					this.cards.add(new Card(Integer.parseInt(newcard[0]),
+							newcard[1], newcard[2], Integer
+									.parseInt(newcard[3]), Integer
+									.parseInt(newcard[4]), Integer
+									.parseInt(newcard[5])));
+				}
 			}
 		}
 		catch(FileNotFoundException ex)
@@ -67,7 +70,6 @@ public class Register {
 		{
 			ex2.printStackTrace();
 		}
-		
 		
 		finally
 		{

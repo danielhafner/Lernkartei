@@ -190,11 +190,15 @@ public class Controller {
 				learningView.initializeWithData(register.getBoxes(), register);
 				mainView.repaintTheFrame(learningView);
 			} else if (e.getActionCommand().equals("Import")) {
-				mainView.openFileDialog();
-				register.imports((Paths.get(mainView.getFileImportPath())));
+				if(mainView.openFileDialog())
+				{
+					register.imports((Paths.get(mainView.getFileImportPath())));
+				}
 			} else if (e.getActionCommand().equals("Export")) {
-				mainView.saveFileDialog();
-				register.export(Paths.get(mainView.getFileExportPath()));
+				if(mainView.saveFileDialog())
+				{
+					register.export(Paths.get(mainView.getFileExportPath()));
+				}
 			}
 		}
 	}
@@ -334,7 +338,6 @@ public class Controller {
 				cardsOfABox.remove(learningCard);
 				if(cardsOfABox.size() == 0)
 				{
-					JOptionPane.showMessageDialog(learningView, "Fach leer, bitte ein neues Fach wählen.");
 					learningView.refreshComboboxFachWithData(register.getBoxes());
 				}
 				refreshLearningData(cardsOfABox);

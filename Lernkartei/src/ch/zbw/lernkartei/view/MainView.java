@@ -202,11 +202,11 @@ public class MainView extends JFrame {
 	/**
 	 * Sets the File Import Path
 	 */
-	public void openFileDialog() {
+	public boolean openFileDialog() {
 		switch (this.jfImportFile.showOpenDialog(this)) {
 		case JFileChooser.APPROVE_OPTION:
 			fileImportPath = jfImportFile.getSelectedFile().toString();
-			break;
+			return true;
 		case JFileChooser.CANCEL_OPTION:
 			// JOptionPane.showMessageDialog(this,
 			// translationArrayList.getTranslatedText("Import wurde abgebrochen.",
@@ -218,22 +218,19 @@ public class MainView extends JFrame {
 							Language.Deutsch, this.language));
 			break;
 		}
+	return false;
 	}
 
 	/**
 	 * Saves as File unter the selected Path
 	 */
-	public void saveFileDialog() {
+	public boolean saveFileDialog() {
 		switch (this.jfImportFile.showSaveDialog(this)) {
 		case JFileChooser.APPROVE_OPTION:
 			fileExportPath = jfImportFile.getSelectedFile().toString();
-			// JOptionPane.showMessageDialog(this,
-			// "todo Ruel: Karten werden in ein File exportiert...");
 			break;
 		case JFileChooser.CANCEL_OPTION:
-			JOptionPane.showMessageDialog(this,
-			translationArrayList.getTranslatedText("Export wurde abgebrochen.",
-			Language.Deutsch, this.language));
+			fileExportPath = null;
 			break;
 		case JFileChooser.ERROR_OPTION:
 			JOptionPane.showMessageDialog(this, translationArrayList
@@ -241,6 +238,11 @@ public class MainView extends JFrame {
 							Language.Deutsch, this.language));
 			break;
 		}
+		
+		if(fileExportPath != null)
+			return true;
+		else
+			return false;
 	}
 
 	/** Sets MenuActionListener for all different Languages
