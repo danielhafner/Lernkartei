@@ -12,7 +12,7 @@ import java.io.IOException;
 public class Register {
 	private ArrayList<Card> cards;
 	private int maxId_Card;
-	private static final String internalPath = "src/data.csv";
+	private static final String internalPath = "src\\data.csv";
 
 	public Register() {
 		// Dieser Konstruktor wird nur für Testzwecke aufgerufen - so
