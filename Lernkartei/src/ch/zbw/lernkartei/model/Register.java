@@ -8,11 +8,13 @@ import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Register {
 	private ArrayList<Card> cards;
 	private int maxId_Card;
-	private static final String internalPath = "src\\data.csv";
+	private static final Path internalPath =  Paths.get("src/data.csv");
 
 	public Register() {
 		// Dieser Konstruktor wird nur für Testzwecke aufgerufen - so
@@ -29,7 +31,7 @@ public class Register {
 	* @Author: Daniel
 	* Inserts pre-saved cards into cards
 	*/
-	public void imports(String sourcePath)
+	public void imports(Path sourcePath)
 	{
 		this.cards = getDataFromInternalFile(sourcePath);	
 	}
@@ -39,14 +41,15 @@ public class Register {
 	* Opens an existing register saved in a csv-file. Takes one line after another and splits lines after each delim (semicolon in our case).
 	* The parts of the line are temporarily written into an array and after delivered as parameters into the cards.add method.
 	*/
-	private ArrayList<Card> getDataFromInternalFile(String sourcePath) {
+	private ArrayList<Card> getDataFromInternalFile(Path sourcePath) {
 		BufferedReader br = null;
 		FileReader fl;
+		
 		String line = "";
 		String delim = ";";		
 		try
 		{
-			fl = new FileReader(sourcePath);
+			fl = new FileReader(sourcePath.toString());
 			br = new BufferedReader(fl);
 			this.cards.removeAll(cards);
 			
@@ -157,9 +160,9 @@ public class Register {
 	* Each field is separated with a semicolon and cards are separated with a line break.
 	* In the end the writer-method must be flushed (emptied) and closed.
 	*/
-	public void export(String destinationPath) {
+	public void export(Path destinationPath) {
 		try {
-			FileWriter writer = new FileWriter(destinationPath);
+			FileWriter writer = new FileWriter(destinationPath.toString());
 			Iterator<Card> i = this.cards.iterator();
 			while (i.hasNext()) {
 				Card card = (Card) i.next();

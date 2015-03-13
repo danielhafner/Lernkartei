@@ -4,6 +4,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
@@ -189,10 +191,10 @@ public class Controller {
 				mainView.repaintTheFrame(learningView);
 			} else if (e.getActionCommand().equals("Import")) {
 				mainView.openFileDialog();
-				register.imports(mainView.getFileImportPath());
+				register.imports((Paths.get(mainView.getFileImportPath())));
 			} else if (e.getActionCommand().equals("Export")) {
 				mainView.saveFileDialog();
-				register.export(mainView.getFileExportPath());
+				register.export(Paths.get(mainView.getFileExportPath()));
 			}
 		}
 	}
