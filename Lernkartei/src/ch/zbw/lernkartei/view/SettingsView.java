@@ -207,9 +207,10 @@ public class SettingsView extends JPanel {
 	 * @param card
 	 */
 	public void displayCard(Card card) {
+		this.textfieldCardNumber.setText(card.getIdCard() + "");
+		this.textfieldBoxNumber.setText(card.getBox() + "");
 		this.textAreaFront.setText(card.getFront());
 		this.textAreaBack.setText(card.getBack());
-		this.textfieldCardNumber.setText(card.getIdCard() + "");
 	}
 	
 	/** Return the Id of the Card
