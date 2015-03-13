@@ -12,12 +12,13 @@ import java.io.IOException;
 public class Register {
 	private ArrayList<Card> cards;
 	private int maxId_Card;
+	private static final String internalPath = "src/data.csv";
 
 	public Register() {
 		// Dieser Konstruktor wird nur für Testzwecke aufgerufen - so
 		// implementiert lassen
 		this.cards = new ArrayList<Card>();
-		this.cards = getDataFromInternalFile("src/data.csv");
+		this.cards = getDataFromInternalFile(internalPath);
 	}
 
 	public Register(ArrayList<Card> cards, String title) {
@@ -63,9 +64,10 @@ public class Register {
 		return cards;
 	}
 
-	private void saveDataIntoInternalFile(String string) {
+	public void saveDataIntoInternalFile() {
 		//Wenn interner Pfad angegeben wurde muss unterschieden werden
 		//zwischen Windows und Unix-basierten Systemen, da / und \ unterschiedlich? dh
+		export(internalPath);
 	}
 
 	public void sortList() 

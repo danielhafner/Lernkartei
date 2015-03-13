@@ -150,6 +150,10 @@ public class Controller {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getActionCommand().equals("Beenden")) {
+				if(mainView.quitAndSave())
+				{
+					register.saveDataIntoInternalFile();
+				}
 				mainView.closeApplication();
 			} else if (e.getActionCommand().equals("Deutsch")) {
 				mainView.switchLanguage(e);
@@ -406,7 +410,6 @@ public class Controller {
 			}
 		}
 	}
-	
 	
 	/** Refreshs the Learning-Data
 	 * @param cardsOfABox

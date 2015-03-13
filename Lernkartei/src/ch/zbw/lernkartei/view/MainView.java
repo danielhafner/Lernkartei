@@ -31,6 +31,14 @@ import ch.zbw.lernkartei.model.TranslationDataSet;
  * @author Ruel
  *
  */
+/**
+ * @author Ruel
+ *
+ */
+/**
+ * @author Ruel
+ *
+ */
 public class MainView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -407,5 +415,20 @@ public class MainView extends JFrame {
 	 */
 	public String getFileImportPath() {
 		return this.fileImportPath;
+	}
+
+	
+	/** Asks the User to Save Changes (Export to the internal csv-File)
+	 * @return
+	 */
+	public boolean quitAndSave() {	
+		if(JOptionPane.showConfirmDialog(this, "Willst du deinen Lernstand speichern?") == 0)
+				{
+					// 0 = Ja
+					return true;
+				}
+
+		
+		return false;
 	}	
 }
