@@ -24,6 +24,10 @@ public class Card
 	public Card(){
 	}
 
+	/**
+	* @Author: Daniel
+	* Alternative constructor. Used for Import.
+	*/
 	public Card(int id_Card, String front, String back, int probability, int calcProbability, int box)
 	{
 		this.id_Card = id_Card;
@@ -43,6 +47,11 @@ public class Card
 		return false;
 	}
 	
+	/**
+	* @Author: Daniel
+	* Checks whether the parameters front and back are neither null nor only consisting of a space.
+	* If true: Writes parameters into the fields. If false: Prints error message.
+	*/
 	public void setCard(String front, String back)
 	{
 		if(front!=null && front!=" " && back!=null && back!=" ")
@@ -53,11 +62,22 @@ public class Card
 		else{System.out.println("Felder duerfen nicht leer sein");}
 	}
 
+	/**
+	* @Author: Daniel
+	* Writes parameters into fields and executes method setCalcProbability.
+	*/
 	public void setBoxAndProbability(int box, int probability)
 	{
 		this.box = box;
 		this.probability = probability;
 		setCalcProbability();
+	}
+	
+	
+	public void resetBoxAndProbability()
+	{
+		box=1;
+		probability=1;
 	}
 	
 	public int getBox()
@@ -75,6 +95,11 @@ public class Card
 		return this.calcProbability;
 	}
 
+	/**
+	* @Author: Daniel
+	* Calculates a random number which is between 1 and 10 and multiplies this number with the probability. 
+	* This way the probability rises randomly and always stays in relation with the older probability.
+	*/
 	public void setCalcProbability()
 	{
 		int rnd;

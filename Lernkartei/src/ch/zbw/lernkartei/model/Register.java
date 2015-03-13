@@ -25,11 +25,20 @@ public class Register {
 		this.cards = cards;
 	}
 
+	/**
+	* @Author: Daniel
+	* Inserts pre-saved cards into cards
+	*/
 	public void imports(String sourcePath)
 	{
 		this.cards = getDataFromInternalFile(sourcePath);	
 	}
 
+	/**
+	* @Author: Daniel
+	* Opens an existing register saved in a csv-file. Takes one line after another and splits lines after each delim (semicolon in our case).
+	* The parts of the line are temporarily written into an array and after delivered as parameters into the cards.add method.
+	*/
 	private ArrayList<Card> getDataFromInternalFile(String sourcePath) {
 		BufferedReader br = null;
 		FileReader fl;
@@ -129,7 +138,25 @@ public class Register {
 		return sortedCards;
 		
 	}
-
+	/**
+	* @Author: Daniel
+	* If an export file is given to another user, he might want to reset the cards - so all of them are in box No 1 again and also the probability is set back to 1.
+	*/
+	public void resetRegister()
+	{
+		Iterator<Card> i = this.cards.iterator();
+		while (i.hasNext()) {
+			Card card = (Card) i.next();
+			card.resetBoxAndProbability();
+		}
+	}
+	
+	/**
+	* @Author: Daniel
+	* Goes through all cards and writes the information of each field into a String. 
+	* Each field is separated with a semicolon and cards are separated with a line break.
+	* In the end the writer-method must be flushed (emptied) and closed.
+	*/
 	public void export(String destinationPath) {
 		try {
 			FileWriter writer = new FileWriter(destinationPath);
@@ -173,7 +200,7 @@ public class Register {
 		this.cards.add(card);
 		return true;
 	}
-
+	
 	public ArrayList<Card> getCards() throws Exception {
 		if (this.cards == null)
 			throw new Exception("Keine Karten vorhanden.");
@@ -206,6 +233,10 @@ public class Register {
 		return myTestCards;
 	}
 
+	/**
+	* @Author: Daniel
+	* Returns number of cards in the register
+	*/
 	public int getNumberOfCards() {
 		if(cards != null)
 		{
