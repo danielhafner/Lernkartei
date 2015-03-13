@@ -75,7 +75,7 @@ public class Register {
 		Iterator<Card> i = this.cards.iterator();
 		while (i.hasNext()) {
 			Card card = (Card) i.next();
-			int prob = card.getcalcProbability();
+			int prob = card.getCalcProbability();
 			sortedNumbers.add(prob);
 		}
 
@@ -86,7 +86,7 @@ public class Register {
 			Card card = (Card) i.next();
 
 			for (int n = 0; n < this.cards.size(); n++) {
-				if (card.getcalcProbability() == (sortedNumbers.get(n))) {
+				if (card.getCalcProbability() == (sortedNumbers.get(n))) {
 					sortedCards.add(card);
 					sortedNumbers.remove(n);
 					break;
@@ -136,7 +136,7 @@ public class Register {
 				Card card = (Card) i.next();
 				writer.append(card.getIdCard() + ";" + card.getFront() + ";"
 						+ card.getBack() + ";" + card.getProbability() + ";"
-						+ card.getcalcProbability() + ";" + card.getBox()
+						+ card.getCalcProbability() + ";" + card.getBox()
 						+ "\n");
 			}
 			writer.flush();

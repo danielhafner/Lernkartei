@@ -70,7 +70,7 @@ public class Card
 		return this.id_Card;
 	}
 
-	public int getcalcProbability()
+	public int getCalcProbability()
 	{
 		return this.calcProbability;
 	}
