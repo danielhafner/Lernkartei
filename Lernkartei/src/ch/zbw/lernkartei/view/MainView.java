@@ -46,6 +46,7 @@ public class MainView extends JFrame {
 	private Language language;
 	private Language previousLanguage;
 	private JLabel labelImageIconBackground;
+	private JLabel labelWelcome;
 
 	private JMenu menuDatei;
 	private JMenu menuSprache;
@@ -112,6 +113,16 @@ public class MainView extends JFrame {
 		ImageIcon imageIconBackground = new ImageIcon(this.getClass().getResource("/bg-sea.jpg"));
 		imageIconBackground.setDescription("Isch das en Scheiss");
 		labelImageIconBackground = new JLabel(imageIconBackground);
+		labelWelcome = new JLabel(""
+				+ "<html><body>"
+				+ "<br><br><br><br><br><br><br><br><br><br><br>"
+				+ "<h1>Vokabeltrainer v.1.0</h1>"
+				+ "<br><br>"
+				+ "Wenn A für Erfolg steht, lautet die Formel:"
+				+ "<br> A = X + Y + Z. X steht für Arbeit, Y ist Muße und Z heißt Mund halten."
+				+ "<br> Albert Einstein"
+				+ "</body></html>");
+		labelWelcome.setFont(MyFont.Ueberschrift4.getMyFont());
 	}
 
 	/**
@@ -151,6 +162,7 @@ public class MainView extends JFrame {
 		// Man kann auf einem Label ein Layout definieren...
 		labelImageIconBackground.setLayout(new GridBagLayout());
 		labelImageIconBackground.add(this.mainPanel);
+		labelImageIconBackground.add(this.labelWelcome);
 		this.add(labelImageIconBackground);
 	}
 

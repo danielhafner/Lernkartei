@@ -10,7 +10,8 @@ public enum MyFont {
 	
 	Ueberschrift1 (new Font("Verdana", Font.BOLD, 20)),
 	Ueberschrift2 (new Font("Verdana", Font.BOLD, 15)),
-	Ueberschrift3 (new Font("Verdana", Font.PLAIN, 12));
+	Ueberschrift3 (new Font("Verdana", Font.PLAIN, 12)),
+	Ueberschrift4 (new Font("Verdana", Font.ITALIC, 15));
 	
 	private final Font font;
 	
