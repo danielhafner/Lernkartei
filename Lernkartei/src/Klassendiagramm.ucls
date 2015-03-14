@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="ch.zbw.lernkartei.controller.Controller.MyMenuActionListener" project="Lernkartei" 
     file="/Lernkartei/src/ch/zbw/lernkartei/controller/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="783" y="503"/>    
+    <position height="-1" width="-1" x="756" y="357"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -31,7 +31,7 @@
   <class id="4" language="java" name="ch.zbw.lernkartei.controller.Controller.MeinButtonActionListener" 
     project="Lernkartei" file="/Lernkartei/src/ch/zbw/lernkartei/controller/Controller.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="936" y="689"/>    
+    <position height="-1" width="-1" x="957" y="668"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -41,7 +41,7 @@
   <class id="5" language="java" name="ch.zbw.lernkartei.controller.Controller.MyComboboxItemListener" 
     project="Lernkartei" file="/Lernkartei/src/ch/zbw/lernkartei/controller/Controller.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1075" y="527"/>    
+    <position height="-1" width="-1" x="1078" y="438"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      

@@ -72,8 +72,7 @@ public class Controller {
 		this.mainView.setLanguageMenuActionListener(new MyMenuActionListener(
 				Language.Italiano.toString()));
 
-		MyMenuActionListener mEditCards = new MyMenuActionListener(
-				"Karten verwalten");
+		MyMenuActionListener mEditCards = new MyMenuActionListener("Karten verwalten");
 		this.mainView.setEditCardsMenuActionListener(mEditCards);
 
 		MyMenuActionListener mStartLearning = new MyMenuActionListener(
@@ -153,53 +152,83 @@ public class Controller {
 			} else if (e.getActionCommand().equals(Language.Italiano.toString())) {
 				mainView.switchLanguage(e);
 			} else if (e.getActionCommand().equals("Karten verwalten")) {
-				try {
-					editCardsAllCards = register.getSortedCardsByCardID();
-				} catch (Exception e1) {
-					editCardsView.showMessageBox(e1.getMessage());
-				}
-				editCardsView.setTextTextFieldCardNumber(editCardsAllCards.get(0).getIdCard() + "");
-				editCardsView.setBoxNumber(editCardsAllCards.get(0).getBox() + "");
-				editCardsView.setTextAreaFront(editCardsAllCards.get(0).getFront());
-				editCardsView.setTextAreaBack(editCardsAllCards.get(0).getBack());
-				editCardsView.setStateNavBackForwardButtons(register, 0);
-				editCardsView.setStateSaveButton(false);
-				mainView.repaintTheFrame(editCardsView);
-				editCardsView.setInitialFocus();
+				editCardsSelected();
 			} else if (e.getActionCommand().equals("Lernen starten")) {
-				try {
-					learningCardsOfABox = register.getCardsByBox(register.getBoxes().get(0));
-					learningCard = learningCardsOfABox.get(0);
-				} catch (Exception e1) {
-					editCardsView.showMessageBox(e1.getMessage());
-				}				
-				learningView.initializeWithData(register.getBoxes(), register);
-				mainView.repaintTheFrame(learningView);
+				startLearningSelected();
 			}
 			else if (e.getActionCommand().equals("Lernstand zurücksetzen")) {
-				register.resetRegister();
-				editCardsView.displayCard(editCardsCard);
-				//learningView.ShowQuestion(learningCard.getFront(), learningCard.getBack(), learningCard.getIdCard());
-				try {
-					learningCardsOfABox = register.getCardsByBox(1);
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					mainView.displayErrorMessage(e1.getMessage());
-				}
-				learningView.initializeWithData(register.getBoxes(), register);
+				resetLearningStatusSelected();
 			}
-			
 			else if (e.getActionCommand().equals("Import")) {
-				if(mainView.openFileDialog())
-				{
-					register.imports((Paths.get(mainView.getFileImportPath())));
-				}
-			} else if (e.getActionCommand().equals("Export")) {
-				if(mainView.saveFileDialog())
-				{
-					register.export(Paths.get(mainView.getFileExportPath()));
-				}
+				importSelected();
+			} 
+			else if (e.getActionCommand().equals("Export")) {
+				exportSelected();
 			}
+		}
+		/**
+		 * Menuitem Export selected
+		 */
+		private void exportSelected() {
+			if(mainView.saveFileDialog())
+			{
+				register.export(Paths.get(mainView.getFileExportPath()));
+			}
+		}
+		/**
+		 * Menuitem Import selected
+		 */
+		private void importSelected() {
+			if(mainView.openFileDialog())
+			{
+				register.imports((Paths.get(mainView.getFileImportPath())));
+			}
+		}
+		/**
+		 * Menuitem Reset Learning Status selected
+		 */
+		private void resetLearningStatusSelected() {
+			register.resetRegister();
+			editCardsView.displayCard(editCardsCard);
+			//learningView.ShowQuestion(learningCard.getFront(), learningCard.getBack(), learningCard.getIdCard());
+			try {
+				learningCardsOfABox = register.getCardsByBox(1);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				mainView.displayErrorMessage(e1.getMessage());
+			}
+			learningView.initializeWithData(register.getBoxes(), register);
+		}
+		/**
+		 * Menu Item Start Learning selected
+		 */
+		private void startLearningSelected() {
+			try {
+				learningCardsOfABox = register.getCardsByBox(register.getBoxes().get(0));
+				learningCard = learningCardsOfABox.get(0);
+			} catch (Exception e1) {
+				editCardsView.showMessageBox(e1.getMessage());
+			}				
+			learningView.initializeWithData(register.getBoxes(), register);
+			mainView.repaintTheFrame(learningView);
+		}
+		/**
+		 * Menu Item Edit Cards selected
+		 */
+		private void editCardsSelected() {
+			try {
+				editCardsAllCards = register.getSortedCardsByCardID();
+			} catch (Exception e1) {
+				editCardsView.showMessageBox(e1.getMessage());
+			}
+			editCardsView.setTextTextFieldCardNumber(editCardsAllCards.get(0).getIdCard() + "");
+			editCardsView.setBoxNumber(editCardsAllCards.get(0).getBox() + "");
+			editCardsView.setTextAreaFront(editCardsAllCards.get(0).getFront());
+			editCardsView.setTextAreaBack(editCardsAllCards.get(0).getBack());
+			editCardsView.setStateNavBackForwardButtons(register, 0);
+			editCardsView.setStateSaveButton(false);
+			mainView.repaintTheFrame(editCardsView);
+			editCardsView.setInitialFocus();
 		}
 	}
 	
@@ -210,8 +239,7 @@ public class Controller {
 	public class MeinButtonActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getActionCommand().equals("Speichern")) {
-				saveSelected();
-				
+				saveSelected();				
 			} else if (e.getActionCommand().equals(">>>")) {
 				forwardSelected();
 			} else if (e.getActionCommand().equals("<<<")) {
@@ -230,6 +258,9 @@ public class Controller {
 			}
 		}
 
+		/**
+		 *  >>> Button selected
+		 */
 		private void forwardSelected() {
 			try {											
 				editCardsCard = register.getCardByIndex(index + 1);
@@ -251,7 +282,9 @@ public class Controller {
 			}
 		}
 
-
+		/** Correct or False Button selected
+		 * @param e
+		 */
 		private void correctOrWrongSelected(ActionEvent e) {
 			if(e.getActionCommand().equals("Richtig"))
 			{
@@ -269,16 +302,16 @@ public class Controller {
 			refreshLearningData(learningCardsOfABox);
 		}
 
-
+		/**
+		 * Front Button selected
+		 */
 		private void frontSelected() {
-			//
-			// Lernen: d.h. eine Vorder- oder Rückseite wurde angeklickt
-			// --> entweder Vorderseite ausblenden und Rückseite einblenden
-			// oder Vorderseite einblenden und Rückseite ausblenden
 			learningView.showAnswer();
 		}
 
-
+		/**
+		 * Löschen Button selected
+		 */
 		private void deleteSelected() {
 			try {
 				// Benutzer fragen, ob er die Karte auch wirklich löschen will...
@@ -294,9 +327,9 @@ public class Controller {
 						editCardsCard = register.getCardByIndex(index);
 					}
 					
+					//Falls keine Karten mehr vorhanden sind...
 					if(editCardsCard == null)
 					{
-						//Keine Karten mehr vorhanden
 						index = 0;
 						editCardsCard = new Card("", "", register.getMaxId_Card());
 						register.add(editCardsCard);
@@ -320,7 +353,9 @@ public class Controller {
 			}
 		}
 
-
+		/**
+		 * Neu Button selected
+		 */
 		private void newSelected() {
 			try {
 				index = register.getNumberOfCards();
@@ -343,7 +378,9 @@ public class Controller {
 			}
 		}
 
-
+		/**
+		 * <<< Button selected
+		 */
 		private void navBack() {
 			try {
 				if (!continueWithoutSaving())
@@ -381,9 +418,8 @@ public class Controller {
 			return false;
 		}
 
-
 		/**
-		 * Saves a card
+		 * Save-Button selected
 		 */
 		private void saveSelected() {
 			try {
@@ -451,6 +487,10 @@ public class Controller {
 		learningView.ShowQuestion(this.learningCard.getFront(), this.learningCard.getBack(), this.learningCard.getIdCard());
 	}
 	
+	/**
+	 * Asks the User if he want to save the Data into the internal csv-File
+	 * and closes the Application
+	 */
 	private void actionPerformedBeenden() {
 		if(mainView.quitAndSave())
 		{
@@ -459,6 +499,10 @@ public class Controller {
 		mainView.closeApplication();
 	}
 
+	/**
+	 * @author Ruel
+	 * Own WindowListener: Actions on JFrame is closing..
+	 */
 	public class MyWindowListener implements WindowListener{
 
 		@Override
