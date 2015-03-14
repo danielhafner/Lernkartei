@@ -4,9 +4,9 @@ public enum Language {
 	
 	//Werte müssen in Deutsch verfasst sein und dürfen (wegen den ActionCommands) nicht verändert werden!
 	Deutsch(0), 
-	Englisch(1),
-	Französisch(2), 
-	Italienisch(3);
+	English(1),
+	Francais(2), 
+	Italiano(3);
 	
 	public int value;	
 		

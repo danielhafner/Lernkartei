@@ -76,11 +76,11 @@ public class Controller {
 		this.mainView.setLanguageMenuActionListener(new MyMenuActionListener(
 				Language.Deutsch.toString()));
 		this.mainView.setLanguageMenuActionListener(new MyMenuActionListener(
-				Language.Englisch.toString()));
+				Language.English.toString()));
 		this.mainView.setLanguageMenuActionListener(new MyMenuActionListener(
-				Language.Französisch.toString()));
+				Language.Francais.toString()));
 		this.mainView.setLanguageMenuActionListener(new MyMenuActionListener(
-				Language.Italienisch.toString()));
+				Language.Italiano.toString()));
 
 		MyMenuActionListener mEditCards = new MyMenuActionListener(
 				"Karten verwalten");
@@ -154,16 +154,15 @@ public class Controller {
 			if (e.getActionCommand().equals("Beenden")) {
 				actionPerformedBeenden();
 				mainView.closeApplication();
-			} else if (e.getActionCommand().equals("Deutsch")) {
+			} else if (e.getActionCommand().equals(Language.Deutsch.toString())) {
 				mainView.switchLanguage(e);
-			} else if (e.getActionCommand().equals("Französisch")) {
+			} else if (e.getActionCommand().equals(Language.Francais.toString())) {
 				mainView.switchLanguage(e);
-			} else if (e.getActionCommand().equals("Englisch")) {
+			} else if (e.getActionCommand().equals(Language.English.toString())) {
 				mainView.switchLanguage(e);
-			} else if (e.getActionCommand().equals("Italienisch")) {
+			} else if (e.getActionCommand().equals(Language.Italiano.toString())) {
 				mainView.switchLanguage(e);
 			} else if (e.getActionCommand().equals("Karten verwalten")) {
-				
 				try {
 					editCardsAllCards = register.getSortedCardsByCardID();
 				} catch (Exception e1) {

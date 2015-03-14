@@ -104,9 +104,9 @@ public class MainView extends JFrame {
 		this.menuItemClose = new JMenuItem("Beenden");
 		this.menuSprache = new JMenu("Sprache");
 		this.menuItemDeutsch = new JMenuItem("Deutsch");
-		this.menuItemFranzoesisch = new JMenuItem("Französisch");
-		this.menuItemItalienisch = new JMenuItem("Italienisch");
-		this.menuItemEnglisch = new JMenuItem("Englisch");
+		this.menuItemFranzoesisch = new JMenuItem("Francais");
+		this.menuItemItalienisch = new JMenuItem("Italiano");
+		this.menuItemEnglisch = new JMenuItem("English");
 
 		this.translationArrayList = new TranslationDataSet();
 		this.panelLearning = new LearningView();
@@ -253,11 +253,11 @@ public class MainView extends JFrame {
 	public void setLanguageMenuActionListener(MyMenuActionListener listener) {
 		if (listener.command.equals(Language.Deutsch.toString())) {
 			this.menuItemDeutsch.addActionListener(listener);
-		} else if (listener.command.equals(Language.Englisch.toString())) {
+		} else if (listener.command.equals(Language.English.toString())) {
 			this.menuItemEnglisch.addActionListener(listener);
-		} else if (listener.command.equals(Language.Französisch.toString())) {
+		} else if (listener.command.equals(Language.Francais.toString())) {
 			this.menuItemFranzoesisch.addActionListener(listener);
-		} else if (listener.command.equals(Language.Italienisch.toString())) {
+		} else if (listener.command.equals(Language.Italiano.toString())) {
 			this.menuItemItalienisch.addActionListener(listener);
 		}
 	}
@@ -313,14 +313,14 @@ public class MainView extends JFrame {
 		case "Deutsch":
 			setControlsToBeTranslated(Language.Deutsch);
 			break;
-		case "Italienisch":
-			setControlsToBeTranslated(Language.Italienisch);
+		case "Italiano":
+			setControlsToBeTranslated(Language.Italiano);
 			break;
-		case "Französisch":
-			setControlsToBeTranslated(Language.Französisch);
+		case "Francais":
+			setControlsToBeTranslated(Language.Francais);
 			break;
-		case "Englisch":
-			setControlsToBeTranslated(Language.Englisch);
+		case "English":
+			setControlsToBeTranslated(Language.English);
 			break;
 		default:
 			setControlsToBeTranslated(Language.Deutsch);
