@@ -1,5 +1,4 @@
 package ch.zbw.lernkartei.controller;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -7,11 +6,9 @@ import java.awt.event.ItemListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -237,6 +234,7 @@ public class Controller {
 	 * ButtonActionListener (Inner Class) for all Buttons
 	 */
 	public class MeinButtonActionListener implements ActionListener {
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getActionCommand().equals("Speichern")) {
 				saveSelected();				
@@ -297,7 +295,7 @@ public class Controller {
 			learningCardsOfABox.remove(learningCard);
 			if(learningCardsOfABox.size() == 0)
 			{
-				learningView.refreshComboboxFachWithData(register.getBoxes());
+				learningView.refreshComboboxFachWithData(register.getBoxes());				
 			}
 			refreshLearningData(learningCardsOfABox);
 		}
@@ -463,6 +461,7 @@ public class Controller {
 	 */
 	public class MyComboboxItemListener implements ItemListener {
 		
+		@Override
 		public void itemStateChanged(ItemEvent arg0) {
 			
 			if(arg0.getStateChange() == ItemEvent.SELECTED)

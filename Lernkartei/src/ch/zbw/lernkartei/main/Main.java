@@ -1,7 +1,6 @@
 package ch.zbw.lernkartei.main;
 
 import ch.zbw.lernkartei.controller.Controller;
-import ch.zbw.lernkartei.model.Card;
 import ch.zbw.lernkartei.model.Register;
 import ch.zbw.lernkartei.view.LearningView;
 import ch.zbw.lernkartei.view.MainView;

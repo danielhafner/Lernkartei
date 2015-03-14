@@ -2,13 +2,11 @@ package ch.zbw.lernkartei.view;
 
 import java.awt.Component;
 import java.awt.Container;
-import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-import java.io.Console;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -23,8 +21,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.text.html.Option;
-
 import ch.zbw.lernkartei.controller.Controller.MyMenuActionListener;
 import ch.zbw.lernkartei.model.Language;
 import ch.zbw.lernkartei.model.TranslationDataSet;

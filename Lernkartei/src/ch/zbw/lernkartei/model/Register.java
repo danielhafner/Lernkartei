@@ -95,7 +95,7 @@ public class Register {
 		ArrayList<Card> sortedCards = new ArrayList<Card>();
 		Iterator<Card> i = this.cards.iterator();
 		while (i.hasNext()) {
-			Card card = (Card) i.next();
+			Card card = i.next();
 			int prob = card.getCalcProbability();
 			sortedNumbers.add(prob);
 		}
@@ -104,7 +104,7 @@ public class Register {
 
 		i = this.cards.iterator();
 		while (i.hasNext()) {
-			Card card = (Card) i.next();
+			Card card = i.next();
 
 			for (int n = 0; n < this.cards.size(); n++) {
 				if (card.getCalcProbability() == (sortedNumbers.get(n))) {
@@ -123,7 +123,7 @@ public class Register {
 		ArrayList<Card> sortedCards = new ArrayList<Card>();
 		Iterator<Card> i = this.cards.iterator();
 		while (i.hasNext()) {
-			Card card = (Card) i.next();
+			Card card = i.next();
 			int id = card.getIdCard();
 			sortedNumbers.add(id);
 		}
@@ -132,7 +132,7 @@ public class Register {
 
 		i = this.cards.iterator();
 		while (i.hasNext()) {
-			Card card = (Card) i.next();
+			Card card = i.next();
 
 			for (int n = 0; n < this.cards.size(); n++) {
 				if (card.getIdCard() == (sortedNumbers.get(n))) {
@@ -152,7 +152,7 @@ public class Register {
 	{
 		Iterator<Card> i = this.cards.iterator();
 		while (i.hasNext()) {
-			Card card = (Card) i.next();
+			Card card = i.next();
 			card.resetBoxAndProbability();
 		}
 	}
@@ -168,7 +168,7 @@ public class Register {
 			FileWriter writer = new FileWriter(destinationPath.toString());
 			Iterator<Card> i = this.cards.iterator();
 			while (i.hasNext()) {
-				Card card = (Card) i.next();
+				Card card = i.next();
 				writer.append(card.getIdCard() + ";" + card.getFront() + ";"
 						+ card.getBack() + ";" + card.getProbability() + ";"
 						+ card.getCalcProbability() + ";" + card.getBox()
@@ -219,7 +219,7 @@ public class Register {
 		Iterator<Card> i = this.cards.iterator();
 		ArrayList<Card> cards = new ArrayList<Card>();
 		while (i.hasNext()) {
-			Card card = (Card) i.next();
+			Card card = i.next();
 			if (card.getBox() == box) 
 			{
 				cards.add(card);
@@ -264,7 +264,7 @@ public class Register {
 		Iterator<Card> i = this.cards.iterator();
 		while(i.hasNext())
 		{
-			Card cardi = (Card) i.next();
+			Card cardi = i.next();
 			if(cardi.getIdCard() == id)
 			{
 				int box = cardi.getBox();
@@ -291,7 +291,7 @@ public class Register {
 		Iterator<Card> i = this.cards.iterator();
 		while(i.hasNext())
 		{
-			Card cardi = (Card) i.next();
+			Card cardi = i.next();
 			if(cardi.getIdCard() == id)
 			{
 				int probability = cardi.getProbability();
@@ -317,7 +317,7 @@ public class Register {
 		 Iterator<Card> it = this.cards.iterator();
 		 while(it.hasNext())
 		 {
-			 int box = ((Card)it.next()).getBox();
+			 int box = it.next().getBox();
 			 if(!list.contains(box))
 			 {
 				 list.add(box);
@@ -332,7 +332,7 @@ public class Register {
 		Iterator<Card> i = this.cards.iterator();
 		while(i.hasNext())
 		{
-			Card card = (Card)i.next();
+			Card card = i.next();
 			if( this.maxId_Card < card.getIdCard())
 			{
 				this.maxId_Card = card.getIdCard();
@@ -367,13 +367,13 @@ public class Register {
 	}
 
 	public int calculateQuotaCorrect() {
-		if(this.answeredCorrect != 0)
+		if(this.answeredQuestions != 0)
 			return (this.answeredCorrect * 100 / this.answeredQuestions);
 		return 0;
 	}
 
 	public int calculateQuotaWrong() {
-		if(this.answeredWrong != 0)
+		if(this.answeredQuestions != 0)
 			return (this.answeredWrong * 100 / this.answeredQuestions);
 		return 0;
 	}
