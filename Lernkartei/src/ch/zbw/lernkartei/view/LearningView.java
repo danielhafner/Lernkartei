@@ -56,7 +56,7 @@ public class LearningView extends JPanel{
 	
 	private JPanel panelCountCardsOfABox;
 	private JLabel labelActualCardOfBox;
-	private JLabel labelActualCoardOfBoxResult;	
+	private JLabel labelActualCardOfBoxResult;	
 	
 	private JPanel panelCountTotalCards;
 	private JLabel labelTotalCards;
@@ -99,11 +99,11 @@ public class LearningView extends JPanel{
 		this.panelStatusBar = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		
 		this.panelCountCardsOfABox = new JPanel(new BorderLayout());
-		this.labelActualCardOfBox = new JLabel("Box: aktuelle Karte   ");
-		this.labelActualCoardOfBoxResult = new JLabel("-");
+		this.labelActualCardOfBox = new JLabel("Anzahl Karten   ");
+		this.labelActualCardOfBoxResult = new JLabel("-");
 		
 		this.panelCountTotalCards = new JPanel(new BorderLayout());
-		this.labelTotalCards = new JLabel("Anzahl Karten   ");
+		this.labelTotalCards = new JLabel("Total Karten   ");
 		this.labelTotalCardsResult = new JLabel("-");
 		
 		this.panelQuotaCorrect = new JPanel(new BorderLayout());
@@ -189,7 +189,7 @@ public class LearningView extends JPanel{
 		gridBagContraints.gridy = 5;
 		
 		this.panelCountCardsOfABox.add(labelActualCardOfBox, BorderLayout.NORTH);
-		this.panelCountCardsOfABox.add(labelActualCoardOfBoxResult, BorderLayout.SOUTH);
+		this.panelCountCardsOfABox.add(labelActualCardOfBoxResult, BorderLayout.SOUTH);
 		
 		this.panelCountTotalCards.add(labelTotalCards, BorderLayout.NORTH);
 		this.panelCountTotalCards.add(labelTotalCardsResult, BorderLayout.SOUTH);
@@ -365,5 +365,24 @@ public class LearningView extends JPanel{
 				comboboxFach.setSelectedItem(o);
 			}
 		}
+	}
+	
+	/** Sets the Statistics of Learning
+	 * @param cardOfBox
+	 * @param totalCardsOfBox
+	 * @param quotaCorrect
+	 * @param quotaWrong
+	 */
+	public void setStatistics(int totalCardsOfBox, int totalCards, int quotaCorrect, int quotaWrong)
+	{
+		this.labelActualCardOfBoxResult.setText(totalCardsOfBox + "");
+		this.labelTotalCardsResult.setText(totalCards + "");
+		this.labelQuotaCorrectResult.setText(quotaCorrect + "%");
+		this.labelQuotaWrongResult.setText(quotaCorrect + "%");
+	}
+	
+	public int getBox()
+	{
+		return (Integer.parseInt(this.comboboxFach.getSelectedItem().toString()));
 	}
 }

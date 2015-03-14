@@ -484,7 +484,12 @@ public class Controller {
 	public void refreshLearningData(ArrayList<Card> cardsOfABox)
 	{
 		this.learningCard = cardsOfABox.get(0);
-		learningView.ShowQuestion(this.learningCard.getFront(), this.learningCard.getBack(), this.learningCard.getIdCard());
+		this.learningView.ShowQuestion(this.learningCard.getFront(), this.learningCard.getBack(), this.learningCard.getIdCard());
+		try {
+			this.learningView.setStatistics(register.getCardsByBox(learningView.getBox()).size(), register.getNumberOfCards(), 100, 100);
+		} catch (Exception e) {
+			learningView.displayErrorMessage(e.getMessage());
+		}
 	}
 	
 	/**
@@ -533,6 +538,5 @@ public class Controller {
 		@Override
 		public void windowOpened(WindowEvent e) {	
 		}
-	}
-	
+	}	
 }
