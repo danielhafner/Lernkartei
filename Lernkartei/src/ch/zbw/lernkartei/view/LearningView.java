@@ -1,8 +1,10 @@
 package ch.zbw.lernkartei.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -22,6 +24,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
 
 import ch.zbw.lernkartei.controller.Controller.MeinButtonActionListener;
 import ch.zbw.lernkartei.controller.Controller.MyComboboxItemListener;
@@ -49,6 +52,24 @@ public class LearningView extends JPanel{
 	private JButton buttonCorrect;
 	private JButton buttonWrong;
 	
+	private JPanel panelStatusBar;
+	
+	private JPanel panelCountCardsOfABox;
+	private JLabel labelActualCardOfBox;
+	private JLabel labelActualCoardOfBoxResult;	
+	
+	private JPanel panelCountTotalCards;
+	private JLabel labelTotalCards;
+	private JLabel labelTotalCardsResult;
+	
+	private JPanel panelQuotaCorrect;
+	private JLabel labelQuotaCorrect;
+	private JLabel labelQuotaCorrectResult;
+	
+	private JPanel panelQuotaWrong;
+	private JLabel labelQuotaWrong;
+	private JLabel labelQuotaWrongResult;
+	
 	private GridBagConstraints gridBagContraints;
 	
 	/**
@@ -69,11 +90,29 @@ public class LearningView extends JPanel{
 		this.labelBack = new JLabel("Rückseite");
 		this.buttonCardBack = new JButton();
 
-		this.panelAnswer = new JPanel();		
+		this.panelAnswer = new JPanel();	
 		ImageIcon imageIconCorrect = new ImageIcon(this.getClass().getResource("/correct.png"));
 		this.buttonCorrect = new JButton("Richtig", imageIconCorrect);
 		ImageIcon imageIconWrong = new ImageIcon(this.getClass().getResource("/wrong.png"));
 		this.buttonWrong = new JButton("Falsch", imageIconWrong);
+		
+		this.panelStatusBar = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		
+		this.panelCountCardsOfABox = new JPanel(new BorderLayout());
+		this.labelActualCardOfBox = new JLabel("Box: aktuelle Karte   ");
+		this.labelActualCoardOfBoxResult = new JLabel("-");
+		
+		this.panelCountTotalCards = new JPanel(new BorderLayout());
+		this.labelTotalCards = new JLabel("Anzahl Karten   ");
+		this.labelTotalCardsResult = new JLabel("-");
+		
+		this.panelQuotaCorrect = new JPanel(new BorderLayout());
+		this.labelQuotaCorrect = new JLabel("Anteil korrekt   ");
+		this.labelQuotaCorrectResult = new JLabel("-");
+		
+		this.panelQuotaWrong = new JPanel(new BorderLayout());
+		this.labelQuotaWrong = new JLabel("Anteil falsch   ");
+		this.labelQuotaWrongResult = new JLabel("-");
 		
 		this.gridBagContraints = new GridBagConstraints();
 		paint();
@@ -138,13 +177,36 @@ public class LearningView extends JPanel{
 		this.buttonWrong.setHorizontalAlignment(SwingConstants.CENTER); // Damit Text linksbündig angezeigt wird
 		this.buttonWrong.setPreferredSize(MyDimension.ButtonCorrectWrongDimension.get());	
 		this.panelAnswer.add(this.buttonWrong);
-		this.panelAnswer.setBackground(Color.WHITE);
 		this.add(panelAnswer, gridBagContraints);
 
 		this.labelBack.setVisible(false);
 		this.buttonCardBack.setVisible(false);
 		this.buttonCorrect.setVisible(false);
 		this.buttonWrong.setVisible(false);
+		
+		gridBagContraints.fill = 0;
+		gridBagContraints.gridx = 0;
+		gridBagContraints.gridy = 5;
+		
+		this.panelCountCardsOfABox.add(labelActualCardOfBox, BorderLayout.NORTH);
+		this.panelCountCardsOfABox.add(labelActualCoardOfBoxResult, BorderLayout.SOUTH);
+		
+		this.panelCountTotalCards.add(labelTotalCards, BorderLayout.NORTH);
+		this.panelCountTotalCards.add(labelTotalCardsResult, BorderLayout.SOUTH);
+		
+		this.panelQuotaCorrect.add(labelQuotaCorrect, BorderLayout.NORTH);
+		this.panelQuotaCorrect.add(labelQuotaCorrectResult, BorderLayout.SOUTH);
+		
+		this.panelQuotaWrong.add(labelQuotaWrong, BorderLayout.NORTH);
+		this.panelQuotaWrong.add(labelQuotaWrongResult, BorderLayout.SOUTH);
+		
+		this.panelStatusBar.add(panelCountCardsOfABox);
+		this.panelStatusBar.add(panelCountTotalCards);
+		this.panelStatusBar.add(panelQuotaCorrect);
+		this.panelStatusBar.add(panelQuotaWrong);
+
+		this.add(panelStatusBar, gridBagContraints);	
+
 		this.setVisible(true);
 	}
 	

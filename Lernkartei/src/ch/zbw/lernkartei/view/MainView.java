@@ -33,14 +33,6 @@ import ch.zbw.lernkartei.model.TranslationDataSet;
  * @author Ruel
  *
  */
-/**
- * @author Ruel
- *
- */
-/**
- * @author Ruel
- *
- */
 public class MainView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -66,8 +58,6 @@ public class MainView extends JFrame {
 	private JMenuItem menuItemEnglisch;
 
 	private JPanel panelMain;
-	private EditCardsView panelEditCards;
-	private LearningView panelLearning;
 	private Toolkit toolKit;
 	private JFileChooser jfImportFile;
 
@@ -110,8 +100,6 @@ public class MainView extends JFrame {
 		this.menuItemEnglisch = new JMenuItem("English");
 
 		this.translationArrayList = new TranslationDataSet();
-		this.panelLearning = new LearningView();
-		this.panelEditCards = new EditCardsView();
 		this.jfImportFile = new JFileChooser();
 
 		ImageIcon imageIconBackground = new ImageIcon(this.getClass().getResource("/bg-sea.jpg"));
