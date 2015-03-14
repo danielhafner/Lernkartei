@@ -1,13 +1,17 @@
 package ch.zbw.lernkartei.controller;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -16,7 +20,7 @@ import ch.zbw.lernkartei.model.Language;
 import ch.zbw.lernkartei.model.Register;
 import ch.zbw.lernkartei.view.LearningView;
 import ch.zbw.lernkartei.view.MainView;
-import ch.zbw.lernkartei.view.SettingsView;
+import ch.zbw.lernkartei.view.EditCardsView;
 
 
 /**
@@ -24,32 +28,30 @@ import ch.zbw.lernkartei.view.SettingsView;
  *
  */
 public class Controller {
-
 	private MainView mainView;
-	private SettingsView settingsView;
+	private EditCardsView editCardsView;
 	private LearningView learningView;
 	private Register register;
-	private Card settingCard;
+	private Card editCardsCard;
 	private Card learningCard;
+	private ArrayList<Card> editCardsAllCards;
+	private ArrayList<Card> learningCardsOfABox;
 	private int index;
-	private ArrayList<Card> allCards;
-	private ArrayList<Card> cardsOfABox;
 
 	/** Konstructor
 	 * @param mainView
-	 * @param settingsView
+	 * @param editCardsView
 	 * @param learningView
 	 * @param register
 	 */
-	public Controller(MainView mainView, SettingsView settingsView, LearningView learningView, Register register) {
+	public Controller(MainView mainView, EditCardsView editCardsView, LearningView learningView, Register register) {
 		this.mainView = mainView;
-		this.settingsView = settingsView;
+		this.editCardsView = editCardsView;
 		this.learningView = learningView;
-		this.settingCard = register.getCardByIndex(0);
+		this.editCardsCard = register.getCardByIndex(0);
 		this.register = register;
 		addListener();
 	}
-
 
 	/**
 	 * Paints the mainView
@@ -62,38 +64,43 @@ public class Controller {
 		}
 	}
 
-
 	/**
 	 * Registrates all needed Listeners
 	 */
 	private void addListener() {
-		MeinMenuActionListener mBeenden = new MeinMenuActionListener("Beenden");
+		MyWindowListener wBeenden = new MyWindowListener();
+		this.mainView.addWindowListener(wBeenden);
+		
+		MyMenuActionListener mBeenden = new MyMenuActionListener("Beenden");
 		this.mainView.setStartMenuActionListener(mBeenden);
-		this.mainView.setLanguageMenuActionListener(new MeinMenuActionListener(
+		this.mainView.setLanguageMenuActionListener(new MyMenuActionListener(
 				Language.Deutsch.toString()));
-		this.mainView.setLanguageMenuActionListener(new MeinMenuActionListener(
+		this.mainView.setLanguageMenuActionListener(new MyMenuActionListener(
 				Language.Englisch.toString()));
-		this.mainView.setLanguageMenuActionListener(new MeinMenuActionListener(
+		this.mainView.setLanguageMenuActionListener(new MyMenuActionListener(
 				Language.Französisch.toString()));
-		this.mainView.setLanguageMenuActionListener(new MeinMenuActionListener(
+		this.mainView.setLanguageMenuActionListener(new MyMenuActionListener(
 				Language.Italienisch.toString()));
 
-		MeinMenuActionListener mSettings = new MeinMenuActionListener(
-				"Einstellungen");
-		this.mainView.setSettingsMenuActionListener(mSettings);
+		MyMenuActionListener mEditCards = new MyMenuActionListener(
+				"Karten verwalten");
+		this.mainView.setEditCardsMenuActionListener(mEditCards);
 
-		MeinMenuActionListener mStartLearning = new MeinMenuActionListener(
+		MyMenuActionListener mStartLearning = new MyMenuActionListener(
 				"Lernen starten");
 		this.mainView.setStartLearningsMenuActionListener(mStartLearning);
+		
+		MyMenuActionListener mResetLearningStatus = new MyMenuActionListener("Lernstand zurücksetzen");
+		this.mainView.setResetLearningStatusActionListener(mResetLearningStatus);
 
-		MeinMenuActionListener mImport = new MeinMenuActionListener("Import");
+		MyMenuActionListener mImport = new MyMenuActionListener("Import");
 		this.mainView.setImportMenuActionListener(mImport);
 
-		MeinMenuActionListener mExport = new MeinMenuActionListener("Export");
+		MyMenuActionListener mExport = new MyMenuActionListener("Export");
 		this.mainView.setExportMenuActionListener(mExport);
 
 		MeinButtonActionListener mNavigation = new MeinButtonActionListener();
-		this.settingsView.setNavigationButtonListener(mNavigation);
+		this.editCardsView.setNavigationButtonListener(mNavigation);
 		
 		MeinButtonActionListener mLearning = new MeinButtonActionListener();
 		this.learningView.setButtonFrontBackListener(mLearning);
@@ -102,25 +109,23 @@ public class Controller {
 		this.learningView.setComboboxItemListener(itemHandler);
 
 		DocumentListener documentListener = new DocumentListener() {
-
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-				if (settingsView.getFrontText().equals("")
-						&& settingsView.getBackText().equals("")) {
-					settingsView.setStateSaveButton(false);
-					settingsView.setStateDeleteButton(true);
-				} else if (!settingsView.getFrontText().equals("")
-						&& !settingsView.getBackText().equals(""))
-					settingsView.setStateSaveButton(true);
+				if (editCardsView.getFrontText().equals("")
+						&& editCardsView.getBackText().equals("")) {
+					editCardsView.setStateSaveButton(false);
+					editCardsView.setStateDeleteButton(true);
+				} else if (!editCardsView.getFrontText().equals("")
+						&& !editCardsView.getBackText().equals(""))
+					editCardsView.setStateSaveButton(true);
 			}
-
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				if (!settingsView.getFrontText().equals(settingCard.getFront())
-						&& !settingsView.getBackText().equals(settingCard.getBack())) {
+				if (!editCardsView.getFrontText().equals(editCardsCard.getFront())
+						&& !editCardsView.getBackText().equals(editCardsCard.getBack())) {
 
-					settingsView.setStateSaveButton(true);
-					settingsView.setStateDeleteButton(true);
+					editCardsView.setStateSaveButton(true);
+					editCardsView.setStateDeleteButton(true);
 				} else
 					removeUpdate(e);
 			}
@@ -129,33 +134,25 @@ public class Controller {
 			public void changedUpdate(DocumentEvent e) {
 			}
 		};
-
-		this.settingsView.setDocumentListener(documentListener);
+		this.editCardsView.setDocumentListener(documentListener);
 	}
 
 	/**
 	 * @author Ruel
 	 * MenuActionListener (Inner Class) for all Menu(Items)
 	 */
-	public class MeinMenuActionListener implements ActionListener {
-
+	public class MyMenuActionListener implements ActionListener {
 		public String command;
-
-		public MeinMenuActionListener(String command) {
+		public MyMenuActionListener(String command) {
 			setCommand(command);
 		}
-
 		public void setCommand(String command) {
 			this.command = command;
 		}
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getActionCommand().equals("Beenden")) {
-				if(mainView.quitAndSave())
-				{
-					register.saveDataIntoInternalFile();
-				}
+				actionPerformedBeenden();
 				mainView.closeApplication();
 			} else if (e.getActionCommand().equals("Deutsch")) {
 				mainView.switchLanguage(e);
@@ -165,31 +162,46 @@ public class Controller {
 				mainView.switchLanguage(e);
 			} else if (e.getActionCommand().equals("Italienisch")) {
 				mainView.switchLanguage(e);
-			} else if (e.getActionCommand().equals("Einstellungen")) {
+			} else if (e.getActionCommand().equals("Karten verwalten")) {
 				
 				try {
-					allCards = register.getSortedCardsByCardID();
+					editCardsAllCards = register.getSortedCardsByCardID();
 				} catch (Exception e1) {
-					settingsView.showMessageBox(e1.getMessage());
+					editCardsView.showMessageBox(e1.getMessage());
 				}
-				settingsView.setTextTextFieldCardNumber(allCards.get(0).getIdCard() + "");
-				settingsView.setBoxNumber(allCards.get(0).getBox() + "");
-				settingsView.setTextAreaFront(allCards.get(0).getFront());
-				settingsView.setTextAreaBack(allCards.get(0).getBack());
-				settingsView.setStateNavBackForwardButtons(register, 0);
-				settingsView.setStateSaveButton(false);
-				mainView.repaintTheFrame(settingsView);
-				settingsView.setInitialFocus();
+				editCardsView.setTextTextFieldCardNumber(editCardsAllCards.get(0).getIdCard() + "");
+				editCardsView.setBoxNumber(editCardsAllCards.get(0).getBox() + "");
+				editCardsView.setTextAreaFront(editCardsAllCards.get(0).getFront());
+				editCardsView.setTextAreaBack(editCardsAllCards.get(0).getBack());
+				editCardsView.setStateNavBackForwardButtons(register, 0);
+				editCardsView.setStateSaveButton(false);
+				mainView.repaintTheFrame(editCardsView);
+				editCardsView.setInitialFocus();
 			} else if (e.getActionCommand().equals("Lernen starten")) {
 				try {
-					cardsOfABox = register.getCardsByBox(register.getBoxes().get(0));
-					learningCard = cardsOfABox.get(0);
+					learningCardsOfABox = register.getCardsByBox(register.getBoxes().get(0));
+					learningCard = learningCardsOfABox.get(0);
 				} catch (Exception e1) {
-					settingsView.showMessageBox(e1.getMessage());
+					editCardsView.showMessageBox(e1.getMessage());
 				}				
 				learningView.initializeWithData(register.getBoxes(), register);
+				mainView.setControlsToBeTranslated(mainView.getCurrentLanguage());
 				mainView.repaintTheFrame(learningView);
-			} else if (e.getActionCommand().equals("Import")) {
+			}
+			else if (e.getActionCommand().equals("Lernstand zurücksetzen")) {
+				register.resetRegister();
+				editCardsView.displayCard(editCardsCard);
+				//learningView.ShowQuestion(learningCard.getFront(), learningCard.getBack(), learningCard.getIdCard());
+				try {
+					learningCardsOfABox = register.getCardsByBox(1);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					mainView.displayErrorMessage(e1.getMessage());
+				}
+				learningView.initializeWithData(register.getBoxes(), register);
+			}
+			
+			else if (e.getActionCommand().equals("Import")) {
 				if(mainView.openFileDialog())
 				{
 					register.imports((Paths.get(mainView.getFileImportPath())));
@@ -202,7 +214,6 @@ public class Controller {
 			}
 		}
 	}
-
 	
 	/**
 	 * @author Ruel
@@ -217,18 +228,18 @@ public class Controller {
 				
 			} else if (e.getActionCommand().equals(">>>")) {
 				try {											
-					settingCard = register.getCardByIndex(index + 1);
-					if(settingCard != null)
+					editCardsCard = register.getCardByIndex(index + 1);
+					if(editCardsCard != null)
 					{
 						index++;
-						settingsView.displayCard(settingCard);
+						editCardsView.displayCard(editCardsCard);
 					}
 					else
 					{
 						index--;
 					}
-					settingsView.setStateSaveButton(false);	
-					settingsView.setStateNavBackForwardButtons(register, index);
+					editCardsView.setStateSaveButton(false);	
+					editCardsView.setStateNavBackForwardButtons(register, index);
 
 				} catch (Exception e1) {
 
@@ -241,17 +252,17 @@ public class Controller {
 					if (index != 0) {
 						index--;
 					}
-					settingCard = register.getCardByIndex(index);
-					settingsView.displayCard(settingCard);
-					settingsView.setStateNavBackForwardButtons(register, index);
-					settingsView.setStateSaveButton(false);
+					editCardsCard = register.getCardByIndex(index);
+					editCardsView.displayCard(editCardsCard);
+					editCardsView.setStateNavBackForwardButtons(register, index);
+					editCardsView.setStateSaveButton(false);
 
 					if (register.getCardByIndex(index).getFront().equals("")
 							&& register.getCardByIndex(index).getBack()
 									.equals("")) {
-						settingsView.setStateDeleteButton(false);
+						editCardsView.setStateDeleteButton(false);
 					} else {
-						settingsView.setStateDeleteButton(true);
+						editCardsView.setStateDeleteButton(true);
 					}
 
 				} catch (Exception e1) {
@@ -261,19 +272,19 @@ public class Controller {
 			} else if (e.getActionCommand().equals("Neu")) {
 				try {
 					index = register.getNumberOfCards();
-					settingCard = new Card("", "", register.getMaxId_Card());
-					register.add(settingCard);
+					editCardsCard = new Card("", "", register.getMaxId_Card());
+					register.add(editCardsCard);
 					
 					//Erfasste Karte neu laden (am Ende der Liste)
-					settingsView.displayCard(register.getCardByIndex(index));
+					editCardsView.displayCard(register.getCardByIndex(index));
 					
 					//Buttons aktualisieren
-					settingsView.setStateNavBackForwardButtons(register, index);
-					settingsView.setStateButtonNew(false);
-					settingsView.setStateSaveButton(false);
-					settingsView.setStateDeleteButton(false);
-					settingsView.setStateButtonBack(false);
-					settingsView.setStateButtonForward(false);
+					editCardsView.setStateNavBackForwardButtons(register, index);
+					editCardsView.setStateButtonNew(false);
+					editCardsView.setStateSaveButton(false);
+					editCardsView.setStateDeleteButton(false);
+					editCardsView.setStateButtonBack(false);
+					editCardsView.setStateButtonForward(false);
 				} catch (Exception e1) {
 
 					mainView.displayErrorMessage(e1.getMessage());
@@ -282,36 +293,36 @@ public class Controller {
 				try {
 					// Benutzer fragen, ob er die Karte auch wirklich löschen will...
 					if (cardWantsToBeDeleted()) {
-						register.getCards().remove(settingCard);
+						register.getCards().remove(editCardsCard);
 						index = register.getNumberOfCards();
 						// Eine nachfolgende Karte müsste nun am gleichen Index stehen...						
-						settingCard = register.getCardByIndex(register.getNumberOfCards() - 1);
-						while (settingCard == null && index >= 0)
+						editCardsCard = register.getCardByIndex(register.getNumberOfCards() - 1);
+						while (editCardsCard == null && index >= 0)
 						{
 							//vorgehende Karte ermitteln
 							index--;
-							settingCard = register.getCardByIndex(index);
+							editCardsCard = register.getCardByIndex(index);
 						}
 						
-						if(settingCard == null)
+						if(editCardsCard == null)
 						{
 							//Keine Karten mehr vorhanden
 							index = 0;
-							settingCard = new Card("", "", register.getMaxId_Card());
-							register.add(settingCard);
-							settingsView.displayCard(settingCard);
-							settingsView.setStateButtonNew(false);
-							settingsView.setStateDeleteButton(false);
+							editCardsCard = new Card("", "", register.getMaxId_Card());
+							register.add(editCardsCard);
+							editCardsView.displayCard(editCardsCard);
+							editCardsView.setStateButtonNew(false);
+							editCardsView.setStateDeleteButton(false);
 						}
 						else
 						{
 							// Vor
-							settingsView.displayCard(settingCard);
+							editCardsView.displayCard(editCardsCard);
 							index = register.getNumberOfCards() - 1;
-							settingsView.setStateButtonNew(true);
+							editCardsView.setStateButtonNew(true);
 						}
-						settingsView.setStateSaveButton(false);
-						settingsView.setStateNavBackForwardButtons(register, index);
+						editCardsView.setStateSaveButton(false);
+						editCardsView.setStateNavBackForwardButtons(register, index);
 					}
 				} catch (Exception e1) {
 
@@ -335,12 +346,12 @@ public class Controller {
 				{
 					register.isFalse(learningView.getCardId());
 				}
-				cardsOfABox.remove(learningCard);
-				if(cardsOfABox.size() == 0)
+				learningCardsOfABox.remove(learningCard);
+				if(learningCardsOfABox.size() == 0)
 				{
 					learningView.refreshComboboxFachWithData(register.getBoxes());
 				}
-				refreshLearningData(cardsOfABox);
+				refreshLearningData(learningCardsOfABox);
 			}
 		}
 
@@ -361,11 +372,11 @@ public class Controller {
 		 */
 		private void saveCard() {
 			try {
-				settingCard.setCard(settingsView.getFrontText(), settingsView.getBackText());				
-				settingsView.setStateDeleteButton(true);
-				settingsView.setStateButtonNew(true);
-				settingsView.setStateSaveButton(false);
-				settingsView.setStateNavBackForwardButtons(register, index);				
+				editCardsCard.setCard(editCardsView.getFrontText(), editCardsView.getBackText());				
+				editCardsView.setStateDeleteButton(true);
+				editCardsView.setStateButtonNew(true);
+				editCardsView.setStateSaveButton(false);
+				editCardsView.setStateNavBackForwardButtons(register, index);				
 			}
 
 			catch (Exception ex) {
@@ -379,9 +390,9 @@ public class Controller {
 		 */
 		private boolean continueWithoutSaving() {
 			try {
-				if (!settingsView.getFrontText().equals(settingCard.getFront())
-						|| !settingsView.getBackText().equals(settingCard.getBack())) {
-					if (settingsView.showMessageBox("Daten wurden verändert. Willst du fortfahren ohne zu speichern?") == JOptionPane.OK_OPTION) {
+				if (!editCardsView.getFrontText().equals(editCardsCard.getFront())
+						|| !editCardsView.getBackText().equals(editCardsCard.getBack())) {
+					if (editCardsView.showMessageBox("Daten wurden verändert. Willst du fortfahren ohne zu speichern?") == JOptionPane.OK_OPTION) {
 						return true;
 					} else {
 						return false;
@@ -406,8 +417,8 @@ public class Controller {
 			if(arg0.getStateChange() == ItemEvent.SELECTED)
 			{
 				try {
-					cardsOfABox = register.getCardsByBox(Integer.parseInt(arg0.getItem().toString()));
-					refreshLearningData(cardsOfABox);
+					learningCardsOfABox = register.getCardsByBox(Integer.parseInt(arg0.getItem().toString()));
+					refreshLearningData(learningCardsOfABox);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					learningView.displayErrorMessage(e.getMessage());
@@ -423,6 +434,46 @@ public class Controller {
 	{
 		this.learningCard = cardsOfABox.get(0);
 		learningView.ShowQuestion(this.learningCard.getFront(), this.learningCard.getBack(), this.learningCard.getIdCard());
+	}
+	
+	private void actionPerformedBeenden() {
+		if(mainView.quitAndSave())
+		{
+			register.saveDataIntoInternalFile();
+		}
+		mainView.closeApplication();
+	}
+
+	public class MyWindowListener implements WindowListener{
+
+		@Override
+		public void windowActivated(WindowEvent e) {
+		}
+
+		@Override
+		public void windowClosed(WindowEvent e) {
+		}
+
+		@Override
+		public void windowClosing(WindowEvent e) {
+			actionPerformedBeenden();
+		}
+
+		@Override
+		public void windowDeactivated(WindowEvent e) {
+		}
+
+		@Override
+		public void windowDeiconified(WindowEvent e) {
+		}
+
+		@Override
+		public void windowIconified(WindowEvent e) {
+		}
+
+		@Override
+		public void windowOpened(WindowEvent e) {	
+		}
 	}
 	
 }

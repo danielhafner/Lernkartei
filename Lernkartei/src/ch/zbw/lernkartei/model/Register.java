@@ -137,11 +137,7 @@ public class Register {
 				}
 			}
 		}
-		if (sortedCards == null)
-			throw new Exception("Keine Karten vorhanden.");
-			
 		return sortedCards;
-		
 	}
 	/**
 	* @Author: Daniel

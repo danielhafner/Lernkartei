@@ -2,23 +2,42 @@ package ch.zbw.lernkartei.model;
 
 import java.util.ArrayList;
 
+/**
+ * @author Ruel
+ *
+ */
 public class TranslationDataSet extends ArrayList<String[]>{
 	
+	/**
+	 * Konstructor
+	 */
 	public TranslationDataSet()
 	{
 		this.fillTranslationWithTestData();
 	}
 	
+	/** Adds a StringArray to the TranslationsDataSet
+	 * @param a
+	 */
 	public void addToTranslation(String[] a)
 	{
 		this.add(a);
 	}
 	
+	/** Adds a new Group of words in different Languages
+	 * @param deutsch
+	 * @param englisch
+	 * @param franzoesisch
+	 * @param italienisch
+	 */
 	public void addNewToTranslation(String deutsch, String englisch, String franzoesisch, String italienisch){	
 		String[] myTranslateArray = {deutsch, englisch, franzoesisch, italienisch};		
 		add(myTranslateArray);
 	}
 	
+	/** Removes a word from the TranslationsDataSet
+	 * @param a
+	 */
 	public void removeFromTranslation(String[] a)
 	{
 		this.remove(a);
@@ -32,21 +51,28 @@ public class TranslationDataSet extends ArrayList<String[]>{
 		this.addNewToTranslation("Sprache", "Language", "Langue", "Lingua");
 		this.addNewToTranslation("Import", "Import", "Importation", "Importazione");
 		this.addNewToTranslation("Export", "Export", "Exportation", "Exportazione");
-		this.addNewToTranslation("Einstellungen", "Settings", "Paramètres", "Impostazioni");
+		this.addNewToTranslation("Karten verwalten", "Edit cards", "Gestion des cartes", "Gestione mappe");
 		this.addNewToTranslation("Deutsch", "German", "Allemand", "Tedesco");
-		this.addNewToTranslation("Franz�sisch", "French", "Francais", "Francese");
+		this.addNewToTranslation("Französisch", "French", "Francais", "Francese");
 		this.addNewToTranslation("Italienisch", "Italian", "Italien", "Italiano");
 		this.addNewToTranslation("Englisch", "English", "Anglais", "Inglese");
 		this.addNewToTranslation("Lernen starten", "Start learning", "Démarrer apprentissage", "Imparare inizio");
-		this.addNewToTranslation("Export wurde abgebrochen.", "Export was canceled.", "Export a été annulée.", "Export è stato annullato.");
-		this.addNewToTranslation("Import wurde abgebrochen.", "Import was canceled.", "Import a été annul�e.", "Import è stato annullato.");
+		this.addNewToTranslation("Lernstand zurücksetzen", "Reset the learning level", "Réinitialiser le niveau d'apprentissage", "Ripristinare il livello di apprendimento");
 		this.addNewToTranslation("Karten-Nr.", "Card-No.", "Numéro de Carte", "Numero della Carta");
 		this.addNewToTranslation("Karteiname", "Name of the Database", "Nom de la base de données", "Nome del database");
 		this.addNewToTranslation("Vorderseite", "Front", "Avant", "Anteriore");
 		this.addNewToTranslation("Rückseite", "Back", "Arrière", "Posteriore");
 		this.addNewToTranslation("Fach", "Box", "Compartiment", "Scomparto");
+		this.addNewToTranslation("Willst du deinen Lernstand speichern?", "Want to save your skill level?", "Vous voulez économiser votre niveau de compétence?", "Vuoi risparmiare il vostro livello di abilità?");
+		this.addNewToTranslation("Hinweis", "Note", "Remarque", "Nota");
 	}
 	
+	/** Gets the translated Text of a Word (Originaltext)
+	 * @param originalText
+	 * @param languageOriginalText
+	 * @param languageTranslatedText
+	 * @return
+	 */
 	public String getTranslatedText(String originalText, Language languageOriginalText, Language languageTranslatedText)
 	{
 		for (String[] elem : this)

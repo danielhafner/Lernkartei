@@ -17,9 +17,9 @@ import ch.zbw.lernkartei.controller.Controller.MeinButtonActionListener;
 import ch.zbw.lernkartei.model.Card;
 import ch.zbw.lernkartei.model.Register;
 
-public class SettingsView extends JPanel {
+public class EditCardsView extends JPanel {
 
-	private JLabel labelSettings;
+	private JLabel labelEditCards;
 	private JPanel panelNav;
 
 	//private JLabel labelRegisterName;
@@ -46,10 +46,10 @@ public class SettingsView extends JPanel {
 	/**
 	 * Konstructor
 	 */
-	public SettingsView()
+	public EditCardsView()
 	{
 		this.setLayout(new GridBagLayout());
-		this.labelSettings = new JLabel("Einstellungen");
+		this.labelEditCards = new JLabel("Karten verwalten");
 		
 		//this.labelRegisterName = new JLabel("Karteiname");
 		//this.textfieldRegisterName = new JTextField(1);
@@ -95,8 +95,8 @@ public class SettingsView extends JPanel {
 
 		gridBagContraints.gridx = 0;
 		gridBagContraints.gridy = 0;
-		this.labelSettings.setFont(MyFont.Ueberschrift1.getMyFont());
-		this.add(labelSettings, gridBagContraints);
+		this.labelEditCards.setFont(MyFont.Ueberschrift1.getMyFont());
+		this.add(labelEditCards, gridBagContraints);
 
 		/* Registername vorläufig nicht implementieren */
 		/*gridBagContraints.gridx = 0;

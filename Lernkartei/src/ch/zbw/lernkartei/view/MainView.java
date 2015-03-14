@@ -22,8 +22,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.text.html.Option;
 
-import ch.zbw.lernkartei.controller.Controller.MeinMenuActionListener;
+import ch.zbw.lernkartei.controller.Controller.MyMenuActionListener;
 import ch.zbw.lernkartei.model.Language;
 import ch.zbw.lernkartei.model.TranslationDataSet;
 
@@ -53,7 +54,8 @@ public class MainView extends JFrame {
 	private JMenuBar menuBar;
 
 	private JMenuItem menuItemStartLearning;
-	private JMenuItem menuItemSettings;
+	private JMenuItem menuItemEditCards;
+	private JMenuItem menuItemResetLearningStatus;
 	private JMenuItem menuItemImport;
 	private JMenuItem menuItemExport;
 	private JMenuItem menuItemClose;
@@ -62,9 +64,9 @@ public class MainView extends JFrame {
 	private JMenuItem menuItemItalienisch;
 	private JMenuItem menuItemEnglisch;
 
-	private JPanel mainPanel;
-	private SettingsView panelSettings;
-	private LearningView panelLearming;
+	private JPanel panelMain;
+	private EditCardsView panelEditCards;
+	private LearningView panelLearning;
 	private Toolkit toolKit;
 	private JFileChooser jfImportFile;
 
@@ -88,14 +90,15 @@ public class MainView extends JFrame {
 			e.printStackTrace();
 		}
 
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.mainPanel = new JPanel(new GridLayout(1, 1));
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		this.panelMain = new JPanel(new GridLayout(1, 1));
 		this.menuBar = new JMenuBar();
 
 		// Menu
 		this.menuDatei = new JMenu("Datei");
 		this.menuItemStartLearning = new JMenuItem("Lernen starten");
-		this.menuItemSettings = new JMenuItem("Einstellungen");
+		this.menuItemEditCards = new JMenuItem("Karten verwalten");
+		this.menuItemResetLearningStatus = new JMenuItem("Lernstand zurücksetzen");
 		this.menuItemImport = new JMenuItem("Import");
 		this.menuItemExport = new JMenuItem("Export");
 		this.menuItemClose = new JMenuItem("Beenden");
@@ -106,8 +109,8 @@ public class MainView extends JFrame {
 		this.menuItemEnglisch = new JMenuItem("Englisch");
 
 		this.translationArrayList = new TranslationDataSet();
-		this.panelLearming = new LearningView();
-		this.panelSettings = new SettingsView();
+		this.panelLearning = new LearningView();
+		this.panelEditCards = new EditCardsView();
 		this.jfImportFile = new JFileChooser();
 
 		ImageIcon imageIconBackground = new ImageIcon(this.getClass().getResource("/bg-sea.jpg"));
@@ -137,7 +140,8 @@ public class MainView extends JFrame {
 		menuBar.add(menuDatei);
 		menuBar.add(menuSprache);
 		menuDatei.add(menuItemStartLearning);
-		menuDatei.add(menuItemSettings);
+		menuDatei.add(menuItemEditCards);
+		menuDatei.add(menuItemResetLearningStatus);
 		menuDatei.add(menuItemImport);
 		menuDatei.add(menuItemExport);
 		menuDatei.add(menuItemClose);
@@ -161,23 +165,23 @@ public class MainView extends JFrame {
 
 		// Man kann auf einem Label ein Layout definieren...
 		labelImageIconBackground.setLayout(new GridBagLayout());
-		labelImageIconBackground.add(this.mainPanel);
+		labelImageIconBackground.add(this.panelMain);
 		labelImageIconBackground.add(this.labelWelcome);
 		this.add(labelImageIconBackground);
 	}
 
 	/**
-	 * Paints the Setting-Panel
+	 * Paints the EditCards-Panel
 	 */
-	public void paintSettingsPanel() {
-		this.repaintTheFrame(this.panelSettings);
+	public void paintEditCardsPanel() {
+		this.repaintTheFrame(this.panelEditCards);
 	}
 
 	/**
 	 * Paints the Learning-Panel
 	 */
 	public void paintPanelLearning() {
-		repaintTheFrame(this.panelLearming);
+		repaintTheFrame(this.panelLearning);
 	}
 
 	/** Repaints a certain Panel
@@ -185,9 +189,9 @@ public class MainView extends JFrame {
 	 */
 	public void repaintTheFrame(JPanel panelToShow) {
 		labelImageIconBackground.removeAll();
-		this.mainPanel.removeAll();
-		this.mainPanel.add(panelToShow);
-		labelImageIconBackground.add(this.mainPanel);
+		this.panelMain.removeAll();
+		this.panelMain.add(panelToShow);
+		labelImageIconBackground.add(this.panelMain);
 		this.setVisible(true);
 	}
 
@@ -208,9 +212,7 @@ public class MainView extends JFrame {
 			fileImportPath = jfImportFile.getSelectedFile().toString();
 			return true;
 		case JFileChooser.CANCEL_OPTION:
-			// JOptionPane.showMessageDialog(this,
-			// translationArrayList.getTranslatedText("Import wurde abgebrochen.",
-			// Language.Deutsch, this.language));
+			fileImportPath = null;
 			break;
 		case JFileChooser.ERROR_OPTION:
 			JOptionPane.showMessageDialog(this, translationArrayList
@@ -248,7 +250,7 @@ public class MainView extends JFrame {
 	/** Sets MenuActionListener for all different Languages
 	 * @param listener
 	 */
-	public void setLanguageMenuActionListener(MeinMenuActionListener listener) {
+	public void setLanguageMenuActionListener(MyMenuActionListener listener) {
 		if (listener.command.equals(Language.Deutsch.toString())) {
 			this.menuItemDeutsch.addActionListener(listener);
 		} else if (listener.command.equals(Language.Englisch.toString())) {
@@ -263,38 +265,43 @@ public class MainView extends JFrame {
 	/** Sets MenuActionListener for 'Close'
 	 * @param listener
 	 */
-	public void setStartMenuActionListener(MeinMenuActionListener listener) {
+	public void setStartMenuActionListener(MyMenuActionListener listener) {
 		this.menuItemClose.addActionListener(listener);
 	}
 
 	
-	/** Sets MenuActionListener for 'Settings'
+	/** Sets MenuActionListener for 'Edit cards'
 	 * @param listener
 	 */
-	public void setSettingsMenuActionListener(MeinMenuActionListener listener) {
-		this.menuItemSettings.addActionListener(listener);
+	public void setEditCardsMenuActionListener(MyMenuActionListener listener) {
+		this.menuItemEditCards.addActionListener(listener);
 	}
 
 	/** Sets MenuActionListener for 'Start Learning'
 	 * @param listener
 	 */
 	public void setStartLearningsMenuActionListener(
-			MeinMenuActionListener listener) {
+			MyMenuActionListener listener) {
 		this.menuItemStartLearning.addActionListener(listener);
 	}
 
 	/** Sets the MenuActionListener for 'Import'
 	 * @param listener
 	 */
-	public void setImportMenuActionListener(MeinMenuActionListener listener) {
+	public void setImportMenuActionListener(MyMenuActionListener listener) {
 		this.menuItemImport.addActionListener(listener);
 	}
 
 	/** Sets the MenuActionListener for 'Export'
 	 * @param listener
 	 */
-	public void setExportMenuActionListener(MeinMenuActionListener listener) {
+	public void setExportMenuActionListener(MyMenuActionListener listener) {
 		this.menuItemExport.addActionListener(listener);
+	}
+	
+	public void setResetLearningStatusActionListener(MyMenuActionListener listener)
+	{
+		this.menuItemResetLearningStatus.addActionListener(listener);
 	}
 
 	
@@ -395,9 +402,22 @@ public class MainView extends JFrame {
 	public void setControlsToBeTranslated(Language newLanguage) {
 		this.previousLanguage = this.language;
 		this.language = newLanguage;
-
-		ArrayList<Component> a = getAllComponents(this.mainPanel);
-		for (Component c : a) {
+		
+		ArrayList<Component> a = getAllComponents(this.panelLearning);
+		a.addAll(getAllComponents(this.panelEditCards));
+		a.addAll(getAllComponents(this.panelMain));
+		a.addAll(getAllComponents(this.menuBar));
+		a.addAll(getAllComponents(this.menuDatei));
+			
+		// Gewisse Komponenten einfach adden...
+		a.add(this.menuItemStartLearning);
+		a.add(this.menuItemEditCards);
+		a.add(this.menuItemResetLearningStatus);
+		a.add(this.menuItemImport);
+		a.add(this.menuItemExport);
+		a.add(this.menuItemClose);
+			
+		for (Component c : a) {			
 			translateTextOfAControl(c);
 		}
 	}
@@ -431,18 +451,25 @@ public class MainView extends JFrame {
 		return this.fileImportPath;
 	}
 
-	
 	/** Asks the User to Save Changes (Export to the internal csv-File)
 	 * @return
 	 */
 	public boolean quitAndSave() {	
-		if(JOptionPane.showConfirmDialog(this, "Willst du deinen Lernstand speichern?") == 0)
+		if(JOptionPane.showConfirmDialog(
+				this
+				,translationArrayList.getTranslatedText("Willst du deinen Lernstand speichern?", Language.Deutsch, this.language)
+				,translationArrayList.getTranslatedText("Hinweis", Language.Deutsch, this.language)
+				,0 /* Ja oder NEIN */
+				) == 0)
 				{
 					// 0 = Ja
 					return true;
-				}
-
-		
+				}		
 		return false;
-	}	
+	}
+	
+	public Language getCurrentLanguage()
+	{
+		return this.language;
+	}
 }

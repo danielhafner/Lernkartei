@@ -1,10 +1,10 @@
-1;Baum;Tree;2;0;1
-2;Apfel;apple;3;0;1
-3;Uhr;watch;4;0;1
+1;Baum;Tree;2;6;1
+2;Apfel;apple;3;18;2
+3;Uhr;watch;4;24;2
 4;Bett;bed;34;32;2
-5;Glas;glas;2;4;1
-6;Tisch;Table;2;8;1
-7;Wahrscheinlichkeit;Probability;2;6;1
-8;Hilfe;help;2;16;1
-9;So viel Spass mit Java Swing...;So much fun with Java Swing ...;2;12;1
-10;Freitag, der 13.;Friday the 13th;2;4;1
+5;Glas;glas;2;16;2
+6;Tisch;Table;2;6;2
+7;Wahrscheinlichkeit;Probability;2;10;2
+8;Hilfe;help;2;4;2
+9;So viel Spass mit Java Swing...;So much fun with Java Swing ...;2;4;2
+10;Freitag, der 13.;Friday the 13th;2;14;2
