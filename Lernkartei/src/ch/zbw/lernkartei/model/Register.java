@@ -350,37 +350,19 @@ public class Register {
 		this.maxId_Card += 1;
 		return this.maxId_Card;
 	}
-	
-	public int getAnsweredQuestions() {
-		return answeredQuestions;
-	}
 
-	public void setAnsweredQuestions() {
-		this.answeredQuestions++;
-	}
-
-	public int getAnsweredCorrect() {
-		return answeredCorrect;
-	}
-
-	public void setAnsweredCorrect() {
-		this.answeredCorrect++;
-	}
-
-	public int getAnsweredWrong() {
-		return answeredWrong;
-	}
-
-	public void setAnsweredWrong() {
-		this.answeredWrong++;
-	}
-
+	/**Calculates the correct answers
+	 * @return
+	 */
 	public int calculateQuotaCorrect() {
 		if(this.answeredQuestions != 0)
 			return (this.answeredCorrect * 100 / this.answeredQuestions);
 		return 0;
 	}
 
+	/** calculates the wrong answers
+	 * @return
+	 */
 	public int calculateQuotaWrong() {
 		if(this.answeredQuestions != 0)
 			return (this.answeredWrong * 100 / this.answeredQuestions);
