@@ -102,17 +102,21 @@ public class Register {
 
 		Collections.sort(sortedNumbers);
 
-		i = this.cards.iterator();
-		while (i.hasNext()) {
-			Card card = i.next();
-
-			for (int n = 0; n < this.cards.size(); n++) {
+		while (!sortedNumbers.isEmpty())
+		{
+			int n = 0;
+			i = this.cards.iterator();
+			while (i.hasNext()) 
+			{
+				Card card = (Card) i.next();
 				if (card.getCalcProbability() == (sortedNumbers.get(n))) {
 					sortedCards.add(card);
 					sortedNumbers.remove(n);
+					i.remove();
 					break;
 				}
 			}
+		    n++;
 		}
 		this.cards = sortedCards;
 	}
@@ -130,19 +134,24 @@ public class Register {
 
 		Collections.sort(sortedNumbers);
 
-		i = this.cards.iterator();
-		while (i.hasNext()) {
-			Card card = i.next();
-
-			for (int n = 0; n < this.cards.size(); n++) {
+		while (!sortedNumbers.isEmpty())
+		{
+			int n = 0;
+			i = this.cards.iterator();
+			while (i.hasNext()) 
+			{
+				Card card = (Card) i.next();
 				if (card.getIdCard() == (sortedNumbers.get(n))) {
 					sortedCards.add(card);
 					sortedNumbers.remove(n);
+					i.remove();
 					break;
 				}
 			}
+				n++;
 		}
-		return sortedCards;
+		this.cards = sortedCards;
+		return this.cards;
 	}
 	/**
 	* @Author: Daniel
