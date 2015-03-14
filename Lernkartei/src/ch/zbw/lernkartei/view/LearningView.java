@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
 
 import ch.zbw.lernkartei.controller.Controller.MeinButtonActionListener;
 import ch.zbw.lernkartei.controller.Controller.MyComboboxItemListener;
@@ -115,11 +116,14 @@ public class LearningView extends JPanel{
 		gridBagContraints.gridy = 3;
 		gridBagContraints.gridwidth = 5;
 		this.buttonCardFront.setPreferredSize(MyDimension.LearningFrontBackDimension.get());
-		this.buttonCardFront.setBackground(Color.ORANGE);
+		this.buttonCardFront.setBackground(Color.BLUE);
+		this.buttonCardFront.setBorder(new BevelBorder(5, Color.BLUE, Color.BLUE ));
+		this.buttonCardFront.setForeground(Color.BLUE);
 		this.add(buttonCardFront, gridBagContraints);
 		this.buttonCardBack.setPreferredSize(MyDimension.LearningFrontBackDimension.get());
 		this.buttonCardBack.setBackground(new Color(0,100,0));
-		this.buttonCardBack.setForeground(Color.WHITE);
+		this.buttonCardBack.setBorder(new BevelBorder(5, new Color(0,100,0), new Color(0,100,0)));
+		this.buttonCardBack.setForeground(new Color(0,100,0));
 		this.add(buttonCardBack, gridBagContraints);
 		
 		gridBagContraints.fill = 0;
@@ -139,10 +143,8 @@ public class LearningView extends JPanel{
 
 		this.labelBack.setVisible(false);
 		this.buttonCardBack.setVisible(false);
-		this.buttonCardBack.setForeground(Color.WHITE);
 		this.buttonCorrect.setVisible(false);
 		this.buttonWrong.setVisible(false);
-		this.setBackground(Color.WHITE);
 		this.setVisible(true);
 	}
 	

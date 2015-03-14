@@ -169,20 +169,7 @@ public class MainView extends JFrame {
 		labelImageIconBackground.add(this.panelMain);
 		labelImageIconBackground.add(this.labelWelcome);
 		this.add(labelImageIconBackground);
-	}
-
-	/**
-	 * Paints the EditCards-Panel
-	 */
-	public void paintEditCardsPanel() {
-		this.repaintTheFrame(this.panelEditCards);
-	}
-
-	/**
-	 * Paints the Learning-Panel
-	 */
-	public void paintPanelLearning() {
-		repaintTheFrame(this.panelLearning);
+		this.setVisible(true);
 	}
 
 	/** Repaints a certain Panel
@@ -191,8 +178,8 @@ public class MainView extends JFrame {
 	public void repaintTheFrame(JPanel panelToShow) {
 		labelImageIconBackground.removeAll();
 		this.panelMain.removeAll();
-		this.panelMain.add(panelToShow);
-		labelImageIconBackground.add(this.panelMain);
+		this.panelMain.add(panelToShow);		
+		labelImageIconBackground.add(this.panelMain);		
 		this.setVisible(true);
 	}
 
@@ -407,9 +394,7 @@ public class MainView extends JFrame {
 		this.previousLanguage = this.language;
 		this.language = newLanguage;
 		
-		ArrayList<Component> a = new ArrayList<Component>(); //getAllComponents(this.panelLearning);
-		a.addAll(getAllComponents(this.panelEditCards));
-		a.addAll(getAllComponents(this.panelMain));
+		ArrayList<Component> a = getAllComponents(this.panelMain); 
 		a.addAll(getAllComponents(this.menuBar));
 		a.addAll(getAllComponents(this.menuDatei));
 			
@@ -420,7 +405,7 @@ public class MainView extends JFrame {
 		a.add(this.menuItemImport);
 		a.add(this.menuItemExport);
 		a.add(this.menuItemClose);	
-		for (Component c : a) {			
+		for (Object c : a) {			
 			translateTextOfAControl(c);
 		}
 	}

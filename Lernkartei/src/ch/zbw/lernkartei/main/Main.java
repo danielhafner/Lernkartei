@@ -25,8 +25,6 @@ public class Main {
 		Register register = new Register();
 		EditCardsView settingsView = new EditCardsView();
 		LearningView learningView = new LearningView();
-		Controller controller = new Controller(mainView, settingsView, learningView, register);
-		controller.paintMainView();
-		mainView.setVisible(true);		
+		new Controller(mainView, settingsView, learningView, register);		
 	}
 }

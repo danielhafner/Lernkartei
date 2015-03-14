@@ -51,17 +51,7 @@ public class Controller {
 		this.editCardsCard = register.getCardByIndex(0);
 		this.register = register;
 		addListener();
-	}
-
-	/**
-	 * Paints the mainView
-	 */
-	public void paintMainView() {
-		try {
-			this.mainView.paint();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		this.mainView.paint();
 	}
 
 	/**
@@ -184,7 +174,6 @@ public class Controller {
 					editCardsView.showMessageBox(e1.getMessage());
 				}				
 				learningView.initializeWithData(register.getBoxes(), register);
-				mainView.setControlsToBeTranslated(mainView.getCurrentLanguage());
 				mainView.repaintTheFrame(learningView);
 			}
 			else if (e.getActionCommand().equals("Lernstand zurücksetzen")) {
@@ -219,138 +208,165 @@ public class Controller {
 	 * ButtonActionListener (Inner Class) for all Buttons
 	 */
 	public class MeinButtonActionListener implements ActionListener {
-
-		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getActionCommand().equals("Speichern")) {
-				saveCard();
+				saveSelected();
 				
 			} else if (e.getActionCommand().equals(">>>")) {
-				try {											
-					editCardsCard = register.getCardByIndex(index + 1);
-					if(editCardsCard != null)
-					{
-						index++;
-						editCardsView.displayCard(editCardsCard);
-					}
-					else
-					{
-						index--;
-					}
-					editCardsView.setStateSaveButton(false);	
-					editCardsView.setStateNavBackForwardButtons(register, index);
-
-				} catch (Exception e1) {
-
-					e1.printStackTrace();
-				}
+				forwardSelected();
 			} else if (e.getActionCommand().equals("<<<")) {
-				try {
-					if (!continueWithoutSaving())
-						saveCard();
-					if (index != 0) {
-						index--;
-					}
-					editCardsCard = register.getCardByIndex(index);
-					editCardsView.displayCard(editCardsCard);
-					editCardsView.setStateNavBackForwardButtons(register, index);
-					editCardsView.setStateSaveButton(false);
-
-					if (register.getCardByIndex(index).getFront().equals("")
-							&& register.getCardByIndex(index).getBack()
-									.equals("")) {
-						editCardsView.setStateDeleteButton(false);
-					} else {
-						editCardsView.setStateDeleteButton(true);
-					}
-
-				} catch (Exception e1) {
-
-					mainView.displayErrorMessage(e1.getMessage());
-				}
+				navBack();
 			} else if (e.getActionCommand().equals("Neu")) {
-				try {
-					index = register.getNumberOfCards();
-					editCardsCard = new Card("", "", register.getMaxId_Card());
-					register.add(editCardsCard);
-					
-					//Erfasste Karte neu laden (am Ende der Liste)
-					editCardsView.displayCard(register.getCardByIndex(index));
-					
-					//Buttons aktualisieren
-					editCardsView.setStateNavBackForwardButtons(register, index);
-					editCardsView.setStateButtonNew(false);
-					editCardsView.setStateSaveButton(false);
-					editCardsView.setStateDeleteButton(false);
-					editCardsView.setStateButtonBack(false);
-					editCardsView.setStateButtonForward(false);
-				} catch (Exception e1) {
-
-					mainView.displayErrorMessage(e1.getMessage());
-				}
+				newSelected();
 			} else if (e.getActionCommand().equals("Löschen")) {
-				try {
-					// Benutzer fragen, ob er die Karte auch wirklich löschen will...
-					if (cardWantsToBeDeleted()) {
-						register.getCards().remove(editCardsCard);
-						index = register.getNumberOfCards();
-						// Eine nachfolgende Karte müsste nun am gleichen Index stehen...						
-						editCardsCard = register.getCardByIndex(register.getNumberOfCards() - 1);
-						while (editCardsCard == null && index >= 0)
-						{
-							//vorgehende Karte ermitteln
-							index--;
-							editCardsCard = register.getCardByIndex(index);
-						}
-						
-						if(editCardsCard == null)
-						{
-							//Keine Karten mehr vorhanden
-							index = 0;
-							editCardsCard = new Card("", "", register.getMaxId_Card());
-							register.add(editCardsCard);
-							editCardsView.displayCard(editCardsCard);
-							editCardsView.setStateButtonNew(false);
-							editCardsView.setStateDeleteButton(false);
-						}
-						else
-						{
-							// Vor
-							editCardsView.displayCard(editCardsCard);
-							index = register.getNumberOfCards() - 1;
-							editCardsView.setStateButtonNew(true);
-						}
-						editCardsView.setStateSaveButton(false);
-						editCardsView.setStateNavBackForwardButtons(register, index);
-					}
-				} catch (Exception e1) {
-
-					mainView.displayErrorMessage(e1.getMessage());
-				}
+				deleteSelected();
 			}
 			else if(e.getActionCommand().equals("VORDERSEITE")){
-				//
-				// Lernen: d.h. eine Vorder- oder Rückseite wurde angeklickt
-				// --> entweder Vorderseite ausblenden und Rückseite einblenden
-				// oder Vorderseite einblenden und Rückseite ausblenden
-				learningView.showAnswer();
+				frontSelected();
 			}
 			else if(e.getActionCommand().equals("Richtig") || e.getActionCommand().equals("Falsch"))
 			{
-				if(e.getActionCommand().equals("Richtig"))
+				correctOrWrongSelected(e);
+			}
+		}
+
+		private void forwardSelected() {
+			try {											
+				editCardsCard = register.getCardByIndex(index + 1);
+				if(editCardsCard != null)
 				{
-					register.isTrue(learningView.getCardId());
+					index++;
+					editCardsView.displayCard(editCardsCard);
 				}
-				else if(e.getActionCommand().equals("Falsch"))
+				else
 				{
-					register.isFalse(learningView.getCardId());
+					index--;
 				}
-				learningCardsOfABox.remove(learningCard);
-				if(learningCardsOfABox.size() == 0)
-				{
-					learningView.refreshComboboxFachWithData(register.getBoxes());
+				editCardsView.setStateSaveButton(false);	
+				editCardsView.setStateNavBackForwardButtons(register, index);
+
+			} catch (Exception e1) {
+
+				e1.printStackTrace();
+			}
+		}
+
+
+		private void correctOrWrongSelected(ActionEvent e) {
+			if(e.getActionCommand().equals("Richtig"))
+			{
+				register.isTrue(learningView.getCardId());
+			}
+			else if(e.getActionCommand().equals("Falsch"))
+			{
+				register.isFalse(learningView.getCardId());
+			}
+			learningCardsOfABox.remove(learningCard);
+			if(learningCardsOfABox.size() == 0)
+			{
+				learningView.refreshComboboxFachWithData(register.getBoxes());
+			}
+			refreshLearningData(learningCardsOfABox);
+		}
+
+
+		private void frontSelected() {
+			//
+			// Lernen: d.h. eine Vorder- oder Rückseite wurde angeklickt
+			// --> entweder Vorderseite ausblenden und Rückseite einblenden
+			// oder Vorderseite einblenden und Rückseite ausblenden
+			learningView.showAnswer();
+		}
+
+
+		private void deleteSelected() {
+			try {
+				// Benutzer fragen, ob er die Karte auch wirklich löschen will...
+				if (cardWantsToBeDeleted()) {
+					register.getCards().remove(editCardsCard);
+					index = register.getNumberOfCards();
+					// Eine nachfolgende Karte müsste nun am gleichen Index stehen...						
+					editCardsCard = register.getCardByIndex(register.getNumberOfCards() - 1);
+					while (editCardsCard == null && index >= 0)
+					{
+						//vorgehende Karte ermitteln
+						index--;
+						editCardsCard = register.getCardByIndex(index);
+					}
+					
+					if(editCardsCard == null)
+					{
+						//Keine Karten mehr vorhanden
+						index = 0;
+						editCardsCard = new Card("", "", register.getMaxId_Card());
+						register.add(editCardsCard);
+						editCardsView.displayCard(editCardsCard);
+						editCardsView.setStateButtonNew(false);
+						editCardsView.setStateDeleteButton(false);
+					}
+					else
+					{
+						// Vor
+						editCardsView.displayCard(editCardsCard);
+						index = register.getNumberOfCards() - 1;
+						editCardsView.setStateButtonNew(true);
+					}
+					editCardsView.setStateSaveButton(false);
+					editCardsView.setStateNavBackForwardButtons(register, index);
 				}
-				refreshLearningData(learningCardsOfABox);
+			} catch (Exception e1) {
+
+				mainView.displayErrorMessage(e1.getMessage());
+			}
+		}
+
+
+		private void newSelected() {
+			try {
+				index = register.getNumberOfCards();
+				editCardsCard = new Card("", "", register.getMaxId_Card());
+				register.add(editCardsCard);
+				
+				//Erfasste Karte neu laden (am Ende der Liste)
+				editCardsView.displayCard(register.getCardByIndex(index));
+				
+				//Buttons aktualisieren
+				editCardsView.setStateNavBackForwardButtons(register, index);
+				editCardsView.setStateButtonNew(false);
+				editCardsView.setStateSaveButton(false);
+				editCardsView.setStateDeleteButton(false);
+				editCardsView.setStateButtonBack(false);
+				editCardsView.setStateButtonForward(false);
+			} catch (Exception e1) {
+
+				mainView.displayErrorMessage(e1.getMessage());
+			}
+		}
+
+
+		private void navBack() {
+			try {
+				if (!continueWithoutSaving())
+					saveSelected();
+				if (index != 0) {
+					index--;
+				}
+				editCardsCard = register.getCardByIndex(index);
+				editCardsView.displayCard(editCardsCard);
+				editCardsView.setStateNavBackForwardButtons(register, index);
+				editCardsView.setStateSaveButton(false);
+
+				if (register.getCardByIndex(index).getFront().equals("")
+						&& register.getCardByIndex(index).getBack()
+								.equals("")) {
+					editCardsView.setStateDeleteButton(false);
+				} else {
+					editCardsView.setStateDeleteButton(true);
+				}
+
+			} catch (Exception e1) {
+
+				mainView.displayErrorMessage(e1.getMessage());
 			}
 		}
 
@@ -369,7 +385,7 @@ public class Controller {
 		/**
 		 * Saves a card
 		 */
-		private void saveCard() {
+		private void saveSelected() {
 			try {
 				editCardsCard.setCard(editCardsView.getFrontText(), editCardsView.getBackText());				
 				editCardsView.setStateDeleteButton(true);
