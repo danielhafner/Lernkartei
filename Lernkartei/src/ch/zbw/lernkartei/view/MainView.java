@@ -7,6 +7,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.io.File;
+import java.io.FilenameFilter;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -21,6 +23,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.text.Utilities;
+
 import ch.zbw.lernkartei.controller.Controller.MyMenuActionListener;
 import ch.zbw.lernkartei.model.Language;
 import ch.zbw.lernkartei.model.TranslationDataSet;
@@ -97,9 +102,37 @@ public class MainView extends JFrame {
 
 		this.translationArrayList = new TranslationDataSet();
 		this.jfImportFile = new JFileChooser();
+		this.jfImportFile.setFileFilter(new FileFilter() {
+			
+			@Override
+			public String getDescription() {
+				return "Files with comma-separated values (.csv)";
+			}
+			
+			@Override
+			public boolean accept(File f) {
+				if(f.isDirectory())
+					return false;
+				
+				String extension = null;		
+				int i = f.getName().lastIndexOf(".");
+				if(i > 0)
+					{
+					//Ab Position des Punktes die Dateiendung ermitteln..
+					extension = f.getName().substring(i+1);
+					}
+						
+				if(extension != null)
+				{
+					if(extension.equals("csv"))
+						return true;
+				}
+				return false;
+			}
+		});
 
 		ImageIcon imageIconBackground = new ImageIcon(this.getClass().getResource("/bg-sea.jpg"));
-		imageIconBackground.setDescription("Isch das en Scheiss");
+		imageIconBackground.setDescription("Hintergrundbeschreibung :-)");
 		labelImageIconBackground = new JLabel(imageIconBackground);
 		labelWelcome = new JLabel(""
 				+ "<html><body>"
