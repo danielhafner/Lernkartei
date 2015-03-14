@@ -35,9 +35,9 @@ public class EditCardsView extends JPanel {
 	private JLabel labelBack;
 	private JTextArea textAreaBack;
 
-	private JButton buttonNewCard;
-	private JButton buttonDeleteCard;
-	private JButton buttonSaveCard;
+	public JButton buttonNewCard;
+	public JButton buttonDeleteCard;
+	public JButton buttonSaveCard;
 	private JButton buttonNavBack;
 	private JButton buttonNavForward;
 	

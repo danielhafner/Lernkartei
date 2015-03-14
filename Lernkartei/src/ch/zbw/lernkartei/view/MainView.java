@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.io.Console;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -303,7 +304,6 @@ public class MainView extends JFrame {
 	{
 		this.menuItemResetLearningStatus.addActionListener(listener);
 	}
-
 	
 	/** Switchs into the selected Language
 	 * @param e
@@ -389,11 +389,15 @@ public class MainView extends JFrame {
 		for (Component comp : comps) {
 			compList.add(comp);
 			if (comp instanceof Container)
-				compList.addAll(getAllComponents((Container) comp));
+			{
+				if(getAllComponents((Container) comp).size() > 0)
+				{
+				  compList.addAll(getAllComponents((Container) comp));
+				}
+			}	
 		}
 		return compList;
 	}
-
 	
 	/** Gets all Components of the mainPanel and call the Method
 	 *  translateTExtOfAControl for each Control
@@ -403,7 +407,7 @@ public class MainView extends JFrame {
 		this.previousLanguage = this.language;
 		this.language = newLanguage;
 		
-		ArrayList<Component> a = getAllComponents(this.panelLearning);
+		ArrayList<Component> a = new ArrayList<Component>(); //getAllComponents(this.panelLearning);
 		a.addAll(getAllComponents(this.panelEditCards));
 		a.addAll(getAllComponents(this.panelMain));
 		a.addAll(getAllComponents(this.menuBar));
@@ -415,8 +419,7 @@ public class MainView extends JFrame {
 		a.add(this.menuItemResetLearningStatus);
 		a.add(this.menuItemImport);
 		a.add(this.menuItemExport);
-		a.add(this.menuItemClose);
-			
+		a.add(this.menuItemClose);	
 		for (Component c : a) {			
 			translateTextOfAControl(c);
 		}
