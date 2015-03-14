@@ -193,6 +193,7 @@ public class Controller {
 			} catch (Exception e1) {
 				mainView.displayErrorMessage(e1.getMessage());
 			}
+			learningView.activateProgressBarThread();
 			learningView.initializeWithData(register.getBoxes(), register);
 		}
 		/**
@@ -209,7 +210,7 @@ public class Controller {
 			if(learningView.getTargetBox() == 0)
 			{
 				if (learningView.getTargetBox() == 0)
-					learningView.setTargetBox(mainView.askForTargetBox());
+					learningView.setTargetBox(mainView.askForTargetBox(register.getBoxes()));
 			}
 			
 			learningView.activateProgressBarThread();
@@ -222,6 +223,7 @@ public class Controller {
 		 */
 		private void editCardsSelected() {
 			try {
+				learningView.disableProgressBarThread();
 				editCardsAllCards = register.getSortedCardsByCardID();
 			} catch (Exception e1) {
 				editCardsView.showMessageBox(e1.getMessage());
@@ -558,7 +560,6 @@ public class Controller {
 		int countEffektiv = 0;
 		int countMax = 0;
 		int i = 1;
-		int j = 1;
 		{
 		try {
 			countMax = (register.getCards().size() * 7);

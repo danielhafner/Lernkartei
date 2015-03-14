@@ -51,7 +51,7 @@ public class TranslationDataSet extends ArrayList<String[]>{
 		this.addNewToTranslation("Sprache", "Language", "Langue", "Lingua");
 		this.addNewToTranslation("Import", "Import", "Importation", "Importazione");
 		this.addNewToTranslation("Export", "Export", "Exportation", "Exportazione");
-		this.addNewToTranslation("Karten verwalten", "Edit cards", "Gestion des cartes", "Gestione mappe");
+		this.addNewToTranslation("Karten verwalten", "Edit cards", "Gestion des cartes", "Gestione carte");
 		this.addNewToTranslation("Deutsch", "German", "Allemand", "Tedesco");
 		this.addNewToTranslation("Französisch", "French", "Francais", "Francese");
 		this.addNewToTranslation("Italienisch", "Italian", "Italien", "Italiano");
@@ -65,6 +65,13 @@ public class TranslationDataSet extends ArrayList<String[]>{
 		this.addNewToTranslation("Fach", "Box", "Compartiment", "Scomparto");
 		this.addNewToTranslation("Willst du deinen Lernstand speichern?", "Want to save your skill level?", "Vous voulez économiser votre niveau de compétence?", "Vuoi risparmiare il vostro livello di abilità?");
 		this.addNewToTranslation("Hinweis", "Note", "Remarque", "Nota");
+		this.addNewToTranslation("Dein persönliches Ziel", "Your personal goal", "Votre objectif personnel", "Il tuo obiettivo personale");
+		this.addNewToTranslation("Bis zu welchem Fach möchtest du lernen?", "How far will you go today?", "Jusqu'où irez-vous aujourd'hui?", "Fino a che punto andrai oggi?");
+		this.addNewToTranslation("Anzahl Karten   ", "Number of cards   ", "Numéro des cartes   ", "Numero di carte   ");
+		this.addNewToTranslation("Total Karten   ", "Total cards   ", "Nombre de cartes   ", "Totale carte   ");
+		this.addNewToTranslation("Anteil korrekt   ", "Proportion correct   ", "Proportion correcte   ", "percentuale di corretto   ");
+		this.addNewToTranslation("Anteil falsch   ", "Proportion of false   ", "Proportion correcte   ", "percentuale di falso   ");
+		this.addNewToTranslation("Du hast dein Lernziel erreicht!", "You have reached your learning goal!", "Vous avez atteint votre objectif d'apprentissage!", "Hai raggiunto il tuo obiettivo di apprendimento!");
 	}
 	
 	/** Gets the translated Text of a Word (Originaltext)

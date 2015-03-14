@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,6 +25,8 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileFilter;
+
+import com.sun.org.apache.bcel.internal.generic.InstructionTargeter;
 
 import ch.zbw.lernkartei.controller.Controller.MyMenuActionListener;
 import ch.zbw.lernkartei.model.Language;
@@ -420,7 +423,7 @@ public class MainView extends JFrame {
 		a.add(this.menuItemResetLearningStatus);
 		a.add(this.menuItemImport);
 		a.add(this.menuItemExport);
-		a.add(this.menuItemClose);	
+		a.add(this.menuItemClose);
 		for (Object c : a) {			
 			translateTextOfAControl(c);
 		}
@@ -477,10 +480,18 @@ public class MainView extends JFrame {
 		return this.language;
 	}
 	
-	public int askForTargetBox()
-	{
-		String[] boxes = {"1", "2", "3", "4", "5", "6", "7"};
-		String s = (String)(JOptionPane.showInputDialog(this, "Bis zu welchem Fach möchtest du lernen?" , "Dein persönliches Ziel", JOptionPane.NO_OPTION, null, boxes, boxes[6]));
+	public int askForTargetBox(ArrayList faecher)
+	{		
+		String[] boxes = {"1","2","3","4","5","6","7"};
+		String s = (String)(JOptionPane.showInputDialog(
+				this
+				,translationArrayList.getTranslatedText("Bis zu welchem Fach möchtest du lernen?", Language.Deutsch, this.language)
+				,translationArrayList.getTranslatedText("Dein persönliches Ziel", Language.Deutsch, this.language)
+				,JOptionPane.NO_OPTION
+				,null
+				,boxes
+				,boxes[faecher.size()-1]));
+		
 		if(s != null && s!= "" && Integer.parseInt(s) != 0)
 		{
 			return Integer.parseInt(s);

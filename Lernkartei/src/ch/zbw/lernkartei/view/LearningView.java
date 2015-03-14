@@ -19,12 +19,11 @@ import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
-
 import ch.zbw.lernkartei.controller.Controller.MeinButtonActionListener;
 import ch.zbw.lernkartei.controller.Controller.MyComboboxItemListener;
 import ch.zbw.lernkartei.model.Card;
 import ch.zbw.lernkartei.model.Register;
+import ch.zbw.lernkartei.model.TranslationDataSet;
 
 /**
  * @author Ruel
@@ -92,7 +91,7 @@ public class LearningView extends JPanel{
 		this.labelBack = new JLabel("Rückseite");
 		this.buttonCardBack = new JButton();
 
-		this.panelAnswer = new JPanel();	
+		this.panelAnswer = new JPanel();
 		ImageIcon imageIconCorrect = new ImageIcon(this.getClass().getResource("/correct.png"));
 		this.buttonCorrect = new JButton("Richtig", imageIconCorrect);
 		ImageIcon imageIconWrong = new ImageIcon(this.getClass().getResource("/wrong.png"));
@@ -425,6 +424,6 @@ public class LearningView extends JPanel{
 	
 	public void disableProgressBarThread()
 	{
-		this.progressBarThread.interrupt();
+		this.repaint();
 	}
 }
