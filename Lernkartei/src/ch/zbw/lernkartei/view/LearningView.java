@@ -367,7 +367,7 @@ public class LearningView extends JPanel{
 		}
 	}
 	
-	/** Sets the Statistics of Learning
+	/** Sets the Statistics
 	 * @param cardOfBox
 	 * @param totalCardsOfBox
 	 * @param quotaCorrect
@@ -378,7 +378,7 @@ public class LearningView extends JPanel{
 		this.labelActualCardOfBoxResult.setText(totalCardsOfBox + "");
 		this.labelTotalCardsResult.setText(totalCards + "");
 		this.labelQuotaCorrectResult.setText(quotaCorrect + "%");
-		this.labelQuotaWrongResult.setText(quotaCorrect + "%");
+		this.labelQuotaWrongResult.setText(quotaWrong + "%");
 	}
 	
 	public int getBox()

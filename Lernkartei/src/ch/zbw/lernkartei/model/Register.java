@@ -15,6 +15,11 @@ public class Register {
 	private ArrayList<Card> cards;
 	private int maxId_Card;
 	private static final Path internalPath =  Paths.get("src/data.csv");
+	
+	//Statistics
+	private int answeredQuestions = 0;
+	private int answeredCorrect = 0;
+	private int answeredWrong = 0;
 
 	public Register() {
 		// Dieser Konstruktor wird nur für Testzwecke aufgerufen - so
@@ -277,6 +282,8 @@ public class Register {
 				break;
 			}
 		}
+		this.answeredQuestions++;
+		this.answeredCorrect++;
 	}
 	
 	public void isFalse(int id)
@@ -297,6 +304,8 @@ public class Register {
 				break;
 			}
 		}
+		this.answeredQuestions++;
+		this.answeredWrong++;
 	}
 	
 	public ArrayList<Integer> getBoxes()
@@ -331,5 +340,41 @@ public class Register {
 		}
 		this.maxId_Card += 1;
 		return this.maxId_Card;
+	}
+	
+	public int getAnsweredQuestions() {
+		return answeredQuestions;
+	}
+
+	public void setAnsweredQuestions() {
+		this.answeredQuestions++;
+	}
+
+	public int getAnsweredCorrect() {
+		return answeredCorrect;
+	}
+
+	public void setAnsweredCorrect() {
+		this.answeredCorrect++;
+	}
+
+	public int getAnsweredWrong() {
+		return answeredWrong;
+	}
+
+	public void setAnsweredWrong() {
+		this.answeredWrong++;
+	}
+
+	public int calculateQuotaCorrect() {
+		if(this.answeredCorrect != 0)
+			return (this.answeredCorrect * 100 / this.answeredQuestions);
+		return 0;
+	}
+
+	public int calculateQuotaWrong() {
+		if(this.answeredWrong != 0)
+			return (this.answeredWrong * 100 / this.answeredQuestions);
+		return 0;
 	}
 }

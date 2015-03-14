@@ -486,7 +486,12 @@ public class Controller {
 		this.learningCard = cardsOfABox.get(0);
 		this.learningView.ShowQuestion(this.learningCard.getFront(), this.learningCard.getBack(), this.learningCard.getIdCard());
 		try {
-			this.learningView.setStatistics(register.getCardsByBox(learningView.getBox()).size(), register.getNumberOfCards(), 100, 100);
+			this.learningView.setStatistics(
+					register.getCardsByBox(learningView.getBox()).size()
+					,register.getNumberOfCards()
+					,register.calculateQuotaCorrect()
+					,register.calculateQuotaWrong()
+					);
 		} catch (Exception e) {
 			learningView.displayErrorMessage(e.getMessage());
 		}
