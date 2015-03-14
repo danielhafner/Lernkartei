@@ -333,6 +333,7 @@ public class Register {
 			 }
 		  }
 		}
+		Collections.sort(list);
 		return list;
 	}
 	

@@ -191,7 +191,6 @@ public class Controller {
 			try {
 				learningCardsOfABox = register.getCardsByBox(1);
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				mainView.displayErrorMessage(e1.getMessage());
 			}
 			learningView.initializeWithData(register.getBoxes(), register);
@@ -203,11 +202,20 @@ public class Controller {
 			try {
 				learningCardsOfABox = register.getCardsByBox(register.getBoxes().get(0));
 				learningCard = learningCardsOfABox.get(0);
+				learningView.initializeWithData(register.getBoxes(), register);
 			} catch (Exception e1) {
 				editCardsView.showMessageBox(e1.getMessage());
-			}				
-			learningView.initializeWithData(register.getBoxes(), register);
+			}
+			if(learningView.getTargetBox() == 0)
+			{
+				if (learningView.getTargetBox() == 0)
+					learningView.setTargetBox(mainView.askForTargetBox());
+			}
+			
+			learningView.activateProgressBarThread();
 			mainView.repaintTheFrame(learningView);
+			
+
 		}
 		/**
 		 * Menu Item Edit Cards selected
@@ -295,9 +303,10 @@ public class Controller {
 			learningCardsOfABox.remove(learningCard);
 			if(learningCardsOfABox.size() == 0)
 			{
-				learningView.refreshComboboxFachWithData(register.getBoxes());				
+				learningView.refreshComboboxFachWithData(register.getBoxes());;
 			}
 			refreshLearningData(learningCardsOfABox);
+			learningView.setZahl(calculateNumberForProgressBar());
 		}
 
 		/**
@@ -460,8 +469,6 @@ public class Controller {
 	 * Inner Class for all ItemListeners
 	 */
 	public class MyComboboxItemListener implements ItemListener {
-		
-		@Override
 		public void itemStateChanged(ItemEvent arg0) {
 			
 			if(arg0.getStateChange() == ItemEvent.SELECTED)
@@ -542,5 +549,41 @@ public class Controller {
 		@Override
 		public void windowOpened(WindowEvent e) {	
 		}
+	}
+	
+	public int calculateNumberForProgressBar()
+	{
+		// 100 entspricht einem vollen Progressbar
+		// 0 = leer	
+		int countEffektiv = 0;
+		int countMax = 0;
+		int i = 1;
+		int j = 1;
+		{
+		try {
+			countMax = (register.getCards().size() * 7);
+			
+			for (i = 1; i <= 7; i++)
+			{
+				if(register.getCardsByBox(i).size() > 0)
+				{
+					countEffektiv += (register.getCardsByBox(i).size() * (7-i));
+				}
+			}
+			
+			// Sind ALL Faecher bis zum persoenlichen Ziel leer --> Ziel erreicht!
+			for (i = 1; i <= 7; i++)
+			{
+				if(register.getCardsByBox(i).size() > 1 && i == learningView.getTargetBox())
+				{
+					return 100;
+				}
+			}			
+				
+			} catch (Exception e) {
+				learningView.displayErrorMessage(e.getMessage());
+			}
+		}
+	    return ((countMax - countEffektiv) * 100 / countMax);
 	}	
 }

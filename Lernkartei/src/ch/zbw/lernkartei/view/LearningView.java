@@ -7,8 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.*;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,8 +15,12 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
+
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
+
 import ch.zbw.lernkartei.controller.Controller.MeinButtonActionListener;
 import ch.zbw.lernkartei.controller.Controller.MyComboboxItemListener;
 import ch.zbw.lernkartei.model.Card;
@@ -62,6 +65,13 @@ public class LearningView extends JPanel{
 	private JLabel labelQuotaWrong;
 	private JLabel labelQuotaWrongResult;
 	
+	private int targetBox = 0;
+	private JProgressBar progressBar;
+	private PaintProgressBar paintProgressBar;
+	private Thread progressBarThread;
+	private int zahl = 0;
+	private int zahlMax = 0;
+	
 	private GridBagConstraints gridBagContraints;
 	
 	/**
@@ -105,6 +115,10 @@ public class LearningView extends JPanel{
 		this.panelQuotaWrong = new JPanel(new BorderLayout());
 		this.labelQuotaWrong = new JLabel("Anteil falsch   ");
 		this.labelQuotaWrongResult = new JLabel("-");
+		
+		this.progressBar = new JProgressBar();
+		this.paintProgressBar = new PaintProgressBar(progressBar, this);
+		this.progressBarThread = new Thread(paintProgressBar, "Mein Fortschritt");
 		
 		this.gridBagContraints = new GridBagConstraints();
 		paint();
@@ -196,9 +210,13 @@ public class LearningView extends JPanel{
 		this.panelStatusBar.add(panelCountTotalCards);
 		this.panelStatusBar.add(panelQuotaCorrect);
 		this.panelStatusBar.add(panelQuotaWrong);
-
 		this.add(panelStatusBar, gridBagContraints);	
-
+		
+		gridBagContraints.fill = GridBagConstraints.HORIZONTAL;
+		gridBagContraints.gridy = 6;
+		gridBagContraints.ipadx = 4;
+		this.add(this.progressBar, gridBagContraints);
+		
 		this.setVisible(true);
 	}
 	
@@ -217,9 +235,9 @@ public class LearningView extends JPanel{
 	 */
 	public void initializeWithData(ArrayList<Integer> boxes, Register register) {			
 		try {
+			java.util.Collections.sort(boxes);
 			this.comboboxFach.removeAllItems();
-			Iterator<Integer> it = boxes.iterator();
-			
+			Iterator<Integer> it = boxes.iterator();	
 			while(it.hasNext())
 			{
 				Integer i = it.next();
@@ -227,8 +245,7 @@ public class LearningView extends JPanel{
 				{
 					this.comboboxFach.addItem(i);
 				}
-			}
-			
+			}		
 			Card c = register.getCardByIndex(0);
 			this.cardId = c.getIdCard();
 			this.buttonCardFront.setText(c.getFront());
@@ -237,7 +254,6 @@ public class LearningView extends JPanel{
 			this.buttonCardBack.setText(c.getBack());
 			this.buttonCardBack.setActionCommand("RÜCKSEITE");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			this.displayErrorMessage(e.getMessage());
 		}
 	}
@@ -376,5 +392,39 @@ public class LearningView extends JPanel{
 	public int getBox()
 	{
 		return (Integer.parseInt(this.comboboxFach.getSelectedItem().toString()));
+	}
+	
+	public void setTargetBox(int targetBox)
+	{
+		this.targetBox = targetBox;
+	}
+	
+	public int getTargetBox()
+	{
+		return this.targetBox;
+	}
+	
+	public void setZahl(int zahl)
+	{
+		this.zahl = zahl;
+	}
+	
+	public int getZahl()
+	{
+		return this.zahl;
+	}
+	
+	public void setZahlMax(int zahlMax)
+	{
+		this.progressBar.setMaximum(zahlMax);
+	}
+	
+	public void activateProgressBarThread(){
+		progressBarThread.start();
+	}
+	
+	public void disableProgressBarThread()
+	{
+		this.progressBarThread.interrupt();
 	}
 }

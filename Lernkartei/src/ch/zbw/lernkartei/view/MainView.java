@@ -24,7 +24,6 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileFilter;
-import javax.swing.text.Utilities;
 
 import ch.zbw.lernkartei.controller.Controller.MyMenuActionListener;
 import ch.zbw.lernkartei.model.Language;
@@ -476,5 +475,16 @@ public class MainView extends JFrame {
 	public Language getCurrentLanguage()
 	{
 		return this.language;
+	}
+	
+	public int askForTargetBox()
+	{
+		String[] boxes = {"1", "2", "3", "4", "5", "6", "7"};
+		String s = (String)(JOptionPane.showInputDialog(this, "Bis zu welchem Fach möchtest du lernen?" , "Dein persönliches Ziel", JOptionPane.NO_OPTION, null, boxes, boxes[6]));
+		if(s != null && s!= "" && Integer.parseInt(s) != 0)
+		{
+			return Integer.parseInt(s);
+		}
+	return 0;
 	}
 }
