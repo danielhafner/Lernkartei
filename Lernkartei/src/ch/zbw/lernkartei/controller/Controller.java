@@ -35,6 +35,7 @@ public class Controller {
 	private ArrayList<Card> editCardsAllCards;
 	private ArrayList<Card> learningCardsOfABox;
 	private int index;
+	private TranslationDataSet translate;
 
 	/** Konstructor
 	 * @param mainView
@@ -50,6 +51,7 @@ public class Controller {
 		this.register = register;
 		addListener();
 		this.mainView.paint();
+		this.translate = new TranslationDataSet();
 	}
 
 	/**
@@ -210,7 +212,10 @@ public class Controller {
 				
 				if(learningCardsOfABox.size() == 1 && learningCard.getBack().equals("") &&learningCard.getFront().equals(""))
 				{
-					throw new Exception("There are no Cards available. Please enter some Cards.");				
+					throw new Exception(translate.getTranslatedText(
+							"Es sind keine Karten vorhanden. Bitte Karten erfassen."
+							,Language.Deutsch
+							,mainView.getCurrentLanguage()));				
 				}
 				else
 				{
@@ -326,7 +331,7 @@ public class Controller {
 				learningView.refreshComboboxFachWithData(register.getBoxes());;
 			}
 			refreshLearningData(learningCardsOfABox);
-			learningView.setPercentProgressBar(calculateNumberForProgressBar());
+			learningView.setPercentProgressBar(getCalculateNumberForProgressBar());
 		}
 
 		/**
@@ -571,7 +576,7 @@ public class Controller {
 		}
 	}
 	
-	public int calculateNumberForProgressBar()
+	public int getCalculateNumberForProgressBar()
 	{
 		// 100 entspricht einem vollen Progressbar
 		// 0 = leer	

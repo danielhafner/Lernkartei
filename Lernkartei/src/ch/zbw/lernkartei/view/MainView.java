@@ -104,34 +104,6 @@ public class MainView extends JFrame {
 
 		this.translationArrayList = new TranslationDataSet();
 		this.jfImportFile = new JFileChooser();
-		this.jfImportFile.setFileFilter(new FileFilter() {
-			
-			@Override
-			public String getDescription() {
-				return "Files with comma-separated values (.csv)";
-			}
-			
-			@Override
-			public boolean accept(File f) {
-				if(f.isDirectory())
-					return false;
-				
-				String extension = null;		
-				int i = f.getName().lastIndexOf(".");
-				if(i > 0)
-					{
-					//Ab Position des Punktes die Dateiendung ermitteln..
-					extension = f.getName().substring(i+1);
-					}
-						
-				if(extension != null)
-				{
-					if(extension.equals("csv"))
-						return true;
-				}
-				return false;
-			}
-		});
 
 		ImageIcon imageIconBackground = new ImageIcon(this.getClass().getResource("/bg-sea.jpg"));
 		imageIconBackground.setDescription("Hintergrundbeschreibung :-)");
@@ -152,7 +124,7 @@ public class MainView extends JFrame {
 	 *  Paints the mainView
 	 */
 	public void paint() {
-		this.language = Language.Deutsch;
+		this.language = Language.Deutsch;		
 		setTitle("Vokabeltrainer R. Holderegger | E. Schwarz | D. Hafner");
 		setIconImage(new ImageIcon(this.getClass().getResource("/zbw.jpg")).getImage());
 
@@ -189,6 +161,7 @@ public class MainView extends JFrame {
 		labelImageIconBackground.add(this.labelWelcome);
 		this.add(labelImageIconBackground);
 		this.setVisible(true);
+		this.jfImportFile.setFileFilter(new MyFileFilter(this));
 	}
 
 	/** Repaints a certain Panel

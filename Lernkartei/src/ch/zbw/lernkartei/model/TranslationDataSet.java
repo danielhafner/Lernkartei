@@ -71,7 +71,9 @@ public class TranslationDataSet extends ArrayList<String[]>{
 		this.addNewToTranslation("Total Karten   ", "Total cards   ", "Nombre de cartes   ", "Totale carte   ");
 		this.addNewToTranslation("Anteil korrekt   ", "Proportion correct   ", "Proportion correcte   ", "percentuale di corretto   ");
 		this.addNewToTranslation("Anteil falsch   ", "Proportion of false   ", "Proportion correcte   ", "percentuale di falso   ");
+		this.addNewToTranslation("Dateien mit kommagetrennten Werten (.csv)", "Files with comma-separated values (.csv)", "Fichiers avec des valeurs séparées par des virgules (.csv)", "I file con valori separati da virgole (.csv)");
 		this.addNewToTranslation("Du hast dein Lernziel erreicht!", "You have reached your learning goal!", "Vous avez atteint votre objectif d'apprentissage!", "Hai raggiunto il tuo obiettivo di apprendimento!");
+		this.addNewToTranslation("Es sind keine Karten vorhanden. Bitte Karten erfassen.", "There are no Cards available. Please enter some Cards.", "Il n'y a pas de cartes disponibles. Se il vous plaît entrer certaines cartes.", "Non ci sono carte disponibili. Si prega di inserire alcuni Cards.");
 	}
 	
 	/** Gets the translated Text of a Word (Originaltext)
