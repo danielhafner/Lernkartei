@@ -6,19 +6,19 @@ import javax.swing.JProgressBar;
 import ch.zbw.lernkartei.model.Language;
 import ch.zbw.lernkartei.model.TranslationDataSet;
 
-public class PaintProgressBar implements Runnable{
+public class MyRunnableProgressBar implements Runnable{
 	private JProgressBar bar;
 	private LearningView learningView;
 	private TranslationDataSet translation;
 	
-	public PaintProgressBar(JProgressBar bar, LearningView learningView)
+	public MyRunnableProgressBar(JProgressBar bar, LearningView learningView)
 	{
 		this.bar = bar;
 		this.learningView = learningView;
 		this.translation = new TranslationDataSet();
 	}
 	
-	public void run() {		
+	public void run() {
 	int percent = 0;
 	try {
 		while(percent < 100)

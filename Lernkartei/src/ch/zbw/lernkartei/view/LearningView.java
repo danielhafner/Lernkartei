@@ -66,7 +66,7 @@ public class LearningView extends JPanel{
 	
 	private int targetBox = 0;
 	private JProgressBar progressBar;
-	private PaintProgressBar paintProgressBar;
+	private MyRunnableProgressBar paintProgressBar;
 	private Thread progressBarThread;
 	private int percentProgressBar = 0;
 	private int zahlMax = 0;
@@ -116,7 +116,7 @@ public class LearningView extends JPanel{
 		this.labelQuotaWrongResult = new JLabel("-");
 		
 		this.progressBar = new JProgressBar();
-		this.paintProgressBar = new PaintProgressBar(progressBar, this);
+		this.paintProgressBar = new MyRunnableProgressBar(progressBar, this);
 		this.progressBarThread = new Thread(paintProgressBar, "Mein Fortschritt");
 		
 		this.gridBagContraints = new GridBagConstraints();
