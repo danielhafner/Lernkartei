@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.1.8" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
-  realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
+<class-diagram version="1.1.8" icons="true" automaticImage="PNG" always-add-relationships="false" 
+  generalizations="false" realizations="false" associations="true" dependencies="true" nesting-relationships="false">  
   <class id="1" language="java" name="ch.zbw.lernkartei.main.Main" project="Lernkartei" 
     file="/Lernkartei/src/ch/zbw/lernkartei/main/Main.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="157" width="235" x="670" y="37"/>    
+    <position height="157" width="235" x="41" y="37"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="ch.zbw.lernkartei.controller.Controller" project="Lernkartei" 
     file="/Lernkartei/src/ch/zbw/lernkartei/controller/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="207" width="314" x="1526" y="37"/>    
+    <position height="207" width="314" x="1473" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="ch.zbw.lernkartei.controller.Controller.MyMenuActionListener" project="Lernkartei" 
     file="/Lernkartei/src/ch/zbw/lernkartei/controller/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="225" width="197" x="271" y="284"/>    
+    <position height="225" width="197" x="46" y="284"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -31,7 +31,7 @@
   <class id="4" language="java" name="ch.zbw.lernkartei.controller.Controller.MeinButtonActionListener" 
     project="Lernkartei" file="/Lernkartei/src/ch/zbw/lernkartei/controller/Controller.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="261" width="236" x="1629" y="284"/>    
+    <position height="261" width="236" x="513" y="284"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -41,7 +41,7 @@
   <class id="5" language="java" name="ch.zbw.lernkartei.controller.Controller.MyComboboxItemListener" 
     project="Lernkartei" file="/Lernkartei/src/ch/zbw/lernkartei/controller/Controller.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="99" width="190" x="41" y="284"/>    
+    <position height="99" width="190" x="283" y="284"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -50,7 +50,7 @@
   </class>  
   <class id="6" language="java" name="ch.zbw.lernkartei.view.LearningView" project="Lernkartei" 
     file="/Lernkartei/src/ch/zbw/lernkartei/view/LearningView.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="545" width="352" x="863" y="284"/>    
+    <position height="545" width="352" x="789" y="284"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -59,7 +59,7 @@
   </class>  
   <enumeration id="7" language="java" name="ch.zbw.lernkartei.view.MyDimension" project="Lernkartei" 
     file="/Lernkartei/src/ch/zbw/lernkartei/view/MyDimension.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="189" width="243" x="48" y="37"/>    
+    <position height="189" width="243" x="867" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -68,7 +68,7 @@
   </enumeration>  
   <enumeration id="8" language="java" name="ch.zbw.lernkartei.view.MyFont" project="Lernkartei" 
     file="/Lernkartei/src/ch/zbw/lernkartei/view/MyFont.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="172" width="239" x="1236" y="37"/>    
+    <position height="172" width="239" x="588" y="37"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -77,7 +77,7 @@
   </enumeration>  
   <class id="9" language="java" name="ch.zbw.lernkartei.view.EditCardsView" project="Lernkartei" 
     file="/Lernkartei/src/ch/zbw/lernkartei/view/EditCardsView.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="729" width="315" x="508" y="284"/>    
+    <position height="765" width="315" x="1555" y="284"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -86,7 +86,7 @@
   </class>  
   <class id="10" language="java" name="ch.zbw.lernkartei.model.Card" project="Lernkartei" 
     file="/Lernkartei/src/ch/zbw/lernkartei/model/Card.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="405" width="291" x="1547" y="1053"/>    
+    <position height="405" width="291" x="1213" y="908"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -95,7 +95,7 @@
   </class>  
   <enumeration id="11" language="java" name="ch.zbw.lernkartei.model.Language" project="Lernkartei" 
     file="/Lernkartei/src/ch/zbw/lernkartei/model/Language.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="172" width="232" x="954" y="37"/>    
+    <position height="172" width="232" x="316" y="37"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -104,7 +104,7 @@
   </enumeration>  
   <class id="12" language="java" name="ch.zbw.lernkartei.model.Register" project="Lernkartei" 
     file="/Lernkartei/src/ch/zbw/lernkartei/model/Register.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="567" width="250" x="1255" y="284"/>    
+    <position height="549" width="250" x="1181" y="284"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -113,7 +113,7 @@
   </class>  
   <class id="13" language="java" name="ch.zbw.lernkartei.model.TranslationDataSet" project="Lernkartei" 
     file="/Lernkartei/src/ch/zbw/lernkartei/model/TranslationDataSet.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="171" width="283" x="339" y="37"/>    
+    <position height="171" width="283" x="1150" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -121,13 +121,13 @@
     </display>  
   </class>  
   <association id="14">    
-    <bendpoint x="1556" y="284"/>    
+    <bendpoint x="1524" y="284"/>    
     <end type="SOURCE" refId="2" navigable="false">      
       <attribute id="15" name="learningCard">        
-        <position height="0" width="0" x="-7" y="-44"/>      
+        <position height="18" width="69" x="1198" y="517"/>      
       </attribute>      
       <multiplicity id="16" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-7" y="-44"/>      
+        <position height="16" width="23" x="1318" y="933"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
@@ -146,13 +146,13 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="20">    
-    <bendpoint x="1577" y="284"/>    
+    <bendpoint x="1461" y="284"/>    
     <end type="SOURCE" refId="2" navigable="false">      
       <attribute id="21" name="editCardsCard">        
-        <position height="0" width="0" x="-7" y="-44"/>      
+        <position height="18" width="77" x="1300" y="905"/>      
       </attribute>      
       <multiplicity id="22" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-7" y="-44"/>      
+        <position height="0" width="0" x="-327" y="-573"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
@@ -160,9 +160,7 @@
   </association>  
   <association id="23">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="24" name="register">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
+      <attribute id="24" name="register"/>      
       <multiplicity id="25" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
@@ -175,39 +173,31 @@
     <end type="TARGET" refId="5"/>  
   </nesting>  
   <association id="27">    
-    <bendpoint x="1598" y="284"/>    
+    <bendpoint x="1482" y="284"/>    
     <end type="SOURCE" refId="2" navigable="false">      
       <attribute id="28" name="learningCardsOfABox">        
-        <position height="0" width="0" x="-7" y="-44"/>      
+        <position height="18" width="114" x="1218" y="470"/>      
       </attribute>      
-      <multiplicity id="29" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="-7" y="-44"/>      
-      </multiplicity>    
+      <multiplicity id="29" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="30">    
-    <bendpoint x="1535" y="284"/>    
+    <bendpoint x="1503" y="284"/>    
     <end type="SOURCE" refId="2" navigable="false">      
       <attribute id="31" name="editCardsAllCards">        
-        <position height="0" width="0" x="-7" y="-44"/>      
+        <position height="18" width="95" x="1218" y="457"/>      
       </attribute>      
-      <multiplicity id="32" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="-7" y="-44"/>      
-      </multiplicity>    
+      <multiplicity id="32" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="33">    
     <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="34" name="cards">        
-        <position height="0" width="0" x="-7" y="-44"/>      
-      </attribute>      
-      <multiplicity id="35" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="-7" y="-44"/>      
-      </multiplicity>    
+      <attribute id="34" name="cards"/>      
+      <multiplicity id="35" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
@@ -222,9 +212,7 @@
   </nesting>  
   <association id="38">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="39" name="editCardsView">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
+      <attribute id="39" name="editCardsView"/>      
       <multiplicity id="40" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
@@ -237,5 +225,5 @@
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
     <operations public="true" package="true" protected="true" private="true" static="true"/>  
   </classifier-display>  
-  <association-display labels="true" multiplicity="true"/>
+  <association-display labels="true" multiplicity="false"/>
 </class-diagram>
