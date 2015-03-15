@@ -28,6 +28,12 @@ public class Register {
 		this.cards = getDataFromInternalFile(internalPath);
 	}
 
+	/**
+	* @Author: Elias
+	* Reset the regitser
+	* @param: List of cards
+	* @param: title
+	*/
 	public Register(ArrayList<Card> cards, String title) {
 		this.cards = cards;
 	}
@@ -45,6 +51,7 @@ public class Register {
 	* @Author: Daniel
 	* Opens an existing register saved in a csv-file. Takes one line after another and splits lines after each delim (semicolon in our case).
 	* The parts of the line are temporarily written into an array and after delivered as parameters into the cards.add method.
+	* @param: sourcePath
 	*/
 	private ArrayList<Card> getDataFromInternalFile(Path sourcePath) {
 		BufferedReader br = null;
@@ -65,6 +72,8 @@ public class Register {
 									.parseInt(newcard[4]), Integer
 									.parseInt(newcard[5])));
 				}
+				br.close();
+				fl.close();
 			}
 		}
 		catch(FileNotFoundException ex)
@@ -89,6 +98,10 @@ public class Register {
 		export(internalPath);
 	}
 
+	/**
+	* @Author: Elias
+	* Sorts all the cards by the calculated probability-Poroperty.
+	*/
 	public void sortList() 
 	{
 		ArrayList<Integer> sortedNumbers = new ArrayList<Integer>();
@@ -121,6 +134,10 @@ public class Register {
 		this.cards = sortedCards;
 	}
 	
+	/**
+	* @Author: Elias
+	* Sorts all the cards by CardID-Poroperty and returns it.
+	*/
 	public ArrayList<Card> getSortedCardsByCardID() throws Exception
 	{
 		ArrayList<Integer> sortedNumbers = new ArrayList<Integer>();
@@ -190,12 +207,13 @@ public class Register {
 		}
 	}
 
-	public void saveChanges(Card card) {
-		this.cards.set(card.getIdCard(), card);
-	}
-
+	/**
+	* @Author: Elias
+	* Remove the card in the list and returns a boolean.
+	* @param: card 
+	*/
 	public boolean remove(Card card) {
-		Iterator i = this.cards.iterator();
+		Iterator<Card> i = this.cards.iterator();
 		while (i.hasNext()) {
 			if (card.equals(i.next())) {
 				this.cards.remove(card);
@@ -205,8 +223,13 @@ public class Register {
 		return false;
 	}
 
+	/**
+	* @Author: Elias
+	* Sorts all the cards by the calculated probability-Poroperty.
+	* @param: card
+	*/
 	public boolean add(Card card) {
-		Iterator i = this.cards.iterator();
+		Iterator<Card> i = this.cards.iterator();
 		while (i.hasNext()) {
 			if (card.equals(i.next())) {
 				return false;
@@ -216,6 +239,10 @@ public class Register {
 		return true;
 	}
 	
+	/**
+	* @Author: Elias
+	* Returns all cards
+	*/
 	public ArrayList<Card> getCards() throws Exception {
 		if (this.cards == null)
 			throw new Exception("Keine Karten vorhanden.");
@@ -223,6 +250,11 @@ public class Register {
 		return this.cards;
 	}
 
+	/**
+	* @Author: Elias
+	* Returns a list of cards by box.
+	* @param: box
+	*/
 	public ArrayList<Card> getCardsByBox(int box) throws Exception{
 		sortList();
 		Iterator<Card> i = this.cards.iterator();
@@ -236,8 +268,8 @@ public class Register {
 		}
 		if (cards == null)
 			throw new Exception("Keine Karten vorhanden.");
-		
-		return cards;
+		else
+			return cards;
 	}
 
 	public ArrayList<Card> getTestDataSet() {
@@ -260,6 +292,11 @@ public class Register {
 		return 0;	
 	}
 
+	/**
+	* @Author: Elias
+	* Returns a card in the index.
+	* @param: index
+	*/
 	public Card getCardByIndex(int index) {
 		if (this.cards != null && this.cards.size() > 0
 				&& index < this.cards.size() && index >= 0) {
@@ -268,6 +305,11 @@ public class Register {
 		return null;
 	}
 	
+	/**
+	* @Author: Elias
+	* Sets the probability und the box of the card. 
+	* @param: id of the card
+	*/
 	public void isTrue(int id)
 	{
 		Iterator<Card> i = this.cards.iterator();
@@ -295,6 +337,11 @@ public class Register {
 		this.answeredCorrect++;
 	}
 	
+	/**
+	* @Author: Elias
+	* Sets the probability und the box of the card. 
+	* @param: id of the card
+	*/
 	public void isFalse(int id)
 	{
 		Iterator<Card> i = this.cards.iterator();
@@ -317,6 +364,10 @@ public class Register {
 		this.answeredWrong++;
 	}
 	
+	/**
+	* @Author: Elias
+	* Return a List of int of the boxes
+	*/
 	public ArrayList<Integer> getBoxes()
 	{
 		ArrayList<Integer> list = new ArrayList<Integer>();
@@ -337,6 +388,10 @@ public class Register {
 		return list;
 	}
 	
+	/**
+	* @Author: Elias
+	* Returns the highest id of the cards and count it +1
+	*/
 	public int getMaxId_Card()
 	{
 		Iterator<Card> i = this.cards.iterator();

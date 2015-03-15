@@ -7,10 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-import java.io.File;
-import java.io.FilenameFilter;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,9 +21,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.filechooser.FileFilter;
-
-import com.sun.org.apache.bcel.internal.generic.InstructionTargeter;
 
 import ch.zbw.lernkartei.controller.Controller.MyMenuActionListener;
 import ch.zbw.lernkartei.model.Language;
@@ -453,7 +447,7 @@ public class MainView extends JFrame {
 		return this.language;
 	}
 	
-	public int askForTargetBox(ArrayList faecher)
+	public int askForTargetBox(ArrayList<Integer> faecher)
 	{		
 		String[] boxes = {"2","3","4","5","6","7"};
 		String s = (String)(JOptionPane.showInputDialog(

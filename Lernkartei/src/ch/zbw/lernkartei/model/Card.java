@@ -38,15 +38,6 @@ public class Card
 		this.box = box;
 	}
 	
-	public boolean equals(int calcProbability)
-	{
-		if(calcProbability == this.calcProbability)
-		{
-			return true;
-		}
-		return false;
-	}
-	
 	/**
 	* @Author: Daniel
 	* Checks whether the parameters front and back are neither null nor only consisting of a space.
@@ -73,23 +64,38 @@ public class Card
 		setCalcProbability();
 	}
 	
-	
+	/**
+	* @Author: Elias
+	* Resets the card 
+	*/
 	public void resetBoxAndProbability()
 	{
 		box=1;
 		probability=1;
 	}
 	
+	/**
+	* @Author: Elias
+	* Return the number of the box
+	*/
 	public int getBox()
 		{
 			return box;
 		}
 	
+	/**
+	* @Author: Elias
+	* Returns the id of the card
+	*/
 	public int getIdCard()
 	{
 		return this.id_Card;
 	}
 
+	/**
+	* @Author: Elias
+	* return the calculated probability
+	*/
 	public int getCalcProbability()
 	{
 		return this.calcProbability;
@@ -108,16 +114,28 @@ public class Card
 		this.calcProbability = this.probability*rnd;
 	}
 	
+	/**
+	* @Author: Elias
+	* Returns the probability	
+	*/
 	public int getProbability()
 	{
 		return probability;
 	}
 	
+	/**
+	* @Author: Elias
+	* Returns the front of the card
+	*/
 	public String getFront()
 	{
 		return this.front;
 	}
 	
+	/**
+	* @Author: Elias
+	* Returns the back of the card
+	*/	
 	public String getBack()
 	{
 		return this.back;
