@@ -76,11 +76,11 @@ public class TranslationDataSet extends ArrayList<String[]>{
 		this.addNewToTranslation("Es sind keine Karten vorhanden. Bitte Karten erfassen.", "There are no Cards available. Please enter some Cards.", "Il n'y a pas de cartes disponibles. Se il vous plaît entrer certaines cartes.", "Non ci sono carte disponibili. Si prega di inserire alcuni Cards.");
 	}
 	
-	/** Gets the translated Text of a Word (Originaltext)
+	/** 
 	 * @param originalText
 	 * @param languageOriginalText
 	 * @param languageTranslatedText
-	 * @return
+	 * @return Gets the translated Text of a Word (Originaltext)
 	 */
 	public String getTranslatedText(String originalText, Language languageOriginalText, Language languageTranslatedText)
 	{

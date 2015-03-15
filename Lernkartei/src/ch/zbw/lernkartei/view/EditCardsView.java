@@ -216,8 +216,8 @@ public class EditCardsView extends JPanel {
 		this.textAreaBack.setText(card.getBack());
 	}
 	
-	/** Return the Id of the Card
-	 * @return
+	/** 
+	 * @return Returns the Id of the Card
 	 */
 	public Integer getCardid() {
 
@@ -257,7 +257,7 @@ public class EditCardsView extends JPanel {
 	
 	/** Shows a Message-Box
 	 * @param text to be displayd
-	 * @return
+	 * @return the value of the Confirm Dialog
 	 */
 	public int showMessageBox(String text) {
 		return JOptionPane.showConfirmDialog(this, text);
@@ -279,7 +279,7 @@ public class EditCardsView extends JPanel {
 	}
 
 	/** Sets state of the Navigation Buttions (Back <<< and Forward >>>)
-	 * @param reg
+	 * @param numberOfCards
 	 * @param index
 	 */
 	public void setStateNavBackForwardButtons(int numberOfCards, int index) {

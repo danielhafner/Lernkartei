@@ -221,7 +221,7 @@ public class LearningView extends JPanel{
 	}
 	
 	/**
-	 * @return: LerningView
+	 * @return Returns the LerningView
 	 */
 	public LearningView getLearningView()
 	{
@@ -326,7 +326,7 @@ public class LearningView extends JPanel{
 	
 
 	/**
-	 * @return: Card-Id
+	 * @return Returns the card-Id
 	 */
 	public int getCardId()
 	{
@@ -376,8 +376,8 @@ public class LearningView extends JPanel{
 	}
 	
 	/** Sets the Statistics
-	 * @param cardOfBox
 	 * @param totalCardsOfBox
+	 * @param totalCards
 	 * @param quotaCorrect
 	 * @param quotaWrong
 	 */
@@ -389,31 +389,49 @@ public class LearningView extends JPanel{
 		this.labelQuotaWrongResult.setText(quotaWrong + "%");
 	}
 	
+	/**
+	 * @return gets the Box-Number
+	 */
 	public int getBox()
 	{
 		return (Integer.parseInt(this.comboboxFach.getSelectedItem().toString()));
 	}
 	
+	/** Sets the target box
+	 * @param targetBox
+	 */
 	public void setTargetBox(int targetBox)
 	{
 		this.targetBox = targetBox;
 	}
 	
+	/**
+	 * @return Gets the target Box
+	 */
 	public int getTargetBox()
 	{
 		return this.targetBox;
 	}
 	
+	/** Sets percent of the progress bar
+	 * @param percent
+	 */
 	public void setPercentProgressBar(int percent)
 	{
 		this.percentProgressBar = percent;
 	}
 	
+	/**
+	 * @return Gets percent of the progress bar
+	 */
 	public int getPercentProgressBar()
 	{
 		return this.percentProgressBar;
 	}
 	
+	/**
+	 * Activates the progress bar thread
+	 */
 	public void activateProgressBarThread(){
 		
 		if(!this.progressBarThread.isAlive())
@@ -423,6 +441,9 @@ public class LearningView extends JPanel{
 		}
 	}
 	
+	/**
+	 * Disables the progress bar thread
+	 */
 	public void disableProgressBarThread()
 	{
 		this.repaint();

@@ -353,8 +353,8 @@ public class MainView extends JFrame {
 
 	
 	/** 
-	 * @param c: Container
-	 * @return: An ArryList with Components
+	 * @param c Container
+	 * @return ArrayList with all components of the container
 	 */
 	public static ArrayList<Component> getAllComponents(final Container c) {
 		Component[] comps = c.getComponents();
@@ -425,8 +425,8 @@ public class MainView extends JFrame {
 		return this.fileImportPath;
 	}
 
-	/** Asks the User to Save Changes (Export to the internal csv-File)
-	 * @return
+	/** 
+	 * @return Asks the User to Save Changes (Export to the internal csv-File)
 	 */
 	public boolean quitAndSave() {	
 		if(JOptionPane.showConfirmDialog(

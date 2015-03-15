@@ -24,8 +24,8 @@ public enum MyDimension {
 		this.mydimension = new Dimension(width, height);
 	}
 	
-	/** Returns the Dimension of the Enum
-	 * @return
+	/** 
+	 * @return Returns the Dimension of the Enum
 	 */
 	public Dimension get()
 	{

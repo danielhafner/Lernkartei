@@ -24,10 +24,14 @@ public class Card
 	public Card(){
 	}
 
-	/**
-	* @Author: Daniel
-	* Alternative constructor. Used for Import.
-	*/
+	/** Constructor, used for Import
+	 * @param id_Card
+	 * @param front
+	 * @param back
+	 * @param probability
+	 * @param calcProbability
+	 * @param box
+	 */
 	public Card(int id_Card, String front, String back, int probability, int calcProbability, int box)
 	{
 		this.id_Card = id_Card;
@@ -38,11 +42,11 @@ public class Card
 		this.box = box;
 	}
 	
-	/**
-	* @Author: Daniel
-	* Checks whether the parameters front and back are neither null nor only consisting of a space.
+	/**Checks whether the parameters front and back are neither null nor only consisting of a space.
 	* If true: Writes parameters into the fields. If false: Prints error message.
-	*/
+	 * @param front
+	 * @param back
+	 */
 	public void setCard(String front, String back)
 	{
 		if(front!=null && front!=" " && back!=null && back!=" ")
@@ -53,10 +57,10 @@ public class Card
 		else{System.out.println("Felder duerfen nicht leer sein");}
 	}
 
-	/**
-	* @Author: Daniel
-	* Writes parameters into fields and executes method setCalcProbability.
-	*/
+	/** Writes parameters into fields and executes method setCalcProbability.
+	 * @param box
+	 * @param probability
+	 */
 	public void setBoxAndProbability(int box, int probability)
 	{
 		this.box = box;
@@ -65,7 +69,6 @@ public class Card
 	}
 	
 	/**
-	* @Author: Elias
 	* Resets the card 
 	*/
 	public void resetBoxAndProbability()
@@ -75,7 +78,6 @@ public class Card
 	}
 	
 	/**
-	* @Author: Elias
 	* Return the number of the box
 	*/
 	public int getBox()
@@ -84,7 +86,6 @@ public class Card
 		}
 	
 	/**
-	* @Author: Elias
 	* Returns the id of the card
 	*/
 	public int getIdCard()
@@ -93,16 +94,14 @@ public class Card
 	}
 
 	/**
-	* @Author: Elias
-	* return the calculated probability
-	*/
+	 * @return Returns the calculated probability
+	 */
 	public int getCalcProbability()
 	{
 		return this.calcProbability;
 	}
 
 	/**
-	* @Author: Daniel
 	* Calculates a random number which is between 1 and 10 and multiplies this number with the probability. 
 	* This way the probability rises randomly and always stays in relation with the older probability.
 	*/
@@ -115,7 +114,6 @@ public class Card
 	}
 	
 	/**
-	* @Author: Elias
 	* Returns the probability	
 	*/
 	public int getProbability()
@@ -133,7 +131,6 @@ public class Card
 	}
 	
 	/**
-	* @Author: Elias
 	* Returns the back of the card
 	*/	
 	public String getBack()

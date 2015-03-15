@@ -525,8 +525,8 @@ public class Controller {
 			this.learningView.setStatistics(
 					register.getCardsByBox(learningView.getBox()).size()
 					,register.getNumberOfCards()
-					,register.calculateQuotaCorrect()
-					,register.calculateQuotaWrong()
+					,register.getCalculateQuotaCorrect()
+					,register.getCalculateQuotaWrong()
 					);
 		} catch (Exception e) {
 			learningView.displayErrorMessage(e.getMessage());

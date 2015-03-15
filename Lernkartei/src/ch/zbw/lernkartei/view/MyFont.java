@@ -24,7 +24,7 @@ public enum MyFont {
 	}
 	
 	/**
-	 * @return: Gets the Font of this Enum
+	 * @return Gets the Font of this Enum
 	 */
 	public Font getMyFont()
 	{
