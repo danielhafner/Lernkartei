@@ -482,7 +482,7 @@ public class MainView extends JFrame {
 	
 	public int askForTargetBox(ArrayList faecher)
 	{		
-		String[] boxes = {"1","2","3","4","5","6","7"};
+		String[] boxes = {"2","3","4","5","6","7"};
 		String s = (String)(JOptionPane.showInputDialog(
 				this
 				,translationArrayList.getTranslatedText("Bis zu welchem Fach möchtest du lernen?", Language.Deutsch, this.language)

@@ -15,6 +15,7 @@ import javax.swing.event.DocumentListener;
 import ch.zbw.lernkartei.model.Card;
 import ch.zbw.lernkartei.model.Language;
 import ch.zbw.lernkartei.model.Register;
+import ch.zbw.lernkartei.model.TranslationDataSet;
 import ch.zbw.lernkartei.view.LearningView;
 import ch.zbw.lernkartei.view.MainView;
 import ch.zbw.lernkartei.view.EditCardsView;
@@ -185,16 +186,18 @@ public class Controller {
 		 * Menuitem Reset Learning Status selected
 		 */
 		private void resetLearningStatusSelected() {
-			register.resetRegister();
-			editCardsView.displayCard(editCardsCard);
-			//learningView.ShowQuestion(learningCard.getFront(), learningCard.getBack(), learningCard.getIdCard());
 			try {
+				register.resetRegister();
+				editCardsCard = register.getSortedCardsByCardID().get(0);
+				editCardsView.displayCard(editCardsCard);
 				learningCardsOfABox = register.getCardsByBox(1);
 			} catch (Exception e1) {
 				mainView.displayErrorMessage(e1.getMessage());
 			}
+			learningView.setTargetBox(0);
 			learningView.activateProgressBarThread();
 			learningView.initializeWithData(register.getBoxes(), register);
+			learningView.setStatistics(learningCardsOfABox.size(), register.getNumberOfCards(), 0, 0);
 		}
 		/**
 		 * Menu Item Start Learning selected
@@ -203,20 +206,26 @@ public class Controller {
 			try {
 				learningCardsOfABox = register.getCardsByBox(register.getBoxes().get(0));
 				learningCard = learningCardsOfABox.get(0);
-				learningView.initializeWithData(register.getBoxes(), register);
+				
+				if(learningCardsOfABox.size() == 1 && learningCard.getBack().equals("") &&learningCard.getFront().equals(""))
+				{
+					throw new Exception("There are no Cards available. Please enter some Cards.");				
+				}
+				else
+				{
+					learningView.initializeWithData(register.getBoxes(), register);
+					if(learningView.getTargetBox() == 0)
+					{
+						if (learningView.getTargetBox() == 0)
+							learningView.setTargetBox(mainView.askForTargetBox(register.getBoxes()));
+					}
+					
+					learningView.activateProgressBarThread();
+					mainView.repaintTheFrame(learningView);
+				}
 			} catch (Exception e1) {
-				editCardsView.showMessageBox(e1.getMessage());
+				mainView.displayErrorMessage(e1.getMessage());
 			}
-			if(learningView.getTargetBox() == 0)
-			{
-				if (learningView.getTargetBox() == 0)
-					learningView.setTargetBox(mainView.askForTargetBox(register.getBoxes()));
-			}
-			
-			learningView.activateProgressBarThread();
-			mainView.repaintTheFrame(learningView);
-			
-
 		}
 		/**
 		 * Menu Item Edit Cards selected
@@ -232,7 +241,7 @@ public class Controller {
 			editCardsView.setBoxNumber(editCardsAllCards.get(0).getBox() + "");
 			editCardsView.setTextAreaFront(editCardsAllCards.get(0).getFront());
 			editCardsView.setTextAreaBack(editCardsAllCards.get(0).getBack());
-			editCardsView.setStateNavBackForwardButtons(register, 0);
+			editCardsView.setStateNavBackForwardButtons(register.getNumberOfCards() - 1, 0);
 			editCardsView.setStateSaveButton(false);
 			mainView.repaintTheFrame(editCardsView);
 			editCardsView.setInitialFocus();
@@ -282,7 +291,7 @@ public class Controller {
 					index--;
 				}
 				editCardsView.setStateSaveButton(false);	
-				editCardsView.setStateNavBackForwardButtons(register, index);
+				editCardsView.setStateNavBackForwardButtons(register.getNumberOfCards() - 1, index);
 
 			} catch (Exception e1) {
 
@@ -308,7 +317,7 @@ public class Controller {
 				learningView.refreshComboboxFachWithData(register.getBoxes());;
 			}
 			refreshLearningData(learningCardsOfABox);
-			learningView.setZahl(calculateNumberForProgressBar());
+			learningView.setPercentProgressBar(calculateNumberForProgressBar());
 		}
 
 		/**
@@ -354,7 +363,7 @@ public class Controller {
 						editCardsView.setStateButtonNew(true);
 					}
 					editCardsView.setStateSaveButton(false);
-					editCardsView.setStateNavBackForwardButtons(register, index);
+					editCardsView.setStateNavBackForwardButtons(register.getNumberOfCards() - 1, index);
 				}
 			} catch (Exception e1) {
 
@@ -375,7 +384,7 @@ public class Controller {
 				editCardsView.displayCard(register.getCardByIndex(index));
 				
 				//Buttons aktualisieren
-				editCardsView.setStateNavBackForwardButtons(register, index);
+				editCardsView.setStateNavBackForwardButtons(register.getNumberOfCards() - 1, index);
 				editCardsView.setStateButtonNew(false);
 				editCardsView.setStateSaveButton(false);
 				editCardsView.setStateDeleteButton(false);
@@ -399,7 +408,7 @@ public class Controller {
 				}
 				editCardsCard = register.getCardByIndex(index);
 				editCardsView.displayCard(editCardsCard);
-				editCardsView.setStateNavBackForwardButtons(register, index);
+				editCardsView.setStateNavBackForwardButtons(register.getNumberOfCards() - 1, index);
 				editCardsView.setStateSaveButton(false);
 
 				if (register.getCardByIndex(index).getFront().equals("")
@@ -436,7 +445,7 @@ public class Controller {
 				editCardsView.setStateDeleteButton(true);
 				editCardsView.setStateButtonNew(true);
 				editCardsView.setStateSaveButton(false);
-				editCardsView.setStateNavBackForwardButtons(register, index);				
+				editCardsView.setStateNavBackForwardButtons(register.getNumberOfCards() - 1, index);				
 			}
 
 			catch (Exception ex) {

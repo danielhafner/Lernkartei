@@ -68,7 +68,7 @@ public class LearningView extends JPanel{
 	private JProgressBar progressBar;
 	private PaintProgressBar paintProgressBar;
 	private Thread progressBarThread;
-	private int zahl = 0;
+	private int percentProgressBar = 0;
 	private int zahlMax = 0;
 	
 	private GridBagConstraints gridBagContraints;
@@ -128,7 +128,7 @@ public class LearningView extends JPanel{
 	 */
 	public void paint()
 	{		
-		gridBagContraints.insets = new Insets(0, 0, 40, 0);
+		gridBagContraints.insets = new Insets(0, 0, 30, 0);
 		gridBagContraints.fill = GridBagConstraints.HORIZONTAL;
 		gridBagContraints.gridx = 0;
 		gridBagContraints.gridy = 0;
@@ -174,7 +174,7 @@ public class LearningView extends JPanel{
 		gridBagContraints.insets = new Insets(0, 0, 0, 0);
 		gridBagContraints.gridx = 0;
 		gridBagContraints.gridy = 4;
-		this.panelAnswer.setPreferredSize(new Dimension(527, 100));		
+		this.panelAnswer.setPreferredSize(new Dimension(500, 80));		
 
 		this.buttonCorrect.setPreferredSize(MyDimension.ButtonCorrectWrongDimension.get());		
 		this.buttonCorrect.setHorizontalAlignment(SwingConstants.CENTER); // Damit Text linksbündig angezeigt wird
@@ -209,11 +209,12 @@ public class LearningView extends JPanel{
 		this.panelStatusBar.add(panelCountTotalCards);
 		this.panelStatusBar.add(panelQuotaCorrect);
 		this.panelStatusBar.add(panelQuotaWrong);
+		
+		gridBagContraints.gridy = 6;
 		this.add(panelStatusBar, gridBagContraints);	
 		
+		gridBagContraints.gridy = 7;
 		gridBagContraints.fill = GridBagConstraints.HORIZONTAL;
-		gridBagContraints.gridy = 6;
-		gridBagContraints.ipadx = 4;
 		this.add(this.progressBar, gridBagContraints);
 		
 		this.setVisible(true);
@@ -403,23 +404,23 @@ public class LearningView extends JPanel{
 		return this.targetBox;
 	}
 	
-	public void setZahl(int zahl)
+	public void setPercentProgressBar(int percent)
 	{
-		this.zahl = zahl;
+		this.percentProgressBar = percent;
 	}
 	
-	public int getZahl()
+	public int getPercentProgressBar()
 	{
-		return this.zahl;
-	}
-	
-	public void setZahlMax(int zahlMax)
-	{
-		this.progressBar.setMaximum(zahlMax);
+		return this.percentProgressBar;
 	}
 	
 	public void activateProgressBarThread(){
-		progressBarThread.start();
+		
+		if(!this.progressBarThread.isAlive())
+		{
+			progressBarThread = new Thread(paintProgressBar, "Mein Fortschritt");
+			progressBarThread.start();
+		}
 	}
 	
 	public void disableProgressBarThread()

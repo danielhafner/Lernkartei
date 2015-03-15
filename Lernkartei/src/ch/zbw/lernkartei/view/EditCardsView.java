@@ -53,6 +53,7 @@ public class EditCardsView extends JPanel {
 		
 		//this.labelRegisterName = new JLabel("Karteiname");
 		//this.textfieldRegisterName = new JTextField(1);
+		
 		this.labelCardNumber = new JLabel("Karten-Nr.");
 		this.textfieldCardNumber = new JTextField(1);
 		
@@ -279,12 +280,12 @@ public class EditCardsView extends JPanel {
 	 * @param reg
 	 * @param index
 	 */
-	public void setStateNavBackForwardButtons(Register reg, int index) {
+	public void setStateNavBackForwardButtons(int numberOfCards, int index) {
 		if (index == 0)
 			this.buttonNavBack.setEnabled(false);
 		else
 			this.buttonNavBack.setEnabled(true);
-		if (index < reg.getNumberOfCards() - 1)
+		if (index < numberOfCards)
 			setStateButtonForward(true);
 		else
 			setStateButtonForward(false);

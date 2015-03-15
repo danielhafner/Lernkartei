@@ -1,4 +1,5 @@
 package ch.zbw.lernkartei.view;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 
@@ -18,17 +19,17 @@ public class PaintProgressBar implements Runnable{
 	}
 	
 	public void run() {		
-	int zahl = 0;	
+	int percent = 0;
 	try {
-		while(zahl < 100)
+		while(percent < 100)
 		{
-		zahl = learningView.getZahl();
-		bar.setValue(zahl);
-		bar.setToolTipText(zahl + "%");
-		Thread.sleep(1000);
+		percent = learningView.getPercentProgressBar();
+		bar.setValue(percent);
+		bar.setToolTipText(percent + "%");
+		Thread.sleep(500);
 		}
 		JOptionPane.showMessageDialog(learningView, translation.getTranslatedText("Du hast dein Lernziel erreicht!", Language.Deutsch, Language.English));
-		learningView.setZahl(0);
+		learningView.setPercentProgressBar(0);
 		bar.setValue(0);
 		bar.setToolTipText(0 + "%");
 		bar.repaint();
