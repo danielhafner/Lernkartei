@@ -122,9 +122,8 @@ public class Card
 	}
 	
 	/**
-	* @Author: Elias
-	* Returns the front of the card
-	*/
+	 * @return Returns the front of the card
+	 */
 	public String getFront()
 	{
 		return this.front;

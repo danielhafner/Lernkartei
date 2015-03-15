@@ -36,9 +36,9 @@ public class Register {
 		this.cards = cards;
 	}
 
-	/**
-	* Inserts pre-saved cards into cards
-	*/
+	/*Inserts pre-saved cards into cards
+	 * @param sourcePath
+	 */
 	public void imports(Path sourcePath)
 	{
 		this.cards = getDataFromInternalFile(sourcePath);	

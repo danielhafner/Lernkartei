@@ -474,7 +474,7 @@ public class Controller {
 
 
 		/**Ask if User wants to continue without saving the changes...
-		 * @return
+		 * @return True if User wants to continue without saving, false if User wants to save changes
 		 */
 		private boolean continueWithoutSaving() {
 			try {

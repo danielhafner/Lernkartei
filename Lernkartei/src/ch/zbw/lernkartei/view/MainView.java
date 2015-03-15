@@ -412,14 +412,14 @@ public class MainView extends JFrame {
 	}
 
 	/**
-	 * @return: The File Export Path
+	 * @return Returns the File Export Path
 	 */
 	public String getFileExportPath() {
 		return this.fileExportPath;
 	}
 	
 	/**
-	 * @return: The File Import Path
+	 * @return Returns the File Import Path
 	 */
 	public String getFileImportPath() {
 		return this.fileImportPath;
