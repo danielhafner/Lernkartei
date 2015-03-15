@@ -17,7 +17,6 @@ import javax.swing.event.DocumentListener;
 import ch.zbw.lernkartei.controller.Controller.MeinButtonActionListener;
 import ch.zbw.lernkartei.controller.Controller.MyKeyListener;
 import ch.zbw.lernkartei.model.Card;
-import ch.zbw.lernkartei.model.Register;
 
 public class EditCardsView extends JPanel {
 

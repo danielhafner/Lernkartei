@@ -23,7 +23,6 @@ import ch.zbw.lernkartei.controller.Controller.MeinButtonActionListener;
 import ch.zbw.lernkartei.controller.Controller.MyComboboxItemListener;
 import ch.zbw.lernkartei.model.Card;
 import ch.zbw.lernkartei.model.Register;
-import ch.zbw.lernkartei.model.TranslationDataSet;
 
 /**
  * @author Ruel

@@ -1,5 +1,4 @@
 package ch.zbw.lernkartei.view;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 
@@ -18,6 +17,7 @@ public class MyRunnableProgressBar implements Runnable{
 		this.translation = new TranslationDataSet();
 	}
 	
+	@Override
 	public void run() {
 	int percent = 0;
 	try {

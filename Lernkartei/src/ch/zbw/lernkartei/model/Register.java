@@ -117,7 +117,7 @@ public class Register {
 			i = this.cards.iterator();
 			while (i.hasNext()) 
 			{
-				Card card = (Card) i.next();
+				Card card = i.next();
 				if (card.getCalcProbability() == (sortedNumbers.get(n))) {
 					sortedCards.add(card);
 					sortedNumbers.remove(n);
@@ -153,7 +153,7 @@ public class Register {
 			i = this.cards.iterator();
 			while (i.hasNext()) 
 			{
-				Card card = (Card) i.next();
+				Card card = i.next();
 				if (card.getIdCard() == (sortedNumbers.get(n))) {
 					sortedCards.add(card);
 					sortedNumbers.remove(n);
