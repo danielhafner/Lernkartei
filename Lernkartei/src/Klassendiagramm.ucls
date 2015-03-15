@@ -86,7 +86,7 @@
   </class>  
   <class id="10" language="java" name="ch.zbw.lernkartei.model.Card" project="Lernkartei" 
     file="/Lernkartei/src/ch/zbw/lernkartei/model/Card.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="405" width="291" x="1213" y="908"/>    
+    <position height="405" width="291" x="1234" y="977"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -124,10 +124,10 @@
     <bendpoint x="1524" y="284"/>    
     <end type="SOURCE" refId="2" navigable="false">      
       <attribute id="15" name="learningCard">        
-        <position height="18" width="69" x="1198" y="517"/>      
+        <position height="18" width="69" x="1219" y="586"/>      
       </attribute>      
       <multiplicity id="16" minimum="0" maximum="1">        
-        <position height="16" width="23" x="1318" y="933"/>      
+        <position height="16" width="23" x="1339" y="1002"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
@@ -149,10 +149,10 @@
     <bendpoint x="1461" y="284"/>    
     <end type="SOURCE" refId="2" navigable="false">      
       <attribute id="21" name="editCardsCard">        
-        <position height="18" width="77" x="1300" y="905"/>      
+        <position height="18" width="77" x="1268" y="930"/>      
       </attribute>      
       <multiplicity id="22" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-327" y="-573"/>      
+        <position height="0" width="0" x="-306" y="-504"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
@@ -176,7 +176,7 @@
     <bendpoint x="1482" y="284"/>    
     <end type="SOURCE" refId="2" navigable="false">      
       <attribute id="28" name="learningCardsOfABox">        
-        <position height="18" width="114" x="1218" y="470"/>      
+        <position height="18" width="114" x="1239" y="539"/>      
       </attribute>      
       <multiplicity id="29" minimum="0" maximum="2147483647"/>    
     </end>    
@@ -187,7 +187,7 @@
     <bendpoint x="1503" y="284"/>    
     <end type="SOURCE" refId="2" navigable="false">      
       <attribute id="31" name="editCardsAllCards">        
-        <position height="18" width="95" x="1218" y="457"/>      
+        <position height="18" width="95" x="1239" y="526"/>      
       </attribute>      
       <multiplicity id="32" minimum="0" maximum="2147483647"/>    
     </end>    
