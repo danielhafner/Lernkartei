@@ -2,6 +2,7 @@ package ch.zbw.lernkartei.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -275,6 +276,7 @@ public class LearningView extends JPanel{
 		this.buttonCardBack.setVisible(true);
 		this.buttonCorrect.setVisible(true);
 		this.buttonWrong.setVisible(true);
+		this.setFocus(this.buttonCorrect);
 	}
 
 	
@@ -446,5 +448,30 @@ public class LearningView extends JPanel{
 	public void disableProgressBarThread()
 	{
 		this.repaint();
+	}
+	
+	/** Sets the focus on a component
+	 * @param component
+	 */
+	public void setFocus(Component component)
+	{
+		if(component != null && component.isFocusable())
+		{
+			component.requestFocus();
+		}
+	}
+
+	/**
+	 * @return Gets the Button Card Front
+	 */
+	public JButton getButtonCardFront() {
+		return this.buttonCardFront;
+	}
+
+	/**
+	 * @return Gets the Button Correct
+	 */
+	public JButton getButtonCorrect() {
+		return this.buttonCorrect;
 	}
 }

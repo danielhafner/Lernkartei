@@ -51,9 +51,9 @@ public class Controller {
 		this.learningView = learningView;
 		this.editCardsCard = register.getCardByIndex(0);
 		this.register = register;
-		addListener();
 		this.mainView.paint();
 		this.translate = new TranslationDataSet();
+		addListener();
 	}
 
 	/**
@@ -215,7 +215,7 @@ public class Controller {
 				learningCardsOfABox = register.getCardsByBox(register.getBoxes().get(0));
 				learningCard = learningCardsOfABox.get(0);
 				
-				if(learningCardsOfABox.size() == 1 && learningCard.getBack().equals("") &&learningCard.getFront().equals(""))
+				if(learningCardsOfABox.size() == 1 && learningCard.getBack().equals("") && learningCard.getFront().equals(""))
 				{
 					throw new Exception(translate.getTranslatedText(
 							"Es sind keine Karten vorhanden. Bitte Karten erfassen."
@@ -233,6 +233,7 @@ public class Controller {
 					
 					learningView.activateProgressBarThread();
 					mainView.repaintTheFrame(learningView);
+					learningView.setFocus(learningView.getButtonCardFront());
 				}
 			} catch (Exception e1) {
 				mainView.displayErrorMessage(e1.getMessage());
@@ -336,6 +337,7 @@ public class Controller {
 				learningView.refreshComboboxFachWithData(register.getBoxes());;
 			}
 			refreshLearningData(learningCardsOfABox);
+			learningView.setFocus(learningView.getButtonCardFront());
 			learningView.setPercentProgressBar(getCalculateNumberForProgressBar());
 		}
 
