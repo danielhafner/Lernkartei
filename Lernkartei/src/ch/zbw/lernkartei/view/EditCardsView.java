@@ -1,5 +1,6 @@
 package ch.zbw.lernkartei.view;
 
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -14,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentListener;
 
 import ch.zbw.lernkartei.controller.Controller.MeinButtonActionListener;
+import ch.zbw.lernkartei.controller.Controller.MyKeyListener;
 import ch.zbw.lernkartei.model.Card;
 import ch.zbw.lernkartei.model.Register;
 
@@ -349,5 +351,29 @@ public class EditCardsView extends JPanel {
 		{
 			return 1;
 		}
+	}
+	
+	/** Changes de Focus between the Front and Back JTextArea
+	 * @param c
+	 */
+	public void changeFocus(Component c)
+	{
+		if(c.equals(this.textAreaFront))
+		{
+			this.textAreaBack.requestFocus();
+		}
+		else if(c.equals(this.textAreaBack))
+		{
+			this.textAreaFront.requestFocus();
+		}
+			
+	}
+
+	/** Sets the KeyListener to the Front and Back
+	 * @param kListener
+	 */
+	public void setKeyTabPressedListener(MyKeyListener kListener) {
+		this.textAreaFront.addKeyListener(kListener);
+		this.textAreaBack.addKeyListener(kListener);
 	}
 }

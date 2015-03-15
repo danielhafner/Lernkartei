@@ -13,7 +13,7 @@ public class TranslationDataSet extends ArrayList<String[]>{
 	 */
 	public TranslationDataSet()
 	{
-		this.fillTranslationWithTestData();
+		this.fillWithData();
 	}
 	
 	/** Adds a StringArray to the TranslationsDataSet
@@ -43,7 +43,7 @@ public class TranslationDataSet extends ArrayList<String[]>{
 		this.remove(a);
 	}
 	
-	public void fillTranslationWithTestData()
+	public void fillWithData()
 	{
 		//Übersetzungen müssen in dieser Reihenfolge eingefügt werden: 1. Deutsch, 2. Englisch, 3. Französisch, 4. Italienisch		
 		this.addNewToTranslation("Datei", "File", "Fichier", "File");

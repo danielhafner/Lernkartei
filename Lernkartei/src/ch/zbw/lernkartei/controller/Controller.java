@@ -3,6 +3,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
@@ -124,6 +126,9 @@ public class Controller {
 			}
 		};
 		this.editCardsView.setDocumentListener(documentListener);
+		
+		MyKeyListener kListener = new MyKeyListener();
+		this.editCardsView.setKeyTabPressedListener(kListener);
 	}
 
 	/**
@@ -609,5 +614,29 @@ public class Controller {
 			}
 		}
 	    return ((countMax - countEffektiv) * 100 / countMax);
-	}	
+	}
+	
+	/**
+	 * @author Ruel
+	 * Inner Class for Key-Functions
+	 */
+	public class MyKeyListener implements KeyListener
+	{
+		@Override
+		public void keyPressed(KeyEvent arg0) {
+		if(arg0.getKeyCode() == KeyEvent.VK_TAB)
+			{
+				editCardsView.changeFocus(arg0.getComponent());
+				// Verhindert, dass das Tab im JTextfield auch einen Tab durchführt..
+				arg0.consume();
+			}
+		}
+
+		public void keyReleased(KeyEvent arg0) {		
+		}
+
+		public void keyTyped(KeyEvent arg0) {
+		}
+	}
+	
 }
