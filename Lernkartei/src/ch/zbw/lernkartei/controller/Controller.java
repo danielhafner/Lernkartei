@@ -188,7 +188,8 @@ public class Controller {
 		private void resetLearningStatusSelected() {
 			try {
 				register.resetRegister();
-				editCardsCard = register.getSortedCardsByCardID().get(0);
+				editCardsAllCards = register.getSortedCardsByCardID();
+				editCardsCard = editCardsAllCards.get(0);
 				editCardsView.displayCard(editCardsCard);
 				learningCardsOfABox = register.getCardsByBox(1);
 			} catch (Exception e1) {
@@ -234,17 +235,25 @@ public class Controller {
 			try {
 				learningView.disableProgressBarThread();
 				editCardsAllCards = register.getSortedCardsByCardID();
+				editCardsCard = editCardsAllCards.get(0);
+				editCardsView.setTextTextFieldCardNumber(editCardsCard.getIdCard() + "");
+				editCardsView.setBoxNumber(editCardsCard.getBox() + "");
+				editCardsView.setTextAreaFront(editCardsCard.getFront());
+				editCardsView.setTextAreaBack(editCardsCard.getBack());
+				editCardsView.setStateNavBackForwardButtons(register.getNumberOfCards() - 1, 0);
+				editCardsView.setStateSaveButton(false);
+				
+				if(editCardsAllCards.size() == 1 && editCardsCard.getFront().equals("") && editCardsCard.getBack().equals(""))
+				{
+					editCardsView.setStateButtonNew(false);
+					editCardsView.setStateDeleteButton(false);
+				}
+				
+				mainView.repaintTheFrame(editCardsView);
+				editCardsView.setInitialFocus();	
 			} catch (Exception e1) {
 				editCardsView.showMessageBox(e1.getMessage());
 			}
-			editCardsView.setTextTextFieldCardNumber(editCardsAllCards.get(0).getIdCard() + "");
-			editCardsView.setBoxNumber(editCardsAllCards.get(0).getBox() + "");
-			editCardsView.setTextAreaFront(editCardsAllCards.get(0).getFront());
-			editCardsView.setTextAreaBack(editCardsAllCards.get(0).getBack());
-			editCardsView.setStateNavBackForwardButtons(register.getNumberOfCards() - 1, 0);
-			editCardsView.setStateSaveButton(false);
-			mainView.repaintTheFrame(editCardsView);
-			editCardsView.setInitialFocus();
 		}
 	}
 	
