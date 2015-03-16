@@ -222,7 +222,6 @@ public class Register {
 
 	/** Sorts all the cards by the calculated probability-Poroperty.
 	 * @param card
-	 * @return true if it was possible to add a Card
 	 */
 	public void add(Card card) {
 		if(card != null)
@@ -432,8 +431,8 @@ public class Register {
 		this.hasChanged = b;
 	}
 	
-	/**Gets the value hasChanged
-	 * @return
+	/**
+	 * @return Gets the value hasChanged
 	 */
 	public boolean getHasChanged()
 	{
