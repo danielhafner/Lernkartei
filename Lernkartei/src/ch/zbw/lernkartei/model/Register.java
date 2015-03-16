@@ -248,7 +248,7 @@ public class Register {
 	 * @return Returns a list of cards by box.
 	 * @throws Exception
 	 */
-	public ArrayList<Card> getCardsByBox(int box) throws Exception{
+	public ArrayList<Card> getCardsByBox(int box){
 		sortList();
 		Iterator<Card> i = this.cards.iterator();
 		ArrayList<Card> cards = new ArrayList<Card>();
@@ -259,10 +259,7 @@ public class Register {
 				cards.add(card);
 			}
 		}
-		if (cards.isEmpty())
-			throw new Exception("Keine Karten vorhanden.");
-		else
-			return cards;
+		return cards;
 	}
 
 	/**
