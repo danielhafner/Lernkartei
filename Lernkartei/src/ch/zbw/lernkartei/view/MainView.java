@@ -431,7 +431,7 @@ public class MainView extends JFrame {
 	public boolean quitAndSave() {	
 		if(JOptionPane.showConfirmDialog(
 				this
-				,translationArrayList.getTranslatedText("Willst du deinen Lernstand speichern?", Language.Deutsch, this.language)
+				,translationArrayList.getTranslatedText("Willst du deine Änderungen speichern?", Language.Deutsch, this.language)
 				,translationArrayList.getTranslatedText("Hinweis", Language.Deutsch, this.language)
 				,0 /* Ja oder NEIN */
 				) == 0)

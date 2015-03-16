@@ -63,7 +63,7 @@ public class TranslationDataSet extends ArrayList<String[]>{
 		this.addNewToTranslation("Vorderseite", "Front", "Avant", "Anteriore");
 		this.addNewToTranslation("Rückseite", "Back", "Arrière", "Posteriore");
 		this.addNewToTranslation("Fach", "Box", "Compartiment", "Scomparto");
-		this.addNewToTranslation("Willst du deinen Lernstand speichern?", "Want to save your skill level?", "Vous voulez économiser votre niveau de compétence?", "Vuoi risparmiare il vostro livello di abilità?");
+		this.addNewToTranslation("Willst du deine Änderungen speichern?", "Do you want to save your changes?", "Voulez-vous enregistrer les modifications?", "Vuoi salvare le modifiche?");
 		this.addNewToTranslation("Hinweis", "Note", "Remarque", "Nota");
 		this.addNewToTranslation("Dein persönliches Ziel", "Your personal goal", "Votre objectif personnel", "Il tuo obiettivo personale");
 		this.addNewToTranslation("Bis zu welchem Fach möchtest du lernen?", "How far will you go today?", "Jusqu'où irez-vous aujourd'hui?", "Fino a che punto andrai oggi?");

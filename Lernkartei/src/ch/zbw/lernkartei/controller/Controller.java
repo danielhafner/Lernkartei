@@ -203,6 +203,7 @@ public class Controller {
 				mainView.displayErrorMessage(e1.getMessage());
 			}
 			learningView.setTargetBox(0);
+			editCardsView.setStateSaveButton(false);
 			learningView.activateProgressBarThread();
 			learningView.initializeWithData(register.getBoxes(), register);
 			learningView.setStatistics(learningCardsOfABox.size(), register.getNumberOfCards(), 0, 0);
