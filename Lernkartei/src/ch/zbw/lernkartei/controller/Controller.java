@@ -24,7 +24,7 @@ import ch.zbw.lernkartei.view.EditCardsView;
 
 
 /**
- * @author Ruel
+ * @author Ruel Holderegger
  *
  */
 public class Controller {
@@ -132,7 +132,7 @@ public class Controller {
 	}
 
 	/**
-	 * @author Ruel
+	 * @author Ruel Holderegger
 	 * MenuActionListener (Inner Class) for all Menu(Items)
 	 */
 	public class MyMenuActionListener implements ActionListener {
@@ -208,6 +208,7 @@ public class Controller {
 			learningView.initializeWithData(register.getBoxes(), register);
 			learningView.setStatistics(learningCardsOfABox.size(), register.getNumberOfCards(), 0, 0);
 			register.setHasChanged(true);
+			mainView.displayErrorMessage("Alle Karten wurden zurückgesetzt.");
 		}
 		/**
 		 * Menu Item Start Learning selected
@@ -271,7 +272,7 @@ public class Controller {
 	}
 	
 	/**
-	 * @author Ruel
+	 * @author Ruel Holderegger
 	 * ButtonActionListener (Inner Class) for all Buttons
 	 */
 	public class MeinButtonActionListener implements ActionListener {
@@ -301,7 +302,12 @@ public class Controller {
 		 *  >>> Button selected
 		 */
 		private void forwardSelected() {
-			try {											
+			try {
+				if(!continueWithoutSaving())
+				{
+					saveSelected();
+				}
+				
 				editCardsCard = register.getCardByIndex(index + 1);
 				if(editCardsCard != null)
 				{
@@ -491,7 +497,12 @@ public class Controller {
 			try {
 				if (!editCardsView.getFrontText().equals(editCardsCard.getFront())
 						|| !editCardsView.getBackText().equals(editCardsCard.getBack())) {
-					if (editCardsView.showMessageBox("Daten wurden verändert. Willst du fortfahren ohne zu speichern?") == JOptionPane.OK_OPTION) {
+					if (editCardsView.showMessageBox(
+							translate.getTranslatedText(
+									"Daten wurden verändert. Willst du fortfahren ohne zu speichern?"
+									,Language.Deutsch, mainView.getCurrentLanguage()
+									)								
+									) == JOptionPane.OK_OPTION) {
 						return true;
 					} else {
 						return false;
@@ -506,7 +517,7 @@ public class Controller {
 	}
 	
 	/**
-	 * @author Ruel
+	 * @author Ruel Holderegger
 	 * Inner Class for all ItemListeners
 	 */
 	public class MyComboboxItemListener implements ItemListener {
@@ -561,7 +572,7 @@ public class Controller {
 	}
 
 	/**
-	 * @author Ruel
+	 * @author Ruel Holderegger
 	 * Own WindowListener: Actions on JFrame is closing..
 	 */
 	public class MyWindowListener implements WindowListener{
@@ -596,6 +607,9 @@ public class Controller {
 		}
 	}
 	
+	/**
+	 * @return Gets the calculated Number for the progress bar
+	 */
 	public int getCalculateNumberForProgressBar()
 	{
 		// 100 entspricht einem vollen Progressbar
@@ -632,7 +646,7 @@ public class Controller {
 	}
 	
 	/**
-	 * @author Ruel
+	 * @author Ruel Holderegger
 	 * Inner Class for Key-Functions
 	 */
 	public class MyKeyListener implements KeyListener
@@ -646,14 +660,9 @@ public class Controller {
 				arg0.consume();
 			}
 		}
-
-		@Override
 		public void keyReleased(KeyEvent arg0) {		
 		}
-
-		@Override
 		public void keyTyped(KeyEvent arg0) {
 		}
 	}
-	
 }

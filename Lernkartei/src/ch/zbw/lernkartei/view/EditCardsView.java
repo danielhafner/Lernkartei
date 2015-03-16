@@ -262,7 +262,7 @@ public class EditCardsView extends JPanel {
 	 * @return the value of the Confirm Dialog
 	 */
 	public int showMessageBox(String text) {
-		return JOptionPane.showConfirmDialog(this, text);
+		return JOptionPane.showConfirmDialog(this, text, null, JOptionPane.OK_OPTION);
 	}
 
 	/** Sets the DocumentListener for the Textfields Front and Back

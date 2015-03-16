@@ -285,18 +285,23 @@ public class MainView extends JFrame {
 		switch ((e.getActionCommand())) {
 		case "Deutsch":
 			setControlsToBeTranslated(Language.Deutsch);
+			this.language = Language.Deutsch;
 			break;
 		case "Italiano":
 			setControlsToBeTranslated(Language.Italiano);
+			this.language = Language.Italiano;
 			break;
 		case "Francais":
 			setControlsToBeTranslated(Language.Francais);
+			this.language = Language.Francais;
 			break;
 		case "English":
 			setControlsToBeTranslated(Language.English);
+			this.language = Language.English;
 			break;
 		default:
 			setControlsToBeTranslated(Language.Deutsch);
+			this.language = Language.Deutsch;
 			break;
 		}
 	}
