@@ -6,6 +6,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -71,11 +72,21 @@ public class EditCardsView extends JPanel {
 
 		// Navigation: Neu, Löschen, Speichern, Zurück, Vorwärts
 		this.panelNav = new JPanel(new FlowLayout());
-		this.buttonNewCard = new JButton("Neu");
-		this.buttonDeleteCard = new JButton("Löschen");
-		this.buttonSaveCard = new JButton("Speichern");
-		this.buttonNavBack = new JButton("<<<");
-		this.buttonNavForward = new JButton(">>>");
+		ImageIcon imageIconAdd = new ImageIcon(this.getClass().getResource("/add.png"));
+		this.buttonNewCard = new JButton("", imageIconAdd);
+		this.buttonNewCard.setActionCommand("Neu");
+		ImageIcon imageIconDelete = new ImageIcon(this.getClass().getResource("/delete.png"));
+		this.buttonDeleteCard = new JButton("", imageIconDelete);
+		this.buttonDeleteCard.setActionCommand("Löschen");
+		ImageIcon imageIconSave = new ImageIcon(this.getClass().getResource("/save.png"));
+		this.buttonSaveCard = new JButton("", imageIconSave);
+		this.buttonSaveCard.setActionCommand("Speichern");
+		ImageIcon imageIconBack = new ImageIcon(this.getClass().getResource("/back.png"));
+		this.buttonNavBack = new JButton("", imageIconBack);
+		this.buttonNavBack.setActionCommand("<<<");
+		ImageIcon imageIconForward = new ImageIcon(this.getClass().getResource("/forward.png"));
+		this.buttonNavForward = new JButton("", imageIconForward);
+		this.buttonNavForward.setActionCommand(">>>");
 		
 		this.gridBagContraints = new GridBagConstraints();
 		paint();
@@ -99,18 +110,6 @@ public class EditCardsView extends JPanel {
 		gridBagContraints.gridy = 0;
 		this.labelEditCards.setFont(MyFont.Ueberschrift1.getMyFont());
 		this.add(labelEditCards, gridBagContraints);
-
-		/* Registername vorläufig nicht implementieren */
-		/*gridBagContraints.gridx = 0;
-		gridBagContraints.gridy = 1;
-		this.add(labelRegisterName, gridBagContraints);
-		gridBagContraints.fill = 0;
-		gridBagContraints.gridx = 1;
-		gridBagContraints.gridy = 1;
-		gridBagContraints.ipadx = 210;
-		gridBagContraints.anchor = GridBagConstraints.WEST;
-		this.textfieldRegisterName.setEnabled(false);
-		this.add(textfieldRegisterName, gridBagContraints);*/
 
 		gridBagContraints.fill = 0;
 		gridBagContraints.gridx = 0;

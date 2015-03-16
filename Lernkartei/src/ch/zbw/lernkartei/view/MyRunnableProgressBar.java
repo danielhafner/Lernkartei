@@ -28,7 +28,7 @@ public class MyRunnableProgressBar implements Runnable{
 		bar.setToolTipText(percent + "%");
 		Thread.sleep(500);
 		}
-		JOptionPane.showMessageDialog(learningView, translation.getTranslatedText("Du hast dein Lernziel erreicht!", Language.Deutsch, Language.English));
+		JOptionPane.showMessageDialog(learningView, translation.getTranslatedText("Du hast dein Lernziel erreicht!", Language.Deutsch, Language.Deutsch));
 		learningView.setPercentProgressBar(0);
 		bar.setValue(0);
 		bar.setToolTipText(0 + "%");

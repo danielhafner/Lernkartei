@@ -225,11 +225,11 @@ public class Controller {
 				else
 				{
 					learningView.initializeWithData(register.getBoxes(), register);
-					if(learningView.getTargetBox() == 0)
+					
+					/*if(learningView.getTargetBox() == 0)
 					{
-						if (learningView.getTargetBox() == 0)
-							learningView.setTargetBox(mainView.askForTargetBox(register.getBoxes()));
-					}
+						learningView.setTargetBox(mainView.askForTargetBox(register.getBoxes()));
+					}*/
 					
 					learningView.activateProgressBarThread();
 					mainView.repaintTheFrame(learningView);
@@ -604,13 +604,13 @@ public class Controller {
 			}
 			
 			// Sind ALL Faecher bis zum persoenlichen Ziel leer --> Ziel erreicht!
-			for (i = 1; i <= 7; i++)
+			/*for (i = 1; i <= 7; i++)
 			{
 				if(register.getCardsByBox(i).size() > 1 && i == learningView.getTargetBox())
 				{
 					return 100;
 				}
-			}			
+			}	*/		
 				
 			} catch (Exception e) {
 				learningView.displayErrorMessage(e.getMessage());

@@ -93,9 +93,11 @@ public class LearningView extends JPanel{
 
 		this.panelAnswer = new JPanel();
 		ImageIcon imageIconCorrect = new ImageIcon(this.getClass().getResource("/correct.png"));
-		this.buttonCorrect = new JButton("Richtig", imageIconCorrect);
+		this.buttonCorrect = new JButton("", imageIconCorrect);
+		this.buttonCorrect.setActionCommand("Richtig");
 		ImageIcon imageIconWrong = new ImageIcon(this.getClass().getResource("/wrong.png"));
-		this.buttonWrong = new JButton("Falsch", imageIconWrong);
+		this.buttonWrong = new JButton("", imageIconWrong);
+		this.buttonWrong.setActionCommand("Falsch");
 		
 		this.panelStatusBar = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		
@@ -447,7 +449,7 @@ public class LearningView extends JPanel{
 	 */
 	public void disableProgressBarThread()
 	{
-		this.repaint();
+		this.progressBar.repaint();
 	}
 	
 	/** Sets the focus on a component
