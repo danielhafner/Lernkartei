@@ -208,7 +208,7 @@ public class Controller {
 			learningView.initializeWithData(register.getBoxes(), register);
 			learningView.setStatistics(learningCardsOfABox.size(), register.getNumberOfCards(), 0, 0);
 			register.setHasChanged(true);
-			mainView.displayErrorMessage("Alle Karten wurden zurückgesetzt.");
+			mainView.displayErrorMessage(translate.getTranslatedText("Alle Karten wurden zurückgesetzt.", Language.Deutsch, mainView.getCurrentLanguage()));
 		}
 		/**
 		 * Menu Item Start Learning selected

@@ -19,23 +19,25 @@ public class MyRunnableProgressBar implements Runnable{
 	
 	@Override
 	public void run() {
-	int percent = 0;
-	try {
-		while(percent < 100)
+		int percent = 0;
+		try 
 		{
-		percent = learningView.getPercentProgressBar();
-		bar.setValue(percent);
-		bar.setToolTipText(percent + "%");
-		Thread.sleep(500);
-		}
+			while(percent < 100)
+			{
+				percent = learningView.getPercentProgressBar();
+				bar.setValue(percent);
+				bar.setToolTipText(percent + "%");
+				Thread.sleep(500);
+			}
 		JOptionPane.showMessageDialog(learningView, translation.getTranslatedText("Du hast dein Lernziel erreicht!", Language.Deutsch, Language.Deutsch));
 		learningView.setPercentProgressBar(0);
 		bar.setValue(0);
 		bar.setToolTipText(0 + "%");
 		bar.repaint();
 		learningView.disableProgressBarThread();
-	} catch (InterruptedException e) {
-		e.printStackTrace();
-	}
+		} 
+		catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}					
 }

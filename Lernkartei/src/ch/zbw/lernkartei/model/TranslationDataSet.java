@@ -81,6 +81,7 @@ public class TranslationDataSet extends ArrayList<String[]>{
 		this.addNewToTranslation("Es sind keine Karten vorhanden. Bitte Karten erfassen.", "There are no Cards available. Please enter some Cards.", "Il n'y a pas de cartes disponibles. Se il vous plaît entrer certaines cartes.", "Non ci sono carte disponibili. Si prega di inserire alcuni Cards.");
 		this.addNewToTranslation("Karte bereits vorhanden!", "Card with same text already exists!", "Carte existe déjà!", "Mappa esiste già!");
 		this.addNewToTranslation("Daten wurden verändert. Willst du fortfahren ohne zu speichern?", "Data was modified. Do you want to continue without saving changes?", "Les données ont été modifiées. Voulez-vous continuer sans enregistrer?", "I dati sono stati modificati. Vuoi continuare senza salvare?");
+		this.addNewToTranslation("Alle Karten wurden zurückgesetzt.", "All cards have been reseted.", "Toutes les cartes ont été réinitialisés.", "Tutte le mappe sono state ripristinate.");
 	}
 	
 	/** 

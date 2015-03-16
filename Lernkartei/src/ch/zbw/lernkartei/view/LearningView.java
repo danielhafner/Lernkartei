@@ -31,9 +31,6 @@ import ch.zbw.lernkartei.model.Register;
  */
 public class LearningView extends JPanel{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7401960373296431225L;
 	private int cardId;
 	private JLabel labelStartLearning;
