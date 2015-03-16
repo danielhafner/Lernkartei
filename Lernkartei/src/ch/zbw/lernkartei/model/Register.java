@@ -221,15 +221,9 @@ public class Register {
 	 * @param card
 	 * @return true if it was possible to add a Card
 	 */
-	public boolean add(Card card) {
-		Iterator<Card> i = this.cards.iterator();
-		while (i.hasNext()) {
-			if (card.equals(i.next())) {
-				return false;
-			}
-		}
+	public void add(Card card) {
+		if(card != null)
 		this.cards.add(card);
-		return true;
 	}
 	
 	/**Returns all cards
@@ -409,5 +403,19 @@ public class Register {
 		if(this.answeredQuestions != 0)
 			return (this.answeredWrong * 100 / this.answeredQuestions);
 		return 0;
+	}
+
+	public boolean checkCard(String frontText, String backText) {
+		Iterator<Card> i = this.cards.iterator();
+		while (i.hasNext()) {
+			
+			Card c = i.next();
+			
+			if (frontText.equals(c.getFront()) &&
+				backText.equals(c.getBack())) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

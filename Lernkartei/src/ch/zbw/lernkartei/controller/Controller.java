@@ -463,6 +463,10 @@ public class Controller {
 		 */
 		private void saveSelected() {
 			try {
+				
+				if(!register.checkCard(editCardsView.getFrontText(), editCardsView.getBackText()))
+					throw new Exception("Karte bereits vorhanden!");
+				
 				editCardsCard.setCard(editCardsView.getFrontText(), editCardsView.getBackText());				
 				editCardsView.setStateDeleteButton(true);
 				editCardsView.setStateButtonNew(true);
@@ -471,7 +475,7 @@ public class Controller {
 			}
 
 			catch (Exception ex) {
-				mainView.displayErrorMessage("Error: " + ex.getMessage());
+				mainView.displayErrorMessage(translate.getTranslatedText((ex.getMessage()), Language.Deutsch, mainView.getCurrentLanguage()));
 			}
 		}
 
