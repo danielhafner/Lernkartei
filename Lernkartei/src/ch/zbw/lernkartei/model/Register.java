@@ -20,6 +20,8 @@ public class Register {
 	private int answeredQuestions = 0;
 	private int answeredCorrect = 0;
 	private int answeredWrong = 0;
+	
+	private boolean hasChanged = false;
 
 	public Register() {
 		// Dieser Konstruktor wird nur für Testzwecke aufgerufen - so
@@ -41,11 +43,11 @@ public class Register {
 	 */
 	public void imports(Path sourcePath)
 	{
-		this.cards = getDataFromInternalFile(sourcePath);	
+		this.cards = getDataFromInternalFile(sourcePath);
+		this.hasChanged = true;
 	}
 
 	/**
-	* @Author: Daniel
 	* Opens an existing register saved in a csv-file. Takes one line after another and splits lines after each delim (semicolon in our case).
 	* The parts of the line are temporarily written into an array and after delivered as parameters into the cards.add method.
 	* @param: sourcePath
@@ -211,6 +213,7 @@ public class Register {
 		while (i.hasNext()) {
 			if (card.equals(i.next())) {
 				this.cards.remove(card);
+				this.hasChanged = true;
 				return true;
 			}
 		}
@@ -312,6 +315,7 @@ public class Register {
 				{
 					probability += 1;			
 				}
+				this.hasChanged = true;
 				cardi.setBoxAndProbability(box, probability);
 				break;
 			}
@@ -339,6 +343,7 @@ public class Register {
 					probability -= 1;
 				}
 				cardi.setBoxAndProbability(1, probability);
+				this.hasChanged = true;
 				break;
 			}
 		}
@@ -418,4 +423,21 @@ public class Register {
 		}
 		return true;
 	}
+	
+	/** Sets the value hasChanged
+	 * @param b
+	 */
+	public void setHasChanged(boolean b)
+	{
+		this.hasChanged = b;
+	}
+	
+	/**Gets the value hasChanged
+	 * @return
+	 */
+	public boolean getHasChanged()
+	{
+		return this.hasChanged;
+	}
+	
 }

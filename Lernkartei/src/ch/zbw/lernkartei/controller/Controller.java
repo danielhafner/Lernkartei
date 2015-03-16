@@ -207,6 +207,7 @@ public class Controller {
 			learningView.activateProgressBarThread();
 			learningView.initializeWithData(register.getBoxes(), register);
 			learningView.setStatistics(learningCardsOfABox.size(), register.getNumberOfCards(), 0, 0);
+			register.setHasChanged(true);
 		}
 		/**
 		 * Menu Item Start Learning selected
@@ -386,6 +387,7 @@ public class Controller {
 					}
 					editCardsView.setStateSaveButton(false);
 					editCardsView.setStateNavBackForwardButtons(register.getNumberOfCards() - 1, index);
+					register.setHasChanged(true);
 				}
 			} catch (Exception e1) {
 
@@ -412,6 +414,7 @@ public class Controller {
 				editCardsView.setStateDeleteButton(false);
 				editCardsView.setStateButtonBack(false);
 				editCardsView.setStateButtonForward(false);
+				register.setHasChanged(true);
 			} catch (Exception e1) {
 
 				mainView.displayErrorMessage(e1.getMessage());
@@ -467,6 +470,7 @@ public class Controller {
 				if(!register.checkCard(editCardsView.getFrontText(), editCardsView.getBackText()))
 					throw new Exception("Karte bereits vorhanden!");
 				
+				register.setHasChanged(true);
 				editCardsCard.setCard(editCardsView.getFrontText(), editCardsView.getBackText());				
 				editCardsView.setStateDeleteButton(true);
 				editCardsView.setStateButtonNew(true);
@@ -546,9 +550,12 @@ public class Controller {
 	 * and closes the Application
 	 */
 	private void actionPerformedBeenden() {
-		if(mainView.quitAndSave())
+		if(register.getHasChanged())
 		{
-			register.saveDataIntoInternalFile();
+			if(mainView.quitAndSave())
+			{
+				register.saveDataIntoInternalFile();
+			}
 		}
 		mainView.closeApplication();
 	}
