@@ -259,7 +259,7 @@ public class Register {
 				cards.add(card);
 			}
 		}
-		if (cards == null)
+		if (cards.isEmpty())
 			throw new Exception("Keine Karten vorhanden.");
 		else
 			return cards;

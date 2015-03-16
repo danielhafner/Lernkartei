@@ -9,6 +9,11 @@ import java.util.ArrayList;
 public class TranslationDataSet extends ArrayList<String[]>{
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3889874454115134229L;
+
+	/**
 	 * Konstructor
 	 */
 	public TranslationDataSet()

@@ -21,6 +21,10 @@ import ch.zbw.lernkartei.model.Card;
 
 public class EditCardsView extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5511845753103961114L;
 	private JLabel labelEditCards;
 	private JPanel panelNav;
 

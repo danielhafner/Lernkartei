@@ -31,6 +31,10 @@ import ch.zbw.lernkartei.model.Register;
  */
 public class LearningView extends JPanel{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7401960373296431225L;
 	private int cardId;
 	private JLabel labelStartLearning;
 	
@@ -69,7 +73,6 @@ public class LearningView extends JPanel{
 	private MyRunnableProgressBar paintProgressBar;
 	private Thread progressBarThread;
 	private int percentProgressBar = 0;
-	private int zahlMax = 0;
 	
 	private GridBagConstraints gridBagContraints;
 	
