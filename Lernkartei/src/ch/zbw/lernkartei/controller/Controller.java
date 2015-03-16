@@ -342,9 +342,12 @@ public class Controller {
 			learningCardsOfABox.remove(learningCard);
 			if(learningCardsOfABox.size() == 0)
 			{
+				//  Combobox muss zwingend neu geladen werden...
 				learningView.refreshComboboxFachWithData(register.getBoxes());;
 			}
 			refreshLearningData(learningCardsOfABox);
+			// Combobox zusätzlich bei jedem Durchgang neu laden...
+			learningView.refreshComboboxFachWithData(register.getBoxes());
 			learningView.setFocus(learningView.getButtonCardFront());
 			learningView.setPercentProgressBar(getCalculateNumberForProgressBar());
 		}
